@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController2D : MonoBehaviour
+public class CharacterController2D : EntityClass
 {
     public float moveSpeed = 60f;  //публичное значение скорости
 
