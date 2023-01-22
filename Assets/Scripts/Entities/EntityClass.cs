@@ -8,7 +8,7 @@ public class EntityClass : MonoBehaviour    //класс любого живог
     public float currentHealth;
     public float maxHealth = 100f;
 
-    void Awake() //на методе Start() не работает
+    void Start() //на методе Start() не работает
     {
         currentHealth = maxHealth; //на запуске ГО даем ему максимум ХП
     }
