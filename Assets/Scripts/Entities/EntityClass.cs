@@ -8,9 +8,10 @@ public class EntityClass : MonoBehaviour    //класс любого живог
     public float currentHealth;
     public float maxHealth = 100f;
 
-    void Start() //на методе Start() не работает
+    void Start() 
     {
         currentHealth = maxHealth; //на запуске ГО даем ему максимум ХП
+        Debug.Log(gameObject.name + currentHealth + " - current health");
     }
 
     public void TakeDamage(float damageAmount)  //метод отвечающий за прием дамага, принимающий float

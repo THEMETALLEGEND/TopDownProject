@@ -12,7 +12,7 @@ public class WeaponBullet : MonoBehaviour
         Destroy(gameObject, 3f); //если пуля не сталкивается ни с чем 3 секунды то она пропадет
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D (Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy") //если этот ГО сталкивается с ГО с тэгом enemy
         {
