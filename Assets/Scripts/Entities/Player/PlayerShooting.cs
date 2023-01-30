@@ -27,9 +27,9 @@ public class PlayerShooting : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
-        Rigidbody2D bulletRigidBody = bullet.GetComponent<Rigidbody2D>();
-        bulletRigidBody.AddForce(firepoint.right * bulletForce, ForceMode2D.Impulse);
+        GameObject bullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation); //выщываем префаб пули из точки и ротации пустого ГО firepoint
+        Rigidbody2D bulletRigidBody = bullet.GetComponent<Rigidbody2D>(); //заходим в рб пулии
+        bulletRigidBody.AddForce(firepoint.right * bulletForce, ForceMode2D.Impulse); //задаем силу пули в сторону красного вектора с силой 20f, тип силы - импульс
     }
 
 }
