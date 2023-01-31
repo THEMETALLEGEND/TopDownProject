@@ -18,7 +18,12 @@ public class TestEnemy : EnemyClass
 
     private void Update()
     {
-        aIPath.destination = target.position;
+        if (!(target == null)) //проверка на то что цель существует
+        {
+            aIPath.destination = target.position; //и если так то строить до неё путь
+        }
+        else
+            return;
     }
 
     private void OnCollisionStay2D(Collision2D collision)

@@ -11,6 +11,13 @@ public class EntityClass : MonoBehaviour    //класс любого живог
     void Start() 
     {
         currentHealth = maxHealth; //на запуске ГО даем ему максимум ХП
+    }
+
+    public void HealthCheck()
+    {
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
+
         Debug.Log(gameObject.name + currentHealth + " - current health");
     }
 

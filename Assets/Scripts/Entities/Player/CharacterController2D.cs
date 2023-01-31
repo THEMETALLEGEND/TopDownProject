@@ -16,8 +16,6 @@ public class CharacterController2D : EntityClass
     private Animator animator;
     [HideInInspector]public Vector3 playerVelocity;
     [HideInInspector]public float moveX;
-    public enum PlayerStates { Idle, Moving, Running, Attacking, Jumping};
-    public PlayerStates playerStates;
     private PlayerAnimation playerAnimation;
     
 
@@ -34,6 +32,8 @@ public class CharacterController2D : EntityClass
 
     private void Update()
     {
+        HealthCheck();
+
         moveX = Input.GetAxisRaw("Horizontal"); //управление по Х (A, D)
         var moveY = Input.GetAxisRaw("Vertical");   //управление по Y (W, S)
 
