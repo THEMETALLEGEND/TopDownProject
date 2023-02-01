@@ -18,7 +18,7 @@ public class EntityClass : MonoBehaviour    //класс любого живог
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
 
-        Debug.Log(gameObject.name + currentHealth + " - current health");
+        //Debug.Log(gameObject.name + currentHealth + " - current health");
     }
 
     public void TakeDamage(float damageAmount)  //метод отвечающий за прием дамага, принимающий float

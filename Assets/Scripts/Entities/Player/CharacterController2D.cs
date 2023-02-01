@@ -16,6 +16,7 @@ public class CharacterController2D : EntityClass
     private Animator animator;
     [HideInInspector]public Vector3 playerVelocity;
     [HideInInspector]public float moveX;
+    [HideInInspector]public float moveY;
     private PlayerAnimation playerAnimation;
     
 
@@ -34,8 +35,8 @@ public class CharacterController2D : EntityClass
     {
         HealthCheck();
 
-        moveX = Input.GetAxisRaw("Horizontal"); //управление по Х (A, D)
-        var moveY = Input.GetAxisRaw("Vertical");   //управление по Y (W, S)
+        moveX = Input.GetAxisRaw("Player_Horizontal"); //управление по Х (A, D)
+        moveY = Input.GetAxisRaw("Player_Vertical");   //управление по Y (W, S)
 
         moveDir = new Vector3(moveX, moveY).normalized; //вектор движения игрока, не превышающий 1
 
@@ -48,6 +49,7 @@ public class CharacterController2D : EntityClass
         {
             currentSpeed = walkSpeed;
         }
+        Debug.Log(moveDir);
     }
 
     private void FixedUpdate()

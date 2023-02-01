@@ -1349,6 +1349,7 @@ MonoBehaviour:
   runSpeed: 10
   playerVelocity: {x: 0, y: 0, z: 0}
   moveX: 0
+  moveY: 0
 --- !u!50 &405466589
 Rigidbody2D:
   serializedVersion: 4
@@ -1379,7 +1380,7 @@ Transform:
   m_GameObject: {fileID: 405466585}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.38, y: -1.77, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 4.81, y: 4.81, z: 4.81}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1240309359}
