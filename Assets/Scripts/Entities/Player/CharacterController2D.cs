@@ -35,21 +35,20 @@ public class CharacterController2D : EntityClass
     {
         HealthCheck();
 
-        moveX = Input.GetAxisRaw("Player_Horizontal"); //управление по Х (A, D)
-        moveY = Input.GetAxisRaw("Player_Vertical");   //управление по Y (W, S)
+        moveX = Input.GetAxisRaw("Horizontal"); //управление по Х (A, D)
+        moveY = Input.GetAxisRaw("Vertical");   //управление по Y (W, S)
 
         moveDir = new Vector3(moveX, moveY).normalized; //вектор движения игрока, не превышающий 1
 
 
-        if (Input.GetKeyDown("e") && playerAnimation.isMoving)
+        if (Input.GetButtonDown("Sprint") && playerAnimation.isMoving)
         {
             currentSpeed = runSpeed;
         }
-        else if (Input.GetKeyUp("e") || !playerAnimation.isMoving)
+        else if (Input.GetButtonUp("Sprint") || !playerAnimation.isMoving)
         {
             currentSpeed = walkSpeed;
         }
-        Debug.Log(moveDir);
     }
 
     private void FixedUpdate()

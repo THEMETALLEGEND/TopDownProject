@@ -12,7 +12,7 @@ public class PlayerAnimation : MonoBehaviour
     private Transform transform;
     //[SerializeField]
     private Vector3 scale;
-    private bool isFacingRight = true;
+    [HideInInspector]public bool isFacingRight = true;
     public bool isMoving = false;
 
     private void Awake()
@@ -24,6 +24,7 @@ public class PlayerAnimation : MonoBehaviour
         transform = GetComponent<Transform>(); 
     }
 
+   
     void Update()
     {
         Vector2 vel = playerController.playerVelocity; //переменная публичной переменной из скрипта charactercontroller2d
@@ -39,9 +40,9 @@ public class PlayerAnimation : MonoBehaviour
         }
             
 
-        if (Input.GetKeyDown("e") && isMoving) //если зажат шифт И мы двигаемся то анимация бега
+        if (Input.GetButtonDown("Sprint") && isMoving) //если зажат шифт И мы двигаемся то анимация бега
             animator.SetBool("IsRunning", true);
-        else if (Input.GetKeyUp("e") || !isMoving) //отпускаем кнопку или не двигаемся - выключаем бег
+        else if (Input.GetButtonUp("Sprint") || !isMoving) //отпускаем кнопку или не двигаемся - выключаем бег
             animator.SetBool("IsRunning", false);
 
         //
@@ -50,7 +51,7 @@ public class PlayerAnimation : MonoBehaviour
             if (isFacingRight)    //доп проверка булом защита от поворота каждый кадр
             {
                 transform.localScale = Vector3.Scale(new Vector3(transform.localScale.x, transform.localScale.y), new Vector3(-1, 1));
-                //умножение scale этого объекта на -1 и 1 через метод Vector3.Scale(), т.е. поворот объекта по x
+                //умножение scale этого объекта на -1 и 1 через метод Vector3.Scale(), т.е. поворот объекта по x, чтобы scale зависел от реального размера ГО
                 isFacingRight = false;
             }
 

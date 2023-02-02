@@ -11,10 +11,14 @@ public class PlayerShooting : MonoBehaviour
     //----------------------------------------
 
     private Transform firepoint;
+    private GameObject gunGO;
 
     private void Awake()
     {
-        firepoint = transform.Find("GunController/Weapon/Firepoint");
+        gunGO = GameObject.Find("GunController");
+        firepoint = gunGO.transform.GetChild(0).GetChild(0);
+
+        //transform.Find("GunController/Weapon/Firepoint");
     }
 
     private void Update()

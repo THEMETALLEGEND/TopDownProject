@@ -278,13 +278,13 @@ InputManager:
     axis: 0
     joyNum: 4
   - serializedVersion: 3
-    m_Name: Player1_Run
+    m_Name: Sprint
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: left shift
     altNegativeButton: 
-    altPositiveButton: joystick 1 button 2
+    altPositiveButton: e
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
