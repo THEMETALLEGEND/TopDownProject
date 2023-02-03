@@ -10,36 +10,54 @@ public class GunController : MonoBehaviour
     private GameObject weapon;
     private Transform gunControllerTransform;
     [HideInInspector] public GameObject gunGO;
-    private Transform firePoint;
+    private GameObject firePointGO;
+    private Transform firePoint;    //точка вылета пули
     private PlayerAnimation playerAnimation;
     private GameObject playerGO;
     private Transform playerTransform;
     private Rigidbody2D playerRB;
-    private float gunAngle;
+    private SpriteRenderer weaponSprite;
+    private float gunAngle;  //угол пушки до мыши
 
     Vector2 mousePos;
 
     private void Awake()
     {
-        playerGO = GameObject.Find("Player");
-        playerTransform = playerGO.GetComponent<Transform>();
-        playerRB = playerGO.GetComponent<Rigidbody2D>();
-        gunGO = GameObject.Find("GunController");
-        gunControllerTransform = gunGO.transform;
-        weapon = GameObject.Find("GunController/Weapon");
-        playerAnimation = GetComponent<PlayerAnimation>();
+        playerGO = GameObject.Find("Player"); //ГО игрока
+        playerTransform = playerGO.GetComponent<Transform>(); //Трансформ игрока
+        playerRB = playerGO.GetComponent<Rigidbody2D>();   //RigidBody игрока
+        gunGO = GameObject.Find("GunController");   //ГО контроллера пушек
+        gunControllerTransform = gunGO.transform;   //Трансформ контроллера пушек
+        weapon = GameObject.Find("GunController/Weapon");   //ГО пушки
+        weaponSprite = weapon.GetComponent<SpriteRenderer>();
+        playerAnimation = GetComponent<PlayerAnimation>();  //Скрипт анимации игрока
+        firePointGO = weapon.transform.GetChild(0).gameObject;          //GameObject.Find("GunController/Weapon/Firepoint");
+        firePoint = firePointGO.transform;
+
+        Debug.Log(firePointGO);
     }
 
     private void Update()
     {
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
+        float fireposition = firePoint.position.y;
+
         gunControllerTransform.transform.position = playerTransform.transform.position;
 
-        if (gunAngle >= 0 && gunAngle <= 180)
+        if (gunAngle <= 90 && gunAngle >= -90)
         {
-
+            //weaponSprite.flipX = false;
+            weaponSprite.flipY = false;
+            fireposition *= -1;
         }
+        else// if (gunAngle > 90 && gunAngle < -90)
+        {
+            //weaponSprite.flipX = true;
+            weaponSprite.flipY = true;
+            fireposition *= -1;
+        }
+        //Debug.Log(firePoint.position.y);
     }
 
     private void FixedUpdate()
