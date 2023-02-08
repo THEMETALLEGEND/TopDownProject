@@ -14,12 +14,11 @@ public class WeaponBullet : MonoBehaviour
 
     private void OnCollisionEnter2D (Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy") //если этот ГО сталкивается с ГО с тэгом enemy
+        if (collision.gameObject.tag == "Hitbox") //если этот ГО сталкивается с ГО с тэгом hitbox
         {
-            TestEnemy testEnemy = collision.gameObject.GetComponent<TestEnemy>(); //создаем переменную типа TestEnemy (имя скрипта) и
-                                                                                  //назначаем скрипт TestEnemy из объекта, с которым столкнулись
+            TestEnemy testEnemy = collision.gameObject.GetComponentInParent<TestEnemy>(); //создаем переменную типа TestEnemy (имя скрипта) и
+                                                                                  //назначаем скрипт TestEnemy из родителя объекта, с которым столкнулись (ибо хитбокс всегда child)
             testEnemy.TakeDamage(bulletDamageAmount); //вкладываем в назначенную переменную со скриптом метод TakeDamage и назначаем float
-            //Debug.Log("collision enter");
         }
         Destroy(gameObject); //при любом столкновении дестрой себя
     }

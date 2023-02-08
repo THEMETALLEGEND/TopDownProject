@@ -28,11 +28,10 @@ public class TestEnemy : EnemyClass
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player") //если сталкиваемся с игроком
         {
-            CharacterController2D player = collision.gameObject.GetComponent<CharacterController2D>();
-            player.TakeDamage(meleeDamage);
-            Debug.Log("Collided");
+            CharacterController2D player = collision.gameObject.GetComponent<CharacterController2D>(); //то достаем его скрипт
+            player.TakeDamage(meleeDamage); //и нахуяриваем ему дамага
         }
     }
 }

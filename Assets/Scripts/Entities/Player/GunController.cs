@@ -39,16 +39,16 @@ public class GunController : MonoBehaviour
 
     private void Update()
     {
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition); //позиция мышки в мире
 
-        float fireposition = firePoint.position.y;
+        float fireposition = firePoint.position.y;  
 
-        gunControllerTransform.transform.position = playerTransform.transform.position;
+        gunControllerTransform.transform.position = playerTransform.transform.position; //перемещение guncontroller'а вместе с этим объектом ибо это не child
 
-        if (gunAngle <= 90 && gunAngle >= -90)
+        if (gunAngle <= 90 && gunAngle >= -90) //если мышь смотрит вправо на 180 градусов
         {
             //weaponSprite.flipX = false;
-            weaponSprite.flipY = false;
+            weaponSprite.flipY = false; //то переворачиваем спрайт
             fireposition *= -1;
         }
         else// if (gunAngle > 90 && gunAngle < -90)
