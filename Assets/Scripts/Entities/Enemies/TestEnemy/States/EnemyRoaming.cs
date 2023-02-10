@@ -1,10 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
 
-public class TestEnemyStates : MonoBehaviour
+public class EnemyRoaming : BaseState
 {
+    public EnemyRoaming(TestEnemyStates enemyStateMachine) : base("TestEnemyRoaming", enemyStateMachine) { }
+
+    public override void Enter()
+    {
+        base.Enter();
+
+    }
+
+    public override void UpdateLogic()
+    {
+        base.UpdateLogic();
+        if (Input.GetKeyDown("e"))
+            stateMachine.ChangeState(((TestEnemyStates)stateMachine).waitingState);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
     private TestEnemy testEnemy;
     private AIPath aIPath;
     private AIDestinationSetter aIDest;
@@ -22,7 +49,7 @@ public class TestEnemyStates : MonoBehaviour
 
     private Vector3 GetRoamingPosition()
     {
-        return startingPosition + Random.insideUnitSphere * roamRadius;  
+        return startingPosition + Random.insideUnitSphere * roamRadius;
     }
 
     private void Update()
@@ -32,4 +59,5 @@ public class TestEnemyStates : MonoBehaviour
             aIDest.target.position = GetRoamingPosition();
         }
     }
+    */
 }
