@@ -8,8 +8,9 @@ public class PlayerAnimation : MonoBehaviour
 
     private GameObject model;
     private Animator animator;
+    private Transform childModel;
     private CharacterController2D playerController;
-    private Transform transform;
+    private Transform playerTransform;
     //[SerializeField]
     private Vector3 scale;
     [HideInInspector]public bool isFacingRight = true;
@@ -18,10 +19,11 @@ public class PlayerAnimation : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        model = GameObject.Find("Model"); //поиск ГО модели
-        animator = model.GetComponent<Animator>(); //достаем аниматор из ГО модели
+        childModel = this.transform.GetChild(0); //поиск ГО модели
+        animator = childModel.GetComponent<Animator>(); //достаем аниматор из ГО модели
         playerController = GetComponent<CharacterController2D>(); //ищем скрипт типа названия скрипта
-        transform = GetComponent<Transform>(); 
+        playerTransform = GetComponent<Transform>();
+        Debug.Log(childModel);
     }
 
    
