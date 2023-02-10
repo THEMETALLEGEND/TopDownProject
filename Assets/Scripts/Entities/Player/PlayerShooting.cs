@@ -17,7 +17,6 @@ public class PlayerShooting : MonoBehaviour
     {
         gunGO = GameObject.Find("GunController");
         firepoint = gunGO.transform.GetChild(0).GetChild(0); //достаем точку вылета пули через метод get child 
-
         //transform.Find("GunController/Weapon/Firepoint"); - второй способ
     }
 

@@ -1,19 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class EnemyRoaming : BaseState
 {
     public EnemyRoaming(TestEnemyStates enemyStateMachine) : base("TestEnemyRoaming", enemyStateMachine) { }
 
+    private TestEnemy testEnemy;
+    private AIPath aIPath;
+    private AIDestinationSetter aIDest;
+    private Vector3 target;
+    private Vector3 startingPosition;
+
+    public float roamRadius = 10f;
+
     public override void Enter()
     {
         base.Enter();
+
 
     }
 
     public override void UpdateLogic()
     {
+
+
         base.UpdateLogic();
         if (Input.GetKeyDown("e"))
             stateMachine.ChangeState(((TestEnemyStates)stateMachine).waitingState);
