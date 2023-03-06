@@ -1,17 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
 
 public class EnemyRoaming : BaseState
 {
-    public EnemyRoaming(TestEnemyStates enemyStateMachine) : base("TestEnemyRoaming", enemyStateMachine) { }
 
-    private TestEnemy testEnemy;
-    private AIPath aIPath;
-    private AIDestinationSetter aIDest;
-    private Vector3 target;
-    private Vector3 startingPosition;
+    private TestEnemyStates _sm;
+    public EnemyRoaming(TestEnemyStates enemyStateMachine) : base("TestEnemyRoaming", enemyStateMachine) {
+        _sm = (TestEnemyStates)stateMachine;
+    }
 
     public float roamRadius = 10f;
 
@@ -19,29 +16,30 @@ public class EnemyRoaming : BaseState
     {
         base.Enter();
 
-
+        _sm.startingPosition = _sm.transform.position;
     }
 
     public override void UpdateLogic()
     {
-
-
         base.UpdateLogic();
-        if (Input.GetKeyDown("e"))
-            stateMachine.ChangeState(((TestEnemyStates)stateMachine).waitingState);
+        if (Input.GetKeyDown("f"))
+            stateMachine.ChangeState(_sm.waitingState);
+    }
+
+    public override void UpdatePhysics()
+    {
+        base.UpdatePhysics();
+        if (Input.GetKey("x"))
+        {
+            _sm.aIDest.target.position = GetRoamingPosition();
+        }
     }
 
 
-
-
-
-
-
-
-
-
-
-
+    private Vector3 GetRoamingPosition()
+    {
+        return _sm.startingPosition + Random.insideUnitSphere * roamRadius;
+    }
 
     /*
     private TestEnemy testEnemy;

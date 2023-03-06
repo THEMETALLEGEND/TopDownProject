@@ -15,7 +15,7 @@ public class EnemyWaiting : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        if (Input.GetKeyDown("q"))
+        if (Input.GetKeyDown("f"))
             stateMachine.ChangeState(((TestEnemyStates)stateMachine).roamingState);
     }
 
