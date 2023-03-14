@@ -19,6 +19,8 @@ public class EnemyRoaming : BaseState
         base.Enter();
 
         _sm.startingPosition = _sm.transform.position; //стартова€ позици€ дл€ отсчета состо€ни€ roaming
+        _sm.TargetSetter(_sm.roamingTarget);
+        _sm.aIDest.target.position = GetRoamingPosition();
     }
 
     public override void UpdateLogic()
@@ -27,8 +29,8 @@ public class EnemyRoaming : BaseState
         if (Input.GetKeyDown("f"))
             stateMachine.ChangeState(_sm.waitingState); //мен€ем состо€ние по кнопке
 
-        _sm.CheckPlayerInRange(); //провер€ем дистанцию до игрока (метод в стейтмашине)
-        if (_sm.CheckPlayerInRange())   
+        _sm.CheckPlayerInRange(15); //провер€ем дистанцию до игрока (метод в стейтмашине)
+        if (_sm.CheckPlayerInRange(15))   
         {
             stateMachine.ChangeState(_sm.chasingState);
         }
@@ -63,34 +65,4 @@ public class EnemyRoaming : BaseState
     {
         return _sm.startingPosition + Random.insideUnitSphere * _sm.roamRadius; //от стартовой позиции делаем сферу радиуса уже назначенного
     }
-
-    /*
-    private TestEnemy testEnemy;
-    private AIPath aIPath;
-    private AIDestinationSetter aIDest;
-    private Vector3 target;
-    private Vector3 startingPosition;
-
-    public float roamRadius = 10f;
-
-    void Start()
-    {
-        startingPosition = transform.position;
-        aIPath = GetComponent<AIPath>();
-        aIDest = GetComponent<AIDestinationSetter>();
-    }
-
-    private Vector3 GetRoamingPosition()
-    {
-        return startingPosition + Random.insideUnitSphere * roamRadius;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown("f"))
-        {
-            aIDest.target.position = GetRoamingPosition();
-        }
-    }
-    */
 }
