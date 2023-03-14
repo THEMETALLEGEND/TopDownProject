@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Follow: {fileID: 405466590}
   m_Lens:
     FieldOfView: 108.8
-    OrthographicSize: 14.1
+    OrthographicSize: 25.2
     NearClipPlane: 0.1
     FarClipPlane: 5000.15
     Dutch: 0
@@ -413,13 +413,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254408445}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.38, y: -1.77, z: -10}
+  m_LocalPosition: {x: -36.2, y: -12.779999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1133662597}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &269726006
 GameObject:
@@ -1130,7 +1130,7 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 100
   walkSpeed: 7
-  runSpeed: 10
+  runSpeed: 15
   playerVelocity: {x: 0, y: 0, z: 0}
   moveX: 0
   moveY: 0
@@ -1163,7 +1163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405466585}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.38, y: -1.77, z: 0}
+  m_LocalPosition: {x: -36.2, y: -12.779999, z: 0}
   m_LocalScale: {x: 4.81, y: 4.81, z: 4.81}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2556,7 +2556,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240309358}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.38, y: -1.39, z: 0}
+  m_LocalPosition: {x: -36.2, y: -12.4, z: 0}
   m_LocalScale: {x: 4.81, y: 4.81, z: 4.81}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2716,7 +2716,7 @@ Camera:
   far clip plane: 5000.15
   field of view: 108.8
   orthographic: 1
-  orthographic size: 14.1
+  orthographic size: 25.2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2740,7 +2740,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1354965504}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.38, y: -1.77, z: -10}
+  m_LocalPosition: {x: -36.2, y: -12.779999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3302,7 +3302,7 @@ Transform:
   - {fileID: 6266611482559116275}
   - {fileID: 54281631}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1743605160
 GameObject:
@@ -4404,7 +4404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  target: {fileID: 54281631}
+  target: {fileID: 0}
 --- !u!58 &6266611482559116266
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4660,10 +4660,12 @@ MonoBehaviour:
   testEnemy: {fileID: 0}
   aIPath: {fileID: 0}
   aIDest: {fileID: 0}
-  target: {x: 0, y: 0, z: 0}
   startingPosition: {x: 0, y: 0, z: 0}
+  playerObject: {fileID: 0}
+  roamingTarget: {fileID: 0}
   roamingInterval: 120
   roamRadius: 10
+  target: {fileID: 0}
 --- !u!114 &7000486835892170614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4679,7 +4681,9 @@ MonoBehaviour:
   testEnemy: {fileID: 0}
   aIPath: {fileID: 0}
   aIDest: {fileID: 0}
-  target: {x: 0, y: 0, z: 0}
   startingPosition: {x: 0, y: 0, z: 0}
+  playerObject: {fileID: 0}
+  roamingTarget: {fileID: 0}
   roamingInterval: 60
   roamRadius: 4
+  target: {fileID: 0}
