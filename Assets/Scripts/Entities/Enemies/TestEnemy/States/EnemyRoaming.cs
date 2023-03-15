@@ -19,8 +19,8 @@ public class EnemyRoaming : BaseState
         base.Enter();
 
         _sm.startingPosition = _sm.transform.position; //стартовая позиция для отсчета состояния roaming
-        _sm.TargetSetter(_sm.roamingTarget);
-        _sm.aIDest.target.position = GetRoamingPosition();
+        _sm.TargetSetter(_sm.roamingTarget);    //назначение цели 
+        _sm.aIDest.target.position = GetRoamingPosition();      //начальная рандомизация позиции цели от стартовой точки
     }
 
     public override void UpdateLogic()

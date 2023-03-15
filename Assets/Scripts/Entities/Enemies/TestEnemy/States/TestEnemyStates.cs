@@ -40,7 +40,7 @@ public class TestEnemyStates : StateMachine
     {
         return roamingState;
     }
-    public bool CheckPlayerInRange(float alertDistance)     // метод проверяющий расстояние до игрока с переменной которую нужно отдавать с каждого состояния
+    public bool CheckPlayerInRange(float alertDistance)     // метод проверяющий расстояние до игрока с кастомной переменной
     {
         float distance = Vector3.Distance(enemyObject.transform.position, playerObject.transform.position); //проверка дистанции от объекта а до б
         if (distance <= alertDistance)   
