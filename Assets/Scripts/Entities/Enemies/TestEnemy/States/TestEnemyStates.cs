@@ -9,6 +9,7 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public EnemyWaiting waitingState;
     [HideInInspector] public EnemyRoaming roamingState;
     [HideInInspector] public EnemyChasing chasingState;
+    [HideInInspector] public EnemyShooting shootingState;
     [HideInInspector] public TestEnemy testEnemy;
     [HideInInspector] public AIPath aIPath;
     [HideInInspector] public AIDestinationSetter aIDest;
@@ -34,6 +35,7 @@ public class TestEnemyStates : StateMachine
         waitingState = new EnemyWaiting(this); //присваивание состояний к переменным с этой стейт машиной
         roamingState = new EnemyRoaming(this);
         chasingState = new EnemyChasing(this);
+        shootingState = new EnemyShooting(this);
 
     }
     protected override BaseState GetInitialState() //начальное состояние в виде состояния ожидания
