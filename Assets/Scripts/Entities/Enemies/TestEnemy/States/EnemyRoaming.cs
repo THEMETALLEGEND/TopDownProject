@@ -19,7 +19,7 @@ public class EnemyRoaming : BaseState
         base.Enter();
 
         _sm.startingPosition = _sm.transform.position; //стартовая позиция для отсчета состояния roaming
-        _sm.TargetSetter(_sm.roamingTarget);    //назначение цели 
+        _sm.TargetSetter(_sm.pointTarget);    //назначение цели 
         _sm.aIDest.target.position = GetRoamingPosition();      //начальная рандомизация позиции цели от стартовой точки
     }
 
@@ -29,8 +29,8 @@ public class EnemyRoaming : BaseState
         if (Input.GetKeyDown("f"))
             stateMachine.ChangeState(_sm.waitingState); //меняем состояние по кнопке
 
-        _sm.CheckPlayerInRange(45); //проверяем дистанцию до игрока (метод в стейтмашине)
-        if (_sm.CheckPlayerInRange(45))   
+        _sm.CheckPlayerInRange(30); //проверяем дистанцию до игрока (метод в стейтмашине)
+        if (_sm.CheckPlayerInRange(30))   
         {
             stateMachine.ChangeState(_sm.chasingState);
         }

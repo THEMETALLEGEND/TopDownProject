@@ -15,13 +15,15 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public AIDestinationSetter aIDest;
     [HideInInspector] public Vector3 startingPosition;
     [HideInInspector] public GameObject playerObject;
-    public GameObject roamingTarget;
+    [HideInInspector] public Animator animator;
+    public GameObject pointTarget;
     public float roamingInterval = 30f;
     public float roamRadius = 10f;
+    public GameObject bulletPrefab;
 
 
     [HideInInspector] public Transform target;
-    private GameObject enemyObject;
+    [HideInInspector] public GameObject enemyObject;
 
 
     public void Awake()
@@ -31,7 +33,8 @@ public class TestEnemyStates : StateMachine
         enemyObject = gameObject;
         playerObject = GameObject.Find("Player");
         target = aIDest.target;
-        roamingTarget = transform.parent.GetChild(1).gameObject; //поиск пустого √ќ к которому идет враг во врем€ состо€ни€ roaming 
+        pointTarget = transform.parent.GetChild(1).gameObject; //поиск пустого √ќ к которому идет враг во врем€ состо€ни€ roaming 
+        animator = GetComponent<Animator>();
         waitingState = new EnemyWaiting(this); //присваивание состо€ний к переменным с этой стейт машиной
         roamingState = new EnemyRoaming(this);
         chasingState = new EnemyChasing(this);

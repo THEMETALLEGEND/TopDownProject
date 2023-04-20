@@ -413,7 +413,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254408445}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.2, y: -12.779999, z: -10}
+  m_LocalPosition: {x: -66.5, y: -31.18, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1163,7 +1163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405466585}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.2, y: -12.779999, z: 0}
+  m_LocalPosition: {x: -66.5, y: -31.18, z: 0}
   m_LocalScale: {x: 4.81, y: 4.81, z: 4.81}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2556,7 +2556,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240309358}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -36.2, y: -12.4, z: 0}
+  m_LocalPosition: {x: -66.5, y: -30.8, z: 0}
   m_LocalScale: {x: 4.81, y: 4.81, z: 4.81}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2740,7 +2740,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1354965504}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.2, y: -12.779999, z: -10}
+  m_LocalPosition: {x: -66.5, y: -31.18, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4631,7 +4631,6 @@ GameObject:
   - component: {fileID: 7000486835892170614}
   - component: {fileID: 6266611482559116270}
   - component: {fileID: 6266611482559116264}
-  - component: {fileID: 7000486835892170613}
   - component: {fileID: 6266611482559116273}
   - component: {fileID: 6266611482559116272}
   - component: {fileID: 6266611482559116266}
@@ -4645,27 +4644,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &7000486835892170613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6266611482559116278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 767d783f39f4af54ea133328fef28157, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testEnemy: {fileID: 0}
-  aIPath: {fileID: 0}
-  aIDest: {fileID: 0}
-  startingPosition: {x: 0, y: 0, z: 0}
-  playerObject: {fileID: 0}
-  roamingTarget: {fileID: 0}
-  roamingInterval: 120
-  roamRadius: 10
-  target: {fileID: 0}
 --- !u!114 &7000486835892170614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4683,7 +4661,11 @@ MonoBehaviour:
   aIDest: {fileID: 0}
   startingPosition: {x: 0, y: 0, z: 0}
   playerObject: {fileID: 0}
-  roamingTarget: {fileID: 0}
+  animator: {fileID: 0}
+  pointTarget: {fileID: 0}
   roamingInterval: 60
   roamRadius: 4
+  bulletPrefab: {fileID: 8895918990583274388, guid: bb10998cdecf6924a93ed9603f030122,
+    type: 3}
   target: {fileID: 0}
+  enemyObject: {fileID: 0}
