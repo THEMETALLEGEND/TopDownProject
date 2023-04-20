@@ -11,12 +11,15 @@ public class EnemyShooting : BaseState
         _sm = (TestEnemyStates)stateMachine;
     }
 
+
     public override void Enter()
     {
         base.Enter();
 
         //_sm.aIPath.canMove = false;
-        _sm.pointTarget.transform.position = _sm.enemyObject.transform.position; //ставим пустое ГО под ноги агенту чтобы он остановился и обнулил desiredVelocity
+        Vector2 direction = (_sm.playerObject.transform.position - _sm.enemyObject.transform.position).normalized;
+        _sm.pointTarget.transform.position = _sm.enemyObject.transform.position + (new Vector3(direction.x, direction.y, 0f) * 2f); //ставим пустое ГО под ноги агенту но немного вперед в сторону игрока чтобы он
+                                                                                                                                    //остановился и обнулил desiredVelocity и все еще был повернут к игроку лицом
         _sm.TargetSetter(_sm.pointTarget);
 
         _sm.StartCoroutine(ShootBurst()); //здесь объявляем корутину ShootBurst 
