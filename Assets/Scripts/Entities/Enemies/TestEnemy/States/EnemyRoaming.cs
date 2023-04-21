@@ -29,8 +29,8 @@ public class EnemyRoaming : BaseState
         if (Input.GetKeyDown("f"))
             stateMachine.ChangeState(_sm.waitingState); //меняем состояние по кнопке
 
-        _sm.CheckPlayerInRange(30); //проверяем дистанцию до игрока (метод в стейтмашине)
-        if (_sm.CheckPlayerInRange(30))   
+        //_sm.CheckPlayerInRange(30); //проверяем дистанцию до игрока (метод в стейтмашине)
+        if (_sm.CheckPlayerInRange(_sm.roamPlayerDistanceEnter))   
         {
             stateMachine.ChangeState(_sm.chasingState);
         }

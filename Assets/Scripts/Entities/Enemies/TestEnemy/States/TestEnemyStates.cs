@@ -5,25 +5,45 @@ using Pathfinding;
 
 public class TestEnemyStates : StateMachine
 {
-    //------ROAMING---------
+    //-------STATES--------
     [HideInInspector] public EnemyWaiting waitingState;
     [HideInInspector] public EnemyRoaming roamingState;
     [HideInInspector] public EnemyChasing chasingState;
     [HideInInspector] public EnemyShooting shootingState;
+
+    //-------SCRIPTS--------
     [HideInInspector] public TestEnemy testEnemy;
+
+    //-------PATHFINDING A*--------
     [HideInInspector] public AIPath aIPath;
     [HideInInspector] public AIDestinationSetter aIDest;
+
+    //-------COMPONENTS--------
     [HideInInspector] public Vector3 startingPosition;
     [HideInInspector] public GameObject playerObject;
     [HideInInspector] public Animator animator;
-    public GameObject pointTarget;
-    public float roamingInterval = 30f;
-    public float roamRadius = 10f;
-    public GameObject bulletPrefab;
-
-
     [HideInInspector] public Transform target;
     [HideInInspector] public GameObject enemyObject;
+    public GameObject pointTarget;
+    public GameObject bulletPrefab;
+
+    //-------INSPECTOR VALUES--------
+    [Header("Roaming state")]
+    public float roamingInterval = 30f;
+    public float roamRadius = 10f;
+    public float roamPlayerDistanceEnter = 30f;
+
+    [Header("Chasing state")]
+    public float chasingPlayerDistanceEnter = 15f;
+    public float chasingPlayerDistanceExit = 40f;
+
+    [Header("Shooting state")]
+    public float shootingInaccuracySize = 0.4f;
+    public float shootingPlayerDistanceExit = 20f;
+    public float shootingBurstShortTiming = .2f;
+    public float shootingBurstLongTiming = 2f;
+
+
 
 
     public void Awake()
@@ -39,7 +59,7 @@ public class TestEnemyStates : StateMachine
         roamingState = new EnemyRoaming(this);
         chasingState = new EnemyChasing(this);
         shootingState = new EnemyShooting(this);
-
+        GetGameObject(enemyObject);
     }
     protected override BaseState GetInitialState() //начальное состояние в виде состояния ожидания
     {

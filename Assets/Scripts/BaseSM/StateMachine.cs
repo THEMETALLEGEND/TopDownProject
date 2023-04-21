@@ -7,7 +7,7 @@ public class StateMachine : MonoBehaviour
 {
     BaseState currentState;
 
-    
+    private GameObject agent;
 
     private void Start()
     {
@@ -41,10 +41,31 @@ public class StateMachine : MonoBehaviour
         return null;
     }
 
-    private void OnGUI() //тут рисуем состояние в верхнем левом углу
+    public void GetGameObject(GameObject agent)
+    {
+        this.agent = agent;
+    }
+
+    private void OnGUI()
+    {
+        if (agent != null)
+        {
+            Vector3 agentPosition = agent.transform.position; // получаем позицию агента
+            Vector2 screenPosition = Camera.main.WorldToScreenPoint(agentPosition); // переводим позицию агента в позицию на экране
+            float yOffset = 50f; // смещение по оси Y относительно агента
+            Vector2 labelPosition = new Vector2(screenPosition.x, Screen.height - screenPosition.y - yOffset); // позиция текста на экране
+
+            string content = currentState != null ? currentState.name : "(no current state)";
+
+            GUI.Label(new Rect(labelPosition.x - 50, labelPosition.y, 200, 50), content); // отображаем текст над агентом
+        }
+        
+    }
+
+    /*private void OnGUI() //тут рисуем состояние в верхнем левом углу
     {
         string content = currentState != null ? currentState.name : "(no current state)"; //если currentstate не null то присваиваем его значение, а если null то присваиваем no current state
         GUILayout.Label($"<color='black'><size=40>{content}</size></color>"); //размер и цвет стринга контент
 
-    }
+    }*/
 }

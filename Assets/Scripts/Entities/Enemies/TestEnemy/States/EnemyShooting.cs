@@ -6,6 +6,7 @@ public class EnemyShooting : BaseState
 {
 
     private TestEnemyStates _sm;
+    private Coroutine _shootBurstCoroutine; //здесь объявляем переменную корутины ShootBurst 
     public EnemyShooting(TestEnemyStates enemyStateMachine) : base("TestEnemyShooting", enemyStateMachine)
     {
         _sm = (TestEnemyStates)stateMachine;
@@ -22,14 +23,14 @@ public class EnemyShooting : BaseState
                                                                                                                                     //остановился и обнулил desiredVelocity и все еще был повернут к игроку лицом
         _sm.TargetSetter(_sm.pointTarget);
 
-        _sm.StartCoroutine(ShootBurst()); //здесь объявляем корутину ShootBurst 
+        _shootBurstCoroutine = _sm.StartCoroutine(ShootBurst()); //назначаем корутину и вызываем ее
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
 
-        if (!_sm.CheckPlayerInRange(20)) //если дальше 35
+        if (!_sm.CheckPlayerInRange(_sm.shootingPlayerDistanceExit)) //если дальше указанного значения
             stateMachine.ChangeState(_sm.chasingState);
 
     }
@@ -39,12 +40,11 @@ public class EnemyShooting : BaseState
         while (true)
         {
             Shoot();
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(_sm.shootingBurstShortTiming);
             Shoot();
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(_sm.shootingBurstShortTiming);
             Shoot();
-            yield return new WaitForSeconds(0.2f);
-            yield return new WaitForSeconds(1.8f);
+            yield return new WaitForSeconds(_sm.shootingBurstLongTiming);
         }
     }
 
@@ -52,9 +52,15 @@ public class EnemyShooting : BaseState
     {
         Vector2 direction = (_sm.playerObject.transform.position - _sm.enemyObject.transform.position).normalized; // Вычисляем вектор направления от врага до игрока
 
+        float accuracy = 0.2f; // Устанавливаем точность стрельбы
+        float rand = Random.Range(-accuracy, accuracy); // Генерируем случайное смещение для направления выстрела
+
+        Vector2 shootOffset = new Vector2(direction.y, -direction.x) * rand; //вычисляем перпендикулярный вектор и выбираем по нему рандомную точку согласно rand
+        Vector2 newDirection = direction + shootOffset; //новое направление пули с небольшой погрешностью
+
         // Вычисляем позицию, в которой нужно создать пулю, немного впереди от врага.
-        Vector2 offset = direction * 2.75f; 
-        Vector3 position = new Vector3(_sm.enemyObject.transform.position.x + offset.x, _sm.enemyObject.transform.position.y + offset.y, 0f); //явное преобразование в vector3 с добавлением пустой z координаты
+        Vector2 firePointOffset = newDirection * 2.75f; 
+        Vector3 position = new Vector3(_sm.enemyObject.transform.position.x + firePointOffset.x, _sm.enemyObject.transform.position.y + firePointOffset.y, 0f); //явное преобразование в vector3 с добавлением пустой z координаты
 
         GameObject bullet = Object.Instantiate(_sm.bulletPrefab, position, Quaternion.identity); // Создаем экземпляр префаба пули в позиции врага и с нулевым поворотом
         Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>(); // Получаем ссылку на Rigidbody2D экземпляра пули
@@ -65,6 +71,11 @@ public class EnemyShooting : BaseState
     {
         base.Exit();
 
-        _sm.StopCoroutine(ShootBurst()); //останавливаем корутину
+        if (_shootBurstCoroutine != null) //если корутина сейчас проигрывается
+        {
+            _sm.StopCoroutine(_shootBurstCoroutine); //то останавливаем её
+            _shootBurstCoroutine = null;  //и назначаем переменной null (по другому корутина не останавливалась)
+        }
+        Debug.Log("stopped"); //останавливаем корутину
     }
 }
