@@ -44,6 +44,8 @@ public class EnemyShooting : BaseState
             Shoot();
             yield return new WaitForSeconds(_sm.shootingBurstShortTiming);
             Shoot();
+            yield return new WaitForSeconds(_sm.shootingBurstShortTiming);
+            Dodge(); 
             yield return new WaitForSeconds(_sm.shootingBurstLongTiming);
         }
     }
@@ -59,12 +61,32 @@ public class EnemyShooting : BaseState
         Vector2 newDirection = direction + shootOffset; //новое направление пули с небольшой погрешностью
 
         // ¬ычисл€ем позицию, в которой нужно создать пулю, немного впереди от врага.
-        Vector2 firePointOffset = newDirection * 2.75f; 
+        Vector2 firePointOffset = newDirection * 3f; 
         Vector3 position = new Vector3(_sm.enemyObject.transform.position.x + firePointOffset.x, _sm.enemyObject.transform.position.y + firePointOffset.y, 0f); //€вное преобразование в vector3 с добавлением пустой z координаты
 
         GameObject bullet = Object.Instantiate(_sm.bulletPrefab, position, Quaternion.identity); // —оздаем экземпл€р префаба пули в позиции врага и с нулевым поворотом
         Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>(); // ѕолучаем ссылку на Rigidbody2D экземпл€ра пули
         bulletRigidbody.AddForce(direction * 20f, ForceMode2D.Impulse); // ѕримен€ем силу в направлении игрока, использу€ вычисленный вектор направлени€ и мощность силы 20
+    }
+
+    private void Dodge()
+    {
+        _sm.aIPath.maxSpeed = 25; //на врем€ доджа сильно увеличиваем скорость
+        Vector2 direction = (_sm.playerObject.transform.position - _sm.enemyObject.transform.position).normalized; //высчитываем нормализованный вектор от агента до игрока
+        Vector2 perpendicularVector = new Vector2(direction.y, -direction.x); //высчитываем вектор перпендикул€рный вектору выше
+
+        int dodgeDirectionDecision = Random.Range(0, 2); //рандомно решаем бежать влево или вправо
+        if (dodgeDirectionDecision == 0) //если влево
+        {
+            _sm.dodgeRandom = Random.Range(-10f, -5f);
+        }
+        else //если вправо
+        {
+            _sm.dodgeRandom = Random.Range(5f, 10f);
+        }
+
+        Vector3 dodgePoint = perpendicularVector * _sm.dodgeRandom; //ставим точку на перпендикул€рный вектор
+        _sm.pointTarget.transform.position = _sm.enemyObject.transform.position + dodgePoint; //ставим таргет √ќ на ранд точку перпендикул€рного вектора относительно себ€
     }
 
     public override void Exit()
@@ -76,6 +98,6 @@ public class EnemyShooting : BaseState
             _sm.StopCoroutine(_shootBurstCoroutine); //то останавливаем еЄ
             _shootBurstCoroutine = null;  //и назначаем переменной null (по другому корутина не останавливалась)
         }
-        Debug.Log("stopped"); //останавливаем корутину
+        _sm.aIPath.maxSpeed = 8;
     }
 }

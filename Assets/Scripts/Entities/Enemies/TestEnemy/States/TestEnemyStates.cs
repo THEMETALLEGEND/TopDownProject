@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,6 +43,7 @@ public class TestEnemyStates : StateMachine
     public float shootingPlayerDistanceExit = 20f;
     public float shootingBurstShortTiming = .2f;
     public float shootingBurstLongTiming = 2f;
+    [HideInInspector] public float dodgeRandom;
 
 
 
@@ -68,16 +70,26 @@ public class TestEnemyStates : StateMachine
     public bool CheckPlayerInRange(float alertDistance)     // метод проверяющий расстояние до игрока с кастомной переменной
     {
         float distance = Vector3.Distance(enemyObject.transform.position, playerObject.transform.position); //проверка дистанции от объекта а до б
-        if (distance <= alertDistance)   
+        if (distance <= alertDistance)
             return true;
         else
             return false;
 
-        
+
     }
 
     public void TargetSetter(GameObject newTarget)
     {
         aIDest.target = newTarget.transform;
+    }
+
+    public void DiceMethod(float successChance, Action methodToRun) //метод который принимает шанс выполнения метода и при успехе выполняет его.
+                                                                            //для использования метода Action нужно указывать ссылку на сборку System
+    {
+        float randomValue = UnityEngine.Random.Range(0f, 1f);
+        if (randomValue <= successChance / 100f)
+        {
+            methodToRun.Invoke();
+        }
     }
 }
