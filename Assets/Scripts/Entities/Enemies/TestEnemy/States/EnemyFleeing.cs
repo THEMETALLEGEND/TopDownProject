@@ -42,7 +42,7 @@ public class EnemyFleeing : BaseState
         Vector3 dir = (_sm.playerObject.transform.position - _sm.enemyObject.transform.position).normalized;
         Vector3 opDir = dir * -1;
         // получаем точку на максимальном расстоянии от цели
-        Vector3 targetPoint = _sm.playerObject.transform.position + opDir * 3f;
+        Vector3 targetPoint = _sm.enemyObject.transform.position + opDir * 3f;
         // добавляем случайный угол поворота
         float randomAngle = Random.Range(-_sm.maxTurnAngle, _sm.maxTurnAngle);
         //targetPoint = Quaternion.Euler(0f, randomAngle, 0f) * targetPoint;

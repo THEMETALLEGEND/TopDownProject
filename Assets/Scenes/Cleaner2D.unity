@@ -1570,6 +1570,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1369487564795987620, guid: 3bff47cd748976448b3d268989040bbd,
+        type: 3}
+      propertyPath: maxTurnAngle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8225785139911405205, guid: 3bff47cd748976448b3d268989040bbd,
         type: 3}
       propertyPath: m_Name
