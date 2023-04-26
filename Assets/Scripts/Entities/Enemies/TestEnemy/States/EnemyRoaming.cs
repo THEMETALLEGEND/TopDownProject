@@ -32,7 +32,8 @@ public class EnemyRoaming : BaseState
         //_sm.CheckPlayerInRange(30); //проверяем дистанцию до игрока (метод в стейтмашине)
         if (_sm.CheckPlayerInRange(_sm.roamPlayerDistanceEnter))   
         {
-            stateMachine.ChangeState(_sm.chasingState);
+            //stateMachine.ChangeState(_sm.chasingState);
+            stateMachine.ChangeState(_sm.fleeingState);
         }
 
     }

@@ -11,6 +11,7 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public EnemyRoaming roamingState;
     [HideInInspector] public EnemyChasing chasingState;
     [HideInInspector] public EnemyShooting shootingState;
+    [HideInInspector] public EnemyFleeing fleeingState;
 
     //-------SCRIPTS--------
     [HideInInspector] public TestEnemy testEnemy;
@@ -45,6 +46,9 @@ public class TestEnemyStates : StateMachine
     public float shootingBurstLongTiming = 2f;
     [HideInInspector] public float dodgeRandom;
 
+    [Header("Fleeing state")]
+    public float maxTurnAngle = 45f;
+
 
 
 
@@ -61,6 +65,7 @@ public class TestEnemyStates : StateMachine
         roamingState = new EnemyRoaming(this);
         chasingState = new EnemyChasing(this);
         shootingState = new EnemyShooting(this);
+        fleeingState = new EnemyFleeing(this);
         GetGameObject(enemyObject);
     }
     protected override BaseState GetInitialState() //начальное состояние в виде состояния ожидания
