@@ -26,6 +26,7 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public Animator animator;
     [HideInInspector] public Transform target;
     [HideInInspector] public GameObject enemyObject;
+    [HideInInspector] public Rigidbody2D rb;
     public GameObject pointTarget;
     public GameObject bulletPrefab;
 
@@ -33,7 +34,7 @@ public class TestEnemyStates : StateMachine
     [Header("Roaming state")]
     public float roamingInterval = 30f;
     public float roamRadius = 10f;
-    public float roamPlayerDistanceEnter = 30f;
+    public float roamPlayerDistanceEnter = 20f;
 
     [Header("Chasing state")]
     public float chasingPlayerDistanceEnter = 15f;
@@ -47,8 +48,15 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public float dodgeRandom;
 
     [Header("Fleeing state")]
+    public float fleeingSpeed = 12f;
     public float maxTurnAngle = 45f;
+    public float fleeingPlayerDistanceExit = 40f;
 
+    [Header("Obstacle check")]
+    [HideInInspector] public bool reachedObstacleRetreat = true;
+
+
+    public float defaultSpeed = 8f;
 
 
 
@@ -56,6 +64,7 @@ public class TestEnemyStates : StateMachine
     {
         aIPath = GetComponent<AIPath>();
         aIDest = GetComponent<AIDestinationSetter>();
+        rb = GetComponent<Rigidbody2D>();
         enemyObject = gameObject;
         playerObject = GameObject.Find("Player");
         target = aIDest.target;
@@ -67,6 +76,7 @@ public class TestEnemyStates : StateMachine
         shootingState = new EnemyShooting(this);
         fleeingState = new EnemyFleeing(this);
         GetGameObject(enemyObject);
+        aIPath.maxSpeed = defaultSpeed;
     }
     protected override BaseState GetInitialState() //начальное состояние в виде состояния ожидания
     {
@@ -95,6 +105,18 @@ public class TestEnemyStates : StateMachine
         if (randomValue <= successChance / 100f)
         {
             methodToRun.Invoke();
+        }
+    }
+
+    public void ObstacleCheck(GameObject baseTarget)
+    {
+        reachedObstacleRetreat = false;
+        if (aIDest.target != null && aIPath.velocity.magnitude <= .1f && !reachedObstacleRetreat)
+        {
+            Vector2 desiredDir = aIPath.desiredVelocity.normalized;
+            // Создаем новую цель в обратном направлении от агента на расстоянии retreatDistance
+            Vector2 newTargetPos = (Vector2)transform.position - desiredDir * 5f;
+            pointTarget.transform.position = newTargetPos;
         }
     }
 }
