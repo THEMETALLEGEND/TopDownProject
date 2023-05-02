@@ -12,6 +12,7 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public EnemyChasing chasingState;
     [HideInInspector] public EnemyShooting shootingState;
     [HideInInspector] public EnemyFleeing fleeingState;
+    [HideInInspector] public EnemyStuck stuckState;
 
     //-------SCRIPTS--------
     [HideInInspector] public TestEnemy testEnemy;
@@ -29,6 +30,9 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public Rigidbody2D rb;
     public GameObject pointTarget;
     public GameObject bulletPrefab;
+
+    //-------METHODS--------------
+    private Stack<BaseState> stateStack = new Stack<BaseState>();
 
     //-------INSPECTOR VALUES--------
     [Header("Roaming state")]
@@ -54,6 +58,7 @@ public class TestEnemyStates : StateMachine
 
     [Header("Obstacle check")]
     [HideInInspector] public bool reachedObstacleRetreat = true;
+    public float retreatDistance = 10f;
 
 
     public float defaultSpeed = 8f;
@@ -75,9 +80,16 @@ public class TestEnemyStates : StateMachine
         chasingState = new EnemyChasing(this);
         shootingState = new EnemyShooting(this);
         fleeingState = new EnemyFleeing(this);
+        stuckState = new EnemyStuck(this);
         GetGameObject(enemyObject);
         aIPath.maxSpeed = defaultSpeed;
     }
+
+    /*private void Update()
+    {
+        Debug.Log(aIPath.velocity.magnitude);
+    }*/
+
     protected override BaseState GetInitialState() //начальное состояние в виде состояния ожидания
     {
         return roamingState;
@@ -110,13 +122,40 @@ public class TestEnemyStates : StateMachine
 
     public void ObstacleCheck(GameObject baseTarget)
     {
-        reachedObstacleRetreat = false;
-        if (aIDest.target != null && aIPath.velocity.magnitude <= .1f && !reachedObstacleRetreat)
+        // Проверяем, что цель задана и агент не движется
+        if (aIDest.target != null && aIPath.velocity.magnitude <= 0.1f && !aIPath.reachedEndOfPath)
         {
-            Vector2 desiredDir = aIPath.desiredVelocity.normalized;
-            // Создаем новую цель в обратном направлении от агента на расстоянии retreatDistance
-            Vector2 newTargetPos = (Vector2)transform.position - desiredDir * 5f;
-            pointTarget.transform.position = newTargetPos;
+            reachedObstacleRetreat = false;
+            Vector2 agentPos = transform.position; // Получаем текущую позицию агента
+            Vector2 targetPos = aIDest.target.position; // Получаем текущую позицию цели агента
+            Vector2 dirToAgent = (agentPos - targetPos).normalized;   // Получаем направление от цели к агенту
+            Vector2 newTargetPos = targetPos + dirToAgent * -retreatDistance; // Получаем новую позицию цели
+            baseTarget.transform.position = newTargetPos;    // Устанавливаем новую позицию цели
+            aIDest.target = baseTarget.transform;  // Устанавливаем новую цель для агента
+        }
+        // Проверяем, что цель задана и агент достиг конца пути
+        else if (!reachedObstacleRetreat)
+        {
+            if (aIPath.reachedEndOfPath)
+            {
+                reachedObstacleRetreat = true;
+            }
+        }
+    }
+
+    public void EntityStuck(BaseState baseState)
+    {
+        baseState.Exit(); // Проигрываем метод выхода в старом состоянии
+        stateStack.Push(baseState); // Добавляем старое состояние в стек
+        ChangeState(stuckState);
+    }
+
+    public void ReturnToPreviousState()
+    {
+        if (stateStack.Count > 0)
+        {
+            BaseState previousState = stateStack.Pop(); // Извлекаем предыдущее состояние из стека
+            ChangeState(previousState); // Переходим в предыдущее состояние
         }
     }
 }

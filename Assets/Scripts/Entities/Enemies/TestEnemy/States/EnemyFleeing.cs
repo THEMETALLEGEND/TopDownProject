@@ -7,6 +7,9 @@ public class EnemyFleeing : BaseState
     private TestEnemyStates _sm;
     private GameObject _fleeTarget; // пустой объект-цель
     private Vector3 targetpoint;
+    private float startTime;
+    private float waitTime = 1f; // задержка в 1 секунду
+    private bool waiting = false;
     public EnemyFleeing(TestEnemyStates enemyStateMachine) : base("TestEnemyFleeing", enemyStateMachine)
     {
         _sm = (TestEnemyStates)stateMachine;
@@ -42,7 +45,34 @@ public class EnemyFleeing : BaseState
 
         if (!_sm.CheckPlayerInRange(_sm.fleeingPlayerDistanceExit) && _sm.aIPath.reachedDestination == true) //если дальше указанного значения
                 stateMachine.ChangeState(_sm.roamingState);
-        _sm.ObstacleCheck();
+
+        
+
+    }
+
+    public override void UpdatePhysics()
+    {
+        base.UpdatePhysics();
+
+        if (_sm.aIDest.target != null && _sm.aIPath.velocity.magnitude <= .2f && _sm.aIPath.reachedEndOfPath)
+        {
+            if (!waiting)
+            {
+                startTime = Time.time; // сохраняем текущее время
+                waiting = true;
+            }
+            else if (Time.time - startTime >= waitTime)
+            {
+                _sm.ChangeState(_sm.stuckState);
+            }
+        }
+        else
+        {
+            waiting = false; // сбрасываем таймер, если условие больше не выполняется
+        }
+        Debug.Log(_sm.aIDest.target);
+        Debug.Log(_sm.aIPath.velocity.magnitude);
+        Debug.Log(_sm.aIPath.reachedEndOfPath);
     }
     public override void Exit()
     {
