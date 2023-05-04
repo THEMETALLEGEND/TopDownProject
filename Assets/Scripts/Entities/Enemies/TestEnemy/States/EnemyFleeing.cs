@@ -19,7 +19,7 @@ public class EnemyFleeing : BaseState
     {
         base.Enter();
 
-        _sm.aIPath.maxSpeed = _sm.fleeingSpeed;
+        _sm.aIPath.maxSpeed = _sm.fleeingSpeed; //назначаем скорость больше дефолтной на момент отступления
         // создаем пустой объект-цель
         _fleeTarget = new GameObject("FleeTarget");
         _sm.TargetSetter(_fleeTarget); // устанавливаем пустой объект-цель в качестве цели агента
@@ -31,17 +31,20 @@ public class EnemyFleeing : BaseState
     {
         base.UpdateLogic();
 
-        // вычисляем вектор направления от агента до цели
-        Vector3 dir = (_sm.playerObject.transform.position - _sm.enemyObject.transform.position).normalized;
-        Vector3 opDir = dir * -1;
-
-        if (_sm.CheckPlayerInRange(40f))
+        if (_sm.playerObject != null)
         {
-            // получаем точку на максимальном расстоянии от цели
-            targetpoint = _sm.enemyObject.transform.position + opDir * 3f;
-        }
+            Vector3 dir = (_sm.playerObject.transform.position - _sm.enemyObject.transform.position).normalized; // вычисляем вектор направления от агента до цели
+            Vector3 opDir = dir * -1; //обращаем этот вектор
 
-        _fleeTarget.transform.position = targetpoint; // устанавливаем позицию пустого объекта-цели
+            if (_sm.CheckPlayerInRange(40f))
+            {
+                targetpoint = _sm.enemyObject.transform.position + opDir * 3f; //назначаем целевую точку от агента в противоположную от игрока сторону на 3
+            }
+
+            _fleeTarget.transform.position = targetpoint; // устанавливаем позицию пустого объекта-цели
+        }
+        else
+            _sm.ChangeState(_sm.roamingState);
 
         if (!_sm.CheckPlayerInRange(_sm.fleeingPlayerDistanceExit) && _sm.aIPath.reachedEndOfPath == true) //если дальше указанного значения
                 stateMachine.ChangeState(_sm.roamingState);
@@ -54,9 +57,9 @@ public class EnemyFleeing : BaseState
     {
         base.UpdatePhysics();
 
-        if (_sm.aIDest.target != null && _sm.aIPath.velocity.magnitude <= .2f && _sm.aIPath.reachedEndOfPath)
+        if (_sm.aIDest.target != null && _sm.aIPath.velocity.magnitude <= .2f && _sm.aIPath.reachedEndOfPath) //если цель не нулл и двигаемся и достигли конца пути (aIPath.velocity.magnitude работает только в updatephysics)
         {
-            if (!waiting)
+            if (!waiting) //таймер который отсчитывает секунду прежде чем уходить в состояние страха
             {
                 startTime = Time.time; // сохраняем текущее время
                 waiting = true;
@@ -70,15 +73,12 @@ public class EnemyFleeing : BaseState
         {
             waiting = false; // сбрасываем таймер, если условие больше не выполняется
         }
-        Debug.Log(_sm.aIDest.target);
-        Debug.Log(_sm.aIPath.velocity.magnitude);
-        Debug.Log(_sm.aIPath.reachedEndOfPath);
     }
     public override void Exit()
     {
         base.Exit();
 
-        _sm.aIPath.maxSpeed = _sm.defaultSpeed;
+        _sm.aIPath.maxSpeed = _sm.defaultSpeed; //на выходе меняем скорость на дефолтную
 
         if (_fleeTarget != null)    // удаляем пустой объект-цель при выходе из состояния
         {

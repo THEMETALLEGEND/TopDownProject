@@ -28,6 +28,7 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public Transform target;
     [HideInInspector] public GameObject enemyObject;
     [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public GameObject model;
     [HideInInspector] public SpriteRenderer spriteRenderer;
     public GameObject pointTarget;
     public GameObject bulletPrefab;
@@ -36,6 +37,11 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public Stack<BaseState> stateStack = new Stack<BaseState>();
 
     //-------INSPECTOR VALUES--------
+    [Header("Enemy values")]
+    public float defaultSpeed = 8f;
+    public bool isAnNPC = false;
+
+    [Header("State values")]
     [Header("Roaming state")]
     public float roamingInterval = 30f;
     public float roamRadius = 10f;
@@ -61,7 +67,6 @@ public class TestEnemyStates : StateMachine
     public float afraidPlayerDistanceExit = 20f;
 
 
-    public float defaultSpeed = 8f;
 
 
 
@@ -75,7 +80,8 @@ public class TestEnemyStates : StateMachine
         target = aIDest.target;
         pointTarget = transform.parent.GetChild(1).gameObject; //поиск пустого ГО к которому идет враг во время состояния roaming 
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        model = transform.GetChild(0).gameObject;
+        spriteRenderer = model.GetComponent<SpriteRenderer>();
         waitingState = new EnemyWaiting(this); //присваивание состояний к переменным с этой стейт машиной
         roamingState = new EnemyRoaming(this);
         chasingState = new EnemyChasing(this);
@@ -104,11 +110,16 @@ public class TestEnemyStates : StateMachine
     }
     public bool CheckPlayerInRange(float alertDistance)     // метод проверяющий расстояние до игрока с кастомной переменной
     {
-        float distance = Vector3.Distance(enemyObject.transform.position, playerObject.transform.position); //проверка дистанции от объекта а до б
-        if (distance <= alertDistance)
-            return true;
-        else
-            return false;
+        if (playerObject != null)
+        {
+            float distance = Vector3.Distance(enemyObject.transform.position, playerObject.transform.position); //проверка дистанции от объекта а до б
+            if (distance <= alertDistance)
+                return true;
+            else
+                return false;
+        }
+
+        return false;
 
 
     }

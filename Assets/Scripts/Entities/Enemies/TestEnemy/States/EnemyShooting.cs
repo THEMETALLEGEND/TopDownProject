@@ -61,7 +61,7 @@ public class EnemyShooting : BaseState
         Vector2 newDirection = direction + shootOffset; //новое направление пули с небольшой погрешностью
 
         // Вычисляем позицию, в которой нужно создать пулю, немного впереди от врага.
-        Vector2 firePointOffset = newDirection * 3f; 
+        Vector2 firePointOffset = newDirection * 3.5f; 
         Vector3 position = new Vector3(_sm.enemyObject.transform.position.x + firePointOffset.x, _sm.enemyObject.transform.position.y + firePointOffset.y, 0f); //явное преобразование в vector3 с добавлением пустой z координаты
 
         GameObject bullet = Object.Instantiate(_sm.bulletPrefab, position, Quaternion.identity); // Создаем экземпляр префаба пули в позиции врага и с нулевым поворотом

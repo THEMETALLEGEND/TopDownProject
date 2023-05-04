@@ -18,6 +18,7 @@ public class EnemyAfraid : BaseState
 
         _sm.TargetSetter(_sm.pointTarget);
         _sm.pointTarget.transform.position = this._sm.transform.position;
+        _sm.spriteRenderer.color = new Color(0.5f, 0.5f, 1f, 1f); //ставим светло-синий цвет медели
     }
 
     public override void UpdateLogic()
@@ -28,5 +29,12 @@ public class EnemyAfraid : BaseState
         {
             _sm.ReturnToPreviousState();
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        _sm.spriteRenderer.color = new Color(1f, 1f, 1f, 1f); //ставим дефолтный цвет
     }
 }
