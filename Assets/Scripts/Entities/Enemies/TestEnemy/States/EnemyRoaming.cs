@@ -41,7 +41,7 @@ public class EnemyRoaming : BaseState
     public override void UpdatePhysics()
     {
         base.UpdatePhysics();
-        if (timerEnded == false && _sm.aIPath.reachedDestination == true) //если таймер не закончен И пришли к цели
+        if (timerEnded == false && _sm.aIPath.reachedEndOfPath == true) //если таймер не закончен И пришли к цели
         {
             _sm.roamingInterval -= 1; //начинаем отсчет таймера
         }
@@ -53,12 +53,14 @@ public class EnemyRoaming : BaseState
 
 
 
-        if (timerEnded == true && _sm.aIPath.reachedDestination == true) //если таймер закончен И пришли к цели
+        if (timerEnded == true && _sm.aIPath.reachedEndOfPath == true) //если таймер закончен И пришли к цели
         {
             _sm.aIDest.target.position = GetRoamingPosition(); //берем рандомную цель в небольшом радиусе
             _sm.roamingInterval = 60f; //радиус
             timerEnded = false; //таймер больше не закончен, запускаем заново
         }
+
+
     }
 
 

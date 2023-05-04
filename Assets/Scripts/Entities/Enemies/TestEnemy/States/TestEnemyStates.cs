@@ -12,7 +12,7 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public EnemyChasing chasingState;
     [HideInInspector] public EnemyShooting shootingState;
     [HideInInspector] public EnemyFleeing fleeingState;
-    [HideInInspector] public EnemyStuck stuckState;
+    [HideInInspector] public EnemyAfraid afraidState;
 
     //-------SCRIPTS--------
     [HideInInspector] public TestEnemy testEnemy;
@@ -28,11 +28,12 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public Transform target;
     [HideInInspector] public GameObject enemyObject;
     [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public SpriteRenderer spriteRenderer;
     public GameObject pointTarget;
     public GameObject bulletPrefab;
 
     //-------METHODS--------------
-    private Stack<BaseState> stateStack = new Stack<BaseState>();
+    [HideInInspector] public Stack<BaseState> stateStack = new Stack<BaseState>();
 
     //-------INSPECTOR VALUES--------
     [Header("Roaming state")]
@@ -56,9 +57,8 @@ public class TestEnemyStates : StateMachine
     public float maxTurnAngle = 45f;
     public float fleeingPlayerDistanceExit = 40f;
 
-    [Header("Obstacle check")]
-    [HideInInspector] public bool reachedObstacleRetreat = true;
-    public float retreatDistance = 10f;
+    [Header("Afraid state")]
+    public float afraidPlayerDistanceExit = 20f;
 
 
     public float defaultSpeed = 8f;
@@ -75,20 +75,28 @@ public class TestEnemyStates : StateMachine
         target = aIDest.target;
         pointTarget = transform.parent.GetChild(1).gameObject; //поиск пустого √ќ к которому идет враг во врем€ состо€ни€ roaming 
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         waitingState = new EnemyWaiting(this); //присваивание состо€ний к переменным с этой стейт машиной
         roamingState = new EnemyRoaming(this);
         chasingState = new EnemyChasing(this);
         shootingState = new EnemyShooting(this);
         fleeingState = new EnemyFleeing(this);
-        stuckState = new EnemyStuck(this);
+        afraidState = new EnemyAfraid(this);
         GetGameObject(enemyObject);
         aIPath.maxSpeed = defaultSpeed;
     }
 
-    /*private void Update()
+    public override void ChangeState(BaseState newState)
     {
-        Debug.Log(aIPath.velocity.magnitude);
-    }*/
+        if (currentState != null)
+        {
+            currentState.Exit();
+            stateStack.Push(currentState); // добавл€ем текущее состо€ние в стек перед переходом
+        }
+
+        currentState = newState;
+        currentState.Enter();
+    }
 
     protected override BaseState GetInitialState() //начальное состо€ние в виде состо€ни€ ожидани€
     {
@@ -120,36 +128,6 @@ public class TestEnemyStates : StateMachine
         }
     }
 
-    public void ObstacleCheck(GameObject baseTarget)
-    {
-        // ѕровер€ем, что цель задана и агент не движетс€
-        if (aIDest.target != null && aIPath.velocity.magnitude <= 0.1f && !aIPath.reachedEndOfPath)
-        {
-            reachedObstacleRetreat = false;
-            Vector2 agentPos = transform.position; // ѕолучаем текущую позицию агента
-            Vector2 targetPos = aIDest.target.position; // ѕолучаем текущую позицию цели агента
-            Vector2 dirToAgent = (agentPos - targetPos).normalized;   // ѕолучаем направление от цели к агенту
-            Vector2 newTargetPos = targetPos + dirToAgent * -retreatDistance; // ѕолучаем новую позицию цели
-            baseTarget.transform.position = newTargetPos;    // ”станавливаем новую позицию цели
-            aIDest.target = baseTarget.transform;  // ”станавливаем новую цель дл€ агента
-        }
-        // ѕровер€ем, что цель задана и агент достиг конца пути
-        else if (!reachedObstacleRetreat)
-        {
-            if (aIPath.reachedEndOfPath)
-            {
-                reachedObstacleRetreat = true;
-            }
-        }
-    }
-
-    public void EntityStuck(BaseState baseState)
-    {
-        baseState.Exit(); // ѕроигрываем метод выхода в старом состо€нии
-        stateStack.Push(baseState); // ƒобавл€ем старое состо€ние в стек
-        ChangeState(stuckState);
-    }
-
     public void ReturnToPreviousState()
     {
         if (stateStack.Count > 0)
@@ -157,5 +135,7 @@ public class TestEnemyStates : StateMachine
             BaseState previousState = stateStack.Pop(); // »звлекаем предыдущее состо€ние из стека
             ChangeState(previousState); // ѕереходим в предыдущее состо€ние
         }
+        else
+            Debug.Log("стак пуст");
     }
 }

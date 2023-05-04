@@ -43,7 +43,7 @@ public class EnemyFleeing : BaseState
 
         _fleeTarget.transform.position = targetpoint; // устанавливаем позицию пустого объекта-цели
 
-        if (!_sm.CheckPlayerInRange(_sm.fleeingPlayerDistanceExit) && _sm.aIPath.reachedDestination == true) //если дальше указанного значения
+        if (!_sm.CheckPlayerInRange(_sm.fleeingPlayerDistanceExit) && _sm.aIPath.reachedEndOfPath == true) //если дальше указанного значения
                 stateMachine.ChangeState(_sm.roamingState);
 
         
@@ -63,7 +63,7 @@ public class EnemyFleeing : BaseState
             }
             else if (Time.time - startTime >= waitTime)
             {
-                _sm.ChangeState(_sm.stuckState);
+                _sm.ChangeState(_sm.afraidState);
             }
         }
         else

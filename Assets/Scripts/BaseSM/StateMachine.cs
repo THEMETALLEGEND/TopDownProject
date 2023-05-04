@@ -5,7 +5,7 @@ using Pathfinding;
 
 public class StateMachine : MonoBehaviour
 {
-    BaseState currentState;
+    [HideInInspector] public BaseState currentState;
 
     private GameObject agent;
 
@@ -28,7 +28,7 @@ public class StateMachine : MonoBehaviour
             currentState.UpdatePhysics(); //физика АИ будет обрабатываться каждый фиксированный кадр
     }
 
-    public void ChangeState(BaseState newState) //через метод внутри состояния назначаем сюда новое состояние
+    public virtual void ChangeState(BaseState newState) //через метод внутри состояния назначаем сюда новое состояние
     {
         currentState.Exit(); //проигрываем метод выхода в старом состоянии
 
