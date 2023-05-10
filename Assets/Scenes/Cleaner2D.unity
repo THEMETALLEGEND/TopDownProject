@@ -4459,6 +4459,7 @@ GameObject:
   m_Component:
   - component: {fileID: 892325488}
   - component: {fileID: 892325490}
+  - component: {fileID: 892325491}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -4534,6 +4535,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &892325491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892325487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 508294cd96510924aa45f1f6177e29aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAmmo: 40
+  magCapacity: 7
+  currentAmmo: 0
+  reloadSpeed: 1
+  refillSpeed: 1.5
+  ammoText: {fileID: 1775168970}
+  needReload: 0
+  refilling: 0
 --- !u!1 &903279961
 GameObject:
   m_ObjectHideFlags: 0

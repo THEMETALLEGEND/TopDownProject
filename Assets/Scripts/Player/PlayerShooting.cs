@@ -12,18 +12,24 @@ public class PlayerShooting : MonoBehaviour
 
     private Transform firepoint;
     private GameObject gunGO;
+    private Transform testWeapon;
+    private WeaponReload reloadScript;
 
     private void Awake()
     {
         gunGO = GameObject.Find("GunController");
+        testWeapon = gunGO.transform.GetChild(0);
+        reloadScript = testWeapon.GetComponent<WeaponReload>();
         firepoint = gunGO.transform.GetChild(0).GetChild(0); //достаем точку вылета пули через метод get child 
         //transform.Find("GunController/Weapon/Firepoint"); - второй способ
+        Debug.Log(reloadScript);
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !reloadScript.needReload)
         {
+            reloadScript.DecreaseAmmo();
             Shoot();
         }
     }
