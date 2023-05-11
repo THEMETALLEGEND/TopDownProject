@@ -7,7 +7,7 @@ using TMPro;
 public class WeaponReload : MonoBehaviour
 {
     public int maxAmmo = 40;
-    int currentMaxAmmo;
+    //int currentMaxAmmo;
     public int magCapacity = 7;
     [HideInInspector] public int currentAmmo;
 
@@ -18,27 +18,34 @@ public class WeaponReload : MonoBehaviour
 
     [HideInInspector] public bool needReload;
     [HideInInspector] public bool refilling;
+    private GameObject player;
+    private PlayerInventory playerInventory;
+    private int ammoInInventory;
     Animator anim;
     private void Awake()
     {
+        player = GameObject.Find("Player");
+        playerInventory = player.GetComponent<PlayerInventory>();
         currentAmmo = magCapacity;
-        currentMaxAmmo = maxAmmo;
+        playerInventory.TestWeaponAmmo = maxAmmo;
+        Debug.Log(playerInventory);
         //anim = GetComponent<Animator>();
         needReload = false;
     }
 
     private void Update()
     {
+
         if (currentAmmo <= 0)
             needReload = true;
 
-        if (currentMaxAmmo > 0 && currentAmmo < magCapacity)
+        if (playerInventory.TestWeaponAmmo > 0 && currentAmmo < magCapacity)
         {
             if (Input.GetKeyDown(KeyCode.R))
                 StartCoroutine(Reload());
         }
 
-        ammoText.text = currentAmmo + "/" + currentMaxAmmo;
+        ammoText.text = currentAmmo + "/" + playerInventory.TestWeaponAmmo;
     }
 
     IEnumerator Reload()
@@ -48,15 +55,15 @@ public class WeaponReload : MonoBehaviour
         yield return new WaitForSeconds(reloadSpeed);
         needReload = false;
 
-        if ((magCapacity - currentAmmo) <= currentMaxAmmo)
+        if ((magCapacity - currentAmmo) <= playerInventory.TestWeaponAmmo)
         {
-            currentMaxAmmo -= magCapacity - currentAmmo;
+            playerInventory.TestWeaponAmmo -= magCapacity - currentAmmo;
             currentAmmo += magCapacity - currentAmmo;
         }
         else
         {
-            currentAmmo += currentMaxAmmo;
-            currentMaxAmmo = 0;
+            currentAmmo += playerInventory.TestWeaponAmmo;
+            playerInventory.TestWeaponAmmo = 0;
         }
 
         //anim.SetBool("IsReloading", false);
@@ -69,7 +76,7 @@ public class WeaponReload : MonoBehaviour
         Debug.Log("Refilling Ammo");
 
         refilling = true;
-        currentMaxAmmo = maxAmmo;
+        playerInventory.TestWeaponAmmo = maxAmmo;
     }
 
     public void DecreaseAmmo()

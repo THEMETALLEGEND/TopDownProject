@@ -15,7 +15,6 @@ public class InventoryUI : MonoBehaviour
     public void UpdateStuffCollectedText(PlayerInventory playerInventory)
     {
         stuffCollectedText.text = playerInventory.StuffCollected.ToString();
-        Debug.Log("shit");
     }
 
 }
