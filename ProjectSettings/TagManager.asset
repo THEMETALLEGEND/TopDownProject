@@ -10,6 +10,7 @@ TagManager:
   - World
   - NoMask
   - Hitbox
+  - Obstacles
   layers:
   - Default
   - TransparentFX

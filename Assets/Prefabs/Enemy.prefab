@@ -174,12 +174,13 @@ MonoBehaviour:
   showDebugGizmos: 0
   defaultSpeed: 12
   isAnNPC: 0
+  debugMode: 0
   roamingSpeed: 10
   roamingInterval: 30
   roamRadius: 10
   roamPlayerDistanceEnter: 20
   chasingPlayerDistanceEnter: 28
-  chasingPlayerDistanceExit: 65
+  chasingPlayerDistanceExit: 55
   dodgeSpeed: 25
   shootingInaccuracySize: 0.4
   shootingPlayerDistanceExit: 35
@@ -190,6 +191,16 @@ MonoBehaviour:
   maxTurnAngle: 45
   fleeingPlayerDistanceExit: 40
   afraidPlayerDistanceExit: 20
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  rayLength: 28
+  rayCount: 48
+  angleStep: 7.5
+  playerDetectionDistance: 2
 --- !u!114 &2652802638391646755
 MonoBehaviour:
   m_ObjectHideFlags: 0

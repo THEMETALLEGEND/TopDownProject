@@ -40,9 +40,10 @@ public class TestEnemyStates : StateMachine
     [Header("State values")]
 
     [Header("General")]
-    [SerializeField] private bool showDebugGizmos = false;
+    public bool showDebugGizmos = false;
     public float defaultSpeed = 12f;
     public bool isAnNPC = false;
+    public bool debugMode = false;
 
     [Header("Roaming state")]
     public float roamingSpeed = 10f;
@@ -70,6 +71,14 @@ public class TestEnemyStates : StateMachine
     [Header("Afraid state")]
     public float afraidPlayerDistanceExit = 20f;
 
+
+    //--------------TEMPORARY------------
+    public LayerMask obstacleLayer; // слой, содержащий объекты с коллизией и тегом obstacles
+    public LayerMask playerLayer;
+    public float rayLength = 28f; // длина лучей
+    public int rayCount = 48; // количество лучей
+    public float angleStep = 7.5f; // шаг между углами лучей
+    public float playerDetectionDistance = 2f; // расстояние, на котором агент определяет игрока
 
 
 
