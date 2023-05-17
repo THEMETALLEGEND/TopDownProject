@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2652802638391646753}
   - component: {fileID: 2652802638391646752}
   - component: {fileID: 2652802638391646759}
-  - component: {fileID: 1369487564795987620}
   - component: {fileID: 2652802638391646780}
   - component: {fileID: 2652802638391646778}
+  - component: {fileID: 840156048085309693}
   - component: {fileID: 2652802638391646755}
   - component: {fileID: 2652802638391646754}
   - component: {fileID: 2652802638391646776}
@@ -117,48 +117,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1369487564795987620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2652802638391646756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 767d783f39f4af54ea133328fef28157, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testEnemy: {fileID: 0}
-  aIPath: {fileID: 0}
-  aIDest: {fileID: 0}
-  startingPosition: {x: 0, y: 0, z: 0}
-  playerObject: {fileID: 0}
-  animator: {fileID: 0}
-  target: {fileID: 0}
-  enemyObject: {fileID: 0}
-  rb: {fileID: 0}
-  model: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  pointTarget: {fileID: 0}
-  bulletPrefab: {fileID: 8895918990583274388, guid: bb10998cdecf6924a93ed9603f030122,
-    type: 3}
-  defaultSpeed: 8
-  isAnNPC: 0
-  roamingInterval: 60
-  roamRadius: 4
-  roamPlayerDistanceEnter: 20
-  chasingPlayerDistanceEnter: 15
-  chasingPlayerDistanceExit: 40
-  shootingInaccuracySize: 0.4
-  shootingPlayerDistanceExit: 20
-  shootingBurstShortTiming: 0.2
-  shootingBurstLongTiming: 2
-  dodgeRandom: 0
-  fleeingSpeed: 12
-  maxTurnAngle: 10
-  fleeingPlayerDistanceExit: 40
-  afraidPlayerDistanceExit: 20
 --- !u!114 &2652802638391646780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +145,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d97eeabf637a749a6fa2730c58789b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &840156048085309693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2652802638391646756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767d783f39f4af54ea133328fef28157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testEnemy: {fileID: 0}
+  aIPath: {fileID: 0}
+  aIDest: {fileID: 0}
+  startingPosition: {x: 0, y: 0, z: 0}
+  playerObject: {fileID: 0}
+  animator: {fileID: 0}
+  target: {fileID: 0}
+  enemyObject: {fileID: 0}
+  rb: {fileID: 0}
+  model: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  pointTarget: {fileID: 8225785140343745612}
+  bulletPrefab: {fileID: 8895918990583274388, guid: bb10998cdecf6924a93ed9603f030122,
+    type: 3}
+  showDebugGizmos: 0
+  defaultSpeed: 12
+  isAnNPC: 0
+  roamingSpeed: 10
+  roamingInterval: 30
+  roamRadius: 10
+  roamPlayerDistanceEnter: 20
+  chasingPlayerDistanceEnter: 28
+  chasingPlayerDistanceExit: 65
+  dodgeSpeed: 25
+  shootingInaccuracySize: 0.4
+  shootingPlayerDistanceExit: 35
+  shootingBurstShortTiming: 0.2
+  shootingBurstLongTiming: 2
+  dodgeRandom: 0
+  fleeingSpeed: 15
+  maxTurnAngle: 45
+  fleeingPlayerDistanceExit: 40
+  afraidPlayerDistanceExit: 20
 --- !u!114 &2652802638391646755
 MonoBehaviour:
   m_ObjectHideFlags: 0

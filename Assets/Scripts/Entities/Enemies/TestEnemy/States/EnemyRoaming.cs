@@ -21,6 +21,7 @@ public class EnemyRoaming : BaseState
         _sm.startingPosition = _sm.transform.position; //стартовая позиция для отсчета состояния roaming
         _sm.TargetSetter(_sm.pointTarget);    //назначение цели 
         _sm.aIDest.target.position = GetRoamingPosition();      //начальная рандомизация позиции цели от стартовой точки
+        _sm.aIPath.maxSpeed = _sm.roamingSpeed;
     }
 
     public override void UpdateLogic()
@@ -28,7 +29,7 @@ public class EnemyRoaming : BaseState
         base.UpdateLogic();
 
         //_sm.CheckPlayerInRange(30); //проверяем дистанцию до игрока (метод в стейтмашине)
-        if (_sm.CheckPlayerInRange(_sm.roamPlayerDistanceEnter))   
+        if (_sm.CheckPlayerInRange(_sm.chasingPlayerDistanceEnter))   
         {
             if(_sm.isAnNPC)
                 stateMachine.ChangeState(_sm.fleeingState);

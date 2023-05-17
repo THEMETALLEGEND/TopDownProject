@@ -16,7 +16,13 @@ public class EnemyChasing : BaseState
     {
         base.Enter();
 
-        _sm.TargetSetter(_sm.playerObject);
+        if (_sm.playerObject != null)
+        {
+            _sm.TargetSetter(_sm.playerObject);
+            _sm.aIPath.maxSpeed = _sm.defaultSpeed;
+        }
+        else
+            _sm.ChangeState(_sm.roamingState);
     }
 
     public override void UpdateLogic()

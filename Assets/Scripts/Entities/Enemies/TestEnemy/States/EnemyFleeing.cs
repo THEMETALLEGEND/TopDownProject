@@ -78,7 +78,6 @@ public class EnemyFleeing : BaseState
     {
         base.Exit();
 
-        _sm.aIPath.maxSpeed = _sm.defaultSpeed; //на выходе меняем скорость на дефолтную
 
         if (_fleeTarget != null)    // удаляем пустой объект-цель при выходе из состояния
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AmmoBox : PickableClass
 {
-    private int ammoAvailable = 10;
+    public int ammoAvailable = 15;
     
     public override void CollisionCheck(Collider2D other)
     {
@@ -24,7 +24,6 @@ public class AmmoBox : PickableClass
             if (ammoAvailable <= 0)
             {
                 Destroy(gameObject);
-                playerInventory.StuffCollectedCount();
             }
         }
     }

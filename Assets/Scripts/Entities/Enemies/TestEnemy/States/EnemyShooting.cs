@@ -71,7 +71,7 @@ public class EnemyShooting : BaseState
 
     private void Dodge()
     {
-        _sm.aIPath.maxSpeed = 25; //на время доджа сильно увеличиваем скорость
+        _sm.aIPath.maxSpeed = _sm.dodgeSpeed; //на время доджа сильно увеличиваем скорость
         Vector2 direction = (_sm.playerObject.transform.position - _sm.enemyObject.transform.position).normalized; //высчитываем нормализованный вектор от агента до игрока
         Vector2 perpendicularVector = new Vector2(direction.y, -direction.x); //высчитываем вектор перпендикулярный вектору выше
 
@@ -98,6 +98,5 @@ public class EnemyShooting : BaseState
             _sm.StopCoroutine(_shootBurstCoroutine); //то останавливаем её
             _shootBurstCoroutine = null;  //и назначаем переменной null (по другому корутина не останавливалась)
         }
-        _sm.aIPath.maxSpeed = 8;
     }
 }

@@ -37,29 +37,33 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public Stack<BaseState> stateStack = new Stack<BaseState>();
 
     //-------INSPECTOR VALUES--------
-    [Header("Enemy values")]
-    public float defaultSpeed = 8f;
+    [Header("State values")]
+
+    [Header("General")]
+    [SerializeField] private bool showDebugGizmos = false;
+    public float defaultSpeed = 12f;
     public bool isAnNPC = false;
 
-    [Header("State values")]
     [Header("Roaming state")]
+    public float roamingSpeed = 10f;
     public float roamingInterval = 30f;
     public float roamRadius = 10f;
     public float roamPlayerDistanceEnter = 20f;
 
     [Header("Chasing state")]
-    public float chasingPlayerDistanceEnter = 15f;
-    public float chasingPlayerDistanceExit = 40f;
+    public float chasingPlayerDistanceEnter = 28f;
+    public float chasingPlayerDistanceExit = 65f;
 
     [Header("Shooting state")]
+    public float dodgeSpeed = 25f;
     public float shootingInaccuracySize = 0.4f;
-    public float shootingPlayerDistanceExit = 20f;
+    public float shootingPlayerDistanceExit = 35f;
     public float shootingBurstShortTiming = .2f;
     public float shootingBurstLongTiming = 2f;
     [HideInInspector] public float dodgeRandom;
 
     [Header("Fleeing state")]
-    public float fleeingSpeed = 12f;
+    public float fleeingSpeed = 15f;
     public float maxTurnAngle = 45f;
     public float fleeingPlayerDistanceExit = 40f;
 
@@ -148,5 +152,17 @@ public class TestEnemyStates : StateMachine
         }
         else
             Debug.Log("стак пуст");
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (showDebugGizmos)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, chasingPlayerDistanceExit);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, chasingPlayerDistanceEnter);
+        }
     }
 }

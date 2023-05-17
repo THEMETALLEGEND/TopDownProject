@@ -11,7 +11,6 @@ public class HPpickup : PickableClass
 
         if (playerInventory != null)
         {
-            playerInventory.StuffCollectedCount();
             characterController.currentHealth += 2f;
             Destroy(gameObject);
         }
