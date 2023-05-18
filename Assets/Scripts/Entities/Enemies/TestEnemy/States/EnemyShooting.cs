@@ -33,22 +33,33 @@ public class EnemyShooting : BaseState
         if (!_sm.CheckPlayerInRange(_sm.shootingPlayerDistanceExit)) //если дальше указанного значения
             stateMachine.ChangeState(_sm.chasingState);
 
+        Debug.Log(_sm.playerRaycast.raycastHitEnemy);
+
     }
 
-    IEnumerator ShootBurst() //корутина которая делает что-то 3 раза и потом ждет 3 секунды
+    IEnumerator ShootBurst()
     {
         while (true)
         {
+            // проверяем, сталкивается ли агент с лучом игрока
+            if (!_sm.playerRaycast.raycastHitEnemy)
+            {
+                stateMachine.ChangeState(_sm.chasingState);
+                yield break;
+            }
+
+            // если агент сталкивается с лучом, то продолжаем стрельбу
             Shoot();
             yield return new WaitForSeconds(_sm.shootingBurstShortTiming);
             Shoot();
             yield return new WaitForSeconds(_sm.shootingBurstShortTiming);
             Shoot();
             yield return new WaitForSeconds(_sm.shootingBurstShortTiming);
-            Dodge(); 
+            Dodge();
             yield return new WaitForSeconds(_sm.shootingBurstLongTiming);
         }
     }
+
 
     private void Shoot()
     {

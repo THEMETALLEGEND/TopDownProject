@@ -30,6 +30,7 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public GameObject model;
     [HideInInspector] public SpriteRenderer spriteRenderer;
+    [HideInInspector] public PlayerRaycast playerRaycast;
     public GameObject pointTarget;
     public GameObject bulletPrefab;
 
@@ -71,6 +72,9 @@ public class TestEnemyStates : StateMachine
     [Header("Afraid state")]
     public float afraidPlayerDistanceExit = 20f;
 
+    [Header("Detecting")]
+    public bool playerRaycastHit;
+
 
     //--------------TEMPORARY------------
     public LayerMask obstacleLayer; // слой, содержащий объекты с коллизией и тегом obstacles
@@ -90,6 +94,7 @@ public class TestEnemyStates : StateMachine
         rb = GetComponent<Rigidbody2D>();
         enemyObject = gameObject;
         playerObject = GameObject.Find("Player");
+        playerRaycast = playerObject.GetComponent<PlayerRaycast>();
         target = aIDest.target;
         pointTarget = transform.parent.GetChild(1).gameObject; //поиск пустого ГО к которому идет враг во время состояния roaming 
         animator = GetComponent<Animator>();
@@ -103,6 +108,8 @@ public class TestEnemyStates : StateMachine
         afraidState = new EnemyAfraid(this);
         GetGameObject(enemyObject);
         aIPath.maxSpeed = defaultSpeed;
+        // добавляем врага в словарь
+        //playerRaycast.raycastHitEnemies.Add(gameObject, false);
     }
 
     public override void ChangeState(BaseState newState)
