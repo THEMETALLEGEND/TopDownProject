@@ -168,6 +168,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   model: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  playerRaycast: {fileID: 0}
   pointTarget: {fileID: 8225785140343745612}
   bulletPrefab: {fileID: 8895918990583274388, guid: bb10998cdecf6924a93ed9603f030122,
     type: 3}
@@ -191,6 +192,7 @@ MonoBehaviour:
   maxTurnAngle: 45
   fleeingPlayerDistanceExit: 40
   afraidPlayerDistanceExit: 20
+  playerRaycastHit: 0
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 256
