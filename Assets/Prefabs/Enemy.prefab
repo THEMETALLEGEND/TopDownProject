@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 2652802638391646777}
   - component: {fileID: 2652802638391646779}
   - component: {fileID: 2652802638391646772}
+  - component: {fileID: 3686716091314735226}
   m_Layer: 13
   m_Name: EnemyObject
   m_TagString: Enemy
@@ -245,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 0.5
+  radius: 0.68
   height: 2
   canMove: 1
   maxSpeed: 8
@@ -259,7 +260,7 @@ MonoBehaviour:
   orientation: 1
   enableRotation: 0
   autoRepath:
-    mode: 2
+    mode: 1
     period: 0.5
     sensitivity: 10
     maximumPeriod: 2
@@ -269,7 +270,7 @@ MonoBehaviour:
   rotationSpeed: 360
   slowdownDistance: 0
   pickNextWaypointDist: 2
-  endReachedDistance: 0.1
+  endReachedDistance: 1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -346,6 +347,33 @@ MonoBehaviour:
   bezierTangentLength: 0.4
   offset: 0.2
   factor: 0.1
+--- !u!114 &3686716091314735226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2652802638391646756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560112f876f5746c780eca0d404e7139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
+  radiusBackingField: 0.5
+  heightBackingField: 2
+  centerBackingField: 1
+  locked: 0
+  lockWhenNotMoving: 0
+  agentTimeHorizon: 3.12
+  obstacleTimeHorizon: 1.02
+  maxNeighbours: 1
+  layer: 1
+  collidesWith: 3
+  wallAvoidForce: 1
+  wallAvoidFalloff: 1
+  priority: 1
+  debug: 0
 --- !u!1 &3872482337564955135
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,7 +470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4894743385359914197
 Transform:
   m_ObjectHideFlags: 0
