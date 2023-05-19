@@ -29,34 +29,15 @@ public class EnemyRoaming : BaseState
         base.UpdateLogic();
 
         // РИСОВКА ЛУЧЕЙ И ПЕРЕКЛЮЧЕНИЕ СОСТОЯНИЙ
-        for (int i = 0; i < _sm.rayCount; i++)
+        if (_sm.CheckPlayerContact(48, 1, 30))
         {
-            // вычисляем угол луча
-            float angle = i * _sm.angleStep;
-
-            // вычисляем направление луча на основе угла
-            Vector3 direction = Quaternion.Euler(0f, 0f, angle) * Vector3.right;
-
-            // выпускаем луч и получаем информацию о столкновении с объектами на слоях obstacleLayer и playerLayer
-            RaycastHit2D hit = Physics2D.Raycast(_sm.transform.position, direction, _sm.rayLength, _sm.obstacleLayer | _sm.playerLayer);
-
-            // выбираем цвет для линии на основе столкновения луча с объектом
-            Color lineColor = hit.collider != null ? hit.collider.CompareTag("Player") ? Color.red : Color.yellow : Color.green;
-
-            // рисуем линию для луча
-            if (_sm.showDebugGizmos)
-                Debug.DrawLine(_sm.transform.position, hit.collider != null ? hit.point : _sm.transform.position + direction * _sm.rayLength, lineColor);
-
-            // если луч столкнулся с игроком, переходим в другое состояние
-            if (hit.collider != null && hit.collider.CompareTag("Player"))
-            {
-                // переключаемся в другое состояние в зависимости от того, является ли агент NPC
-                if (_sm.isAnNPC && !_sm.debugMode)
-                    stateMachine.ChangeState(_sm.fleeingState);
-                else if (!_sm.debugMode)
-                    stateMachine.ChangeState(_sm.chasingState);
-            }
+            // переключаемся в другое состояние в зависимости от того, является ли агент NPC
+            if (_sm.isAnNPC && !_sm.debugMode)
+                stateMachine.ChangeState(_sm.fleeingState);
+            else if (!_sm.debugMode)
+                stateMachine.ChangeState(_sm.chasingState);
         }
+
 
     }
 

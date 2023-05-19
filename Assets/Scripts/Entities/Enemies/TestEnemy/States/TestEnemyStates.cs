@@ -128,6 +128,54 @@ public class TestEnemyStates : StateMachine
     {
         return roamingState;
     }
+
+    public bool CheckPlayerContact(int rayCount, int playerRayCount, float rayLength)
+    {
+        int playerContacts = 0;
+
+        for (int i = 0; i < rayCount; i++)
+        {
+            // вычисляем угол луча
+            float angle = i * (360f / rayCount);
+
+            // вычисляем направление луча на основе угла
+            Vector3 direction = Quaternion.Euler(0f, 0f, angle) * Vector3.right;
+
+            // выпускаем луч и получаем информацию о столкновении с объектами на слоях obstacleLayer и playerLayer
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, rayLength, LayerMask.GetMask("Player", "Obstacles"));
+
+            // выбираем цвет для линии на основе столкновения луча с объектом
+            Color lineColor = Color.green;
+            if (hit.collider != null)
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    playerContacts++;
+                    lineColor = Color.red;
+                }
+                else if (hit.collider.CompareTag("Obstacles"))
+                {
+                    lineColor = Color.yellow;
+                }
+            }
+
+            // рисуем линию для луча
+            if (showDebugGizmos)
+                Debug.DrawLine(transform.position, hit.collider != null ? hit.point : transform.position + direction * rayLength, lineColor);
+
+            // если мы нашли нужное количество лучей, касающихся игрока, возвращаем true
+            if (playerContacts >= playerRayCount)
+            {
+                return true;
+            }
+        }
+
+        // если не нашли нужное количество лучей, возвращаем false
+        Debug.Log(playerContacts);
+        return false;
+    }
+
+
     public bool CheckPlayerInRange(float alertDistance)     // метод проверяющий расстояние до игрока с кастомной переменной
     {
         if (playerObject != null)

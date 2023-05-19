@@ -33,8 +33,6 @@ public class EnemyShooting : BaseState
         if (!_sm.CheckPlayerInRange(_sm.shootingPlayerDistanceExit)) //если дальше указанного значения
             stateMachine.ChangeState(_sm.chasingState);
 
-        Debug.Log(_sm.playerRaycast.raycastHitEnemy);
-
     }
 
     IEnumerator ShootBurst()
@@ -42,7 +40,7 @@ public class EnemyShooting : BaseState
         while (true)
         {
             // проверяем, сталкивается ли агент с лучом игрока
-            if (!_sm.playerRaycast.raycastHitEnemy)
+            if (!_sm.CheckPlayerContact(48, 1, 30))
             {
                 stateMachine.ChangeState(_sm.chasingState);
                 yield break;
