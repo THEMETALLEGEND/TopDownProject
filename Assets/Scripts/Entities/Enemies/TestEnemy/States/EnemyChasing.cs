@@ -29,11 +29,13 @@ public class EnemyChasing : BaseState
     {
         base.UpdateLogic();
 
+        _sm.SetAlerted(true);
+
         //_sm.CheckPlayerInRange(40); //если дальше 60
         if (!_sm.CheckPlayerInRange(_sm.chasingPlayerDistanceExit)) //если дальше указанного значения
             stateMachine.ChangeState(_sm.roamingState);
 
-        if (_sm.CheckPlayerContact(48, 3, 30)) //если ближе указанного значения
+        if (_sm.CheckPlayerContact(100, 5, 30)) //если ближе указанного значения
             stateMachine.ChangeState(_sm.shootingState);
     }
 }

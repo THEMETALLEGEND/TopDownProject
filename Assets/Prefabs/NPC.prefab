@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: 4984924314396142195}
   - component: {fileID: 4984924314396142193}
   - component: {fileID: 4984924314396142206}
+  - component: {fileID: 8576218253386780852}
   m_Layer: 13
   m_Name: EnemyObject
   m_TagString: Enemy
@@ -309,16 +310,23 @@ MonoBehaviour:
   rb: {fileID: 0}
   model: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  playerRaycast: {fileID: 0}
   pointTarget: {fileID: 0}
   bulletPrefab: {fileID: 8895918990583274388, guid: bb10998cdecf6924a93ed9603f030122,
     type: 3}
+  isAlerted: 0
+  alertRadius: 10
+  showDebugGizmos: 0
   defaultSpeed: 8
   isAnNPC: 1
+  debugMode: 0
+  roamingSpeed: 10
   roamingInterval: 60
   roamRadius: 4
   roamPlayerDistanceEnter: 20
   chasingPlayerDistanceEnter: 15
   chasingPlayerDistanceExit: 40
+  dodgeSpeed: 25
   shootingInaccuracySize: 0.4
   shootingPlayerDistanceExit: 20
   shootingBurstShortTiming: 0.2
@@ -328,6 +336,17 @@ MonoBehaviour:
   maxTurnAngle: 10
   fleeingPlayerDistanceExit: 40
   afraidPlayerDistanceExit: 20
+  playerRaycastHit: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  rayLength: 28
+  rayCount: 48
+  angleStep: 7.5
+  playerDetectionDistance: 2
 --- !u!114 &4984924314396142198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,16 +431,16 @@ MonoBehaviour:
   enableRotation: 0
   autoRepath:
     mode: 2
-    interval: 0.5
+    period: 0.5
     sensitivity: 10
-    maximumInterval: 2
+    maximumPeriod: 2
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
   maxAcceleration: 1000
   rotationSpeed: 360
   slowdownDistance: 0
   pickNextWaypointDist: 2
-  endReachedDistance: 0.1
+  endReachedDistance: 1
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -498,6 +517,33 @@ MonoBehaviour:
   bezierTangentLength: 0.4
   offset: 0.2
   factor: 0.1
+--- !u!114 &8576218253386780852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4984924314396142190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560112f876f5746c780eca0d404e7139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
+  radiusBackingField: 0.5
+  heightBackingField: 2
+  centerBackingField: 1
+  locked: 0
+  lockWhenNotMoving: 0
+  agentTimeHorizon: 3.12
+  obstacleTimeHorizon: 1.02
+  maxNeighbours: 1
+  layer: 1
+  collidesWith: 3
+  wallAvoidForce: 1
+  wallAvoidFalloff: 1
+  priority: 0.5
+  debug: 0
 --- !u!1 &6071826028367389109
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,8 +46,12 @@ public class EnemyFleeing : BaseState
         else
             _sm.ChangeState(_sm.roamingState);
 
-        if (!_sm.CheckPlayerInRange(_sm.fleeingPlayerDistanceExit) && _sm.aIPath.reachedEndOfPath == true) //если дальше указанного значения
-                stateMachine.ChangeState(_sm.roamingState);
+        //если дальше указанного значения
+        if (!_sm.CheckPlayerInRange(_sm.fleeingPlayerDistanceExit) && _sm.aIPath.reachedEndOfPath == true)
+        {
+            //_sm.isAlerted = false;
+            stateMachine.ChangeState(_sm.roamingState);
+        }
 
         
 

@@ -28,15 +28,22 @@ public class EnemyRoaming : BaseState
     {
         base.UpdateLogic();
 
-        // РИСОВКА ЛУЧЕЙ И ПЕРЕКЛЮЧЕНИЕ СОСТОЯНИЙ
+
+        // --------- РИСОВКА ЛУЧЕЙ И ПЕРЕКЛЮЧЕНИЕ СОСТОЯНИЙ
+
+        //Поле зрения и детект игрока
         if (_sm.CheckPlayerContact(48, 1, 30))
         {
             // переключаемся в другое состояние в зависимости от того, является ли агент NPC
-            if (_sm.isAnNPC && !_sm.debugMode)
-                stateMachine.ChangeState(_sm.fleeingState);
-            else if (!_sm.debugMode)
+            if (!_sm.isAnNPC && !_sm.debugMode)
                 stateMachine.ChangeState(_sm.chasingState);
         }
+
+        //если в состоянии страха то в зависимости от поведения сменить состояние
+        if (_sm.isAlerted && !_sm.isAnNPC)
+            _sm.ChangeState(_sm.chasingState);
+        else if (_sm.isAlerted && _sm.isAnNPC && _sm.CheckPlayerContact(48, 1, 30))
+            _sm.ChangeState(_sm.fleeingState);
 
 
     }

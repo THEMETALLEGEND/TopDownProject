@@ -47,12 +47,14 @@ public class TestEnemyAnim : MonoBehaviour
 
             if (aIPath.desiredVelocity.x > .5 && isFacingRight == false) //и если движемся вправо и не смотрим вправо
             {
+                new WaitForSeconds(.3f);
                 childModel.localScale = Vector3.Scale(new Vector3(childModel.localScale.x, childModel.localScale.y), new Vector3(-1, 1)); //умножаем скейл так чтобы объект отразился по х
                 isFacingRight = true; //проверка булом чтобы отражение было только раз
                 return;
             }
             else if (aIPath.desiredVelocity.x < -.5 && isFacingRight == true)
             {
+                new WaitForSeconds(.3f);
                 childModel.localScale = Vector3.Scale(new Vector3(childModel.localScale.x, childModel.localScale.y), new Vector3(-1, 1));
                 isFacingRight = false;
                 return;

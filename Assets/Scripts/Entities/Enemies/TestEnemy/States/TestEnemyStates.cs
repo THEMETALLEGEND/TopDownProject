@@ -31,8 +31,12 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public GameObject model;
     [HideInInspector] public SpriteRenderer spriteRenderer;
     [HideInInspector] public PlayerRaycast playerRaycast;
+
+    //-------LOGIC---------------
     public GameObject pointTarget;
     public GameObject bulletPrefab;
+    public bool isAlerted = false;
+    public float alertRadius = 10f;
 
     //-------METHODS--------------
     [HideInInspector] public Stack<BaseState> stateStack = new Stack<BaseState>();
@@ -173,6 +177,23 @@ public class TestEnemyStates : StateMachine
         // если не нашли нужное количество лучей, возвращаем false
         Debug.Log(playerContacts);
         return false;
+    }
+
+    public void SetAlerted(bool value)
+    {
+        if (value)
+        {
+            // ќповещаем всех агентов в радиусе оповещени€
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, alertRadius);
+            foreach (Collider2D collider in colliders)
+            {
+                TestEnemyStates agent = collider.GetComponent<TestEnemyStates>();
+                if (agent != null && agent != this)
+                {
+                    agent.isAlerted = true;
+                }
+            }
+        }
     }
 
 
