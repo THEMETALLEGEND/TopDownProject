@@ -536,7 +536,7 @@ MonoBehaviour:
   locked: 0
   lockWhenNotMoving: 0
   agentTimeHorizon: 3.12
-  obstacleTimeHorizon: 1.02
+  obstacleTimeHorizon: 0
   maxNeighbours: 1
   layer: 1
   collidesWith: 3

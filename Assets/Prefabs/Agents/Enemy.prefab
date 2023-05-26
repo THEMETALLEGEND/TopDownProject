@@ -174,6 +174,8 @@ MonoBehaviour:
   pointTarget: {fileID: 8225785140343745612}
   bulletPrefab: {fileID: 8895918990583274388, guid: bb10998cdecf6924a93ed9603f030122,
     type: 3}
+  isAlerted: 0
+  alertRadius: 10
   showDebugGizmos: 0
   defaultSpeed: 12
   isAnNPC: 0
@@ -366,7 +368,7 @@ MonoBehaviour:
   locked: 0
   lockWhenNotMoving: 0
   agentTimeHorizon: 3.12
-  obstacleTimeHorizon: 1.02
+  obstacleTimeHorizon: 0
   maxNeighbours: 1
   layer: 1
   collidesWith: 3

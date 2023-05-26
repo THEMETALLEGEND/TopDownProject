@@ -1782,11 +1782,11 @@ InputManager:
     axis: 3
     joyNum: 4
   - serializedVersion: 3
-    m_Name: Submit
+    m_Name: Mouse ScrollWheel
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: enter
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: space
     gravity: 1000

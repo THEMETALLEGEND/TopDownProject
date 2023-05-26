@@ -11,6 +11,8 @@ TagManager:
   - NoMask
   - Hitbox
   - Obstacles
+  - Door
+  - Key
   layers:
   - Default
   - TransparentFX
