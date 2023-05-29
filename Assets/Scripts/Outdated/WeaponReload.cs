@@ -14,13 +14,13 @@ public class WeaponReload : MonoBehaviour
     public float reloadSpeed = 1f;
     public float refillSpeed = 1.5f;
 
-    public TextMeshProUGUI ammoText;
+    //public TextMeshProUGUI ammoText;
 
     [HideInInspector] public bool needReload;
     [HideInInspector] public bool refilling;
     private GameObject player;
     private PlayerInventory playerInventory;
-    private int ammoInInventory;
+    //private int ammoInInventory;
     Animator anim;
     private void Awake()
     {
@@ -45,7 +45,7 @@ public class WeaponReload : MonoBehaviour
                 StartCoroutine(Reload());
         }
 
-        ammoText.text = currentAmmo + "/" + playerInventory.TestWeaponAmmo;
+        //ammoText.text = currentAmmo + "/" + playerInventory.TestWeaponAmmo;
     }
 
     IEnumerator Reload()

@@ -2289,7 +2289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 588545364}
   - component: {fileID: 588545366}
-  - component: {fileID: 588545365}
+  - component: {fileID: 588545367}
   m_Layer: 0
   m_Name: Knife
   m_TagString: Untagged
@@ -2313,26 +2313,6 @@ Transform:
   m_Father: {fileID: 1240309359}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
---- !u!114 &588545365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588545363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 508294cd96510924aa45f1f6177e29aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxAmmo: 40
-  magCapacity: 7
-  currentAmmo: 0
-  reloadSpeed: 1
-  refillSpeed: 1.5
-  ammoText: {fileID: 1775168970}
-  needReload: 0
-  refilling: 0
 --- !u!212 &588545366
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2385,6 +2365,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &588545367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588545363}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e964e7d4944e86d4598850ee1f052125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAmmo: 0
+  magCapacity: 0
+  hasMagazine: 0
+  fireRate: 0
+  ammoType: 0
+  reloadSpeed: 1
+  playerInventory: {fileID: 0}
+  currentAmmo: 0
+  needReload: 0
+  refilling: 0
 --- !u!4 &667836083 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6341795866896412858, guid: 4d423dc305a93ad428954a12d736eed9,
@@ -2776,7 +2778,7 @@ GameObject:
   m_Component:
   - component: {fileID: 892325488}
   - component: {fileID: 892325490}
-  - component: {fileID: 892325491}
+  - component: {fileID: 892325492}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -2852,7 +2854,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &892325491
+--- !u!114 &892325492
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2861,15 +2863,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 892325487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 508294cd96510924aa45f1f6177e29aa, type: 3}
+  m_Script: {fileID: 11500000, guid: c84c7464a9efe5d459ad344c056ca399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxAmmo: 40
   magCapacity: 7
-  currentAmmo: 0
+  hasMagazine: 0
+  fireRate: 100
+  ammoType: 0
   reloadSpeed: 1
-  refillSpeed: 1.5
-  ammoText: {fileID: 1775168970}
+  playerInventory: {fileID: 0}
+  currentAmmo: 0
   needReload: 0
   refilling: 0
 --- !u!1001 &924121109
@@ -4058,6 +4062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedWeapon: 0
+  ammoInfoText: {fileID: 1775168970}
 --- !u!1 &1286300334
 GameObject:
   m_ObjectHideFlags: 0
@@ -6793,6 +6798,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1771778189589760928, guid: f3dc148ff7503cb41b814ea6ad197468,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1771778189589760930, guid: f3dc148ff7503cb41b814ea6ad197468,
         type: 3}
       propertyPath: m_RootOrder
@@ -6801,12 +6811,12 @@ PrefabInstance:
     - target: {fileID: 1771778189589760930, guid: f3dc148ff7503cb41b814ea6ad197468,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.095844
+      value: -20.9
       objectReference: {fileID: 0}
     - target: {fileID: 1771778189589760930, guid: f3dc148ff7503cb41b814ea6ad197468,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 27.520178
+      value: 27.4
       objectReference: {fileID: 0}
     - target: {fileID: 1771778189589760930, guid: f3dc148ff7503cb41b814ea6ad197468,
         type: 3}
@@ -6852,6 +6862,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Key_Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771778189589760932, guid: f3dc148ff7503cb41b814ea6ad197468,
+        type: 3}
+      propertyPath: m_Layer
+      value: 24
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3dc148ff7503cb41b814ea6ad197468, type: 3}

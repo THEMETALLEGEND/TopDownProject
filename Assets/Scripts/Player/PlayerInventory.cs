@@ -18,6 +18,13 @@ public class PlayerInventory : MonoBehaviour
     //----------WEAPONS--------------
     public int TestWeaponAmmo;
     public int TestWeaponMaxAmmo = 100;
+    public int pistolAmmo;
+    public int pistolAmmoMax = 120;
+    public int rifleAmmo;
+    public int rifleAmmoMax = 240;
+    public int energyAmmo;
+    public int energyAmmoMax = 300;
+
 
     public UnityEvent<PlayerInventory> OnStuffCollected;
 

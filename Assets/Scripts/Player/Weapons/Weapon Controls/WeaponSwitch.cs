@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WeaponSwitch : MonoBehaviour
 {
     public int selectedWeapon = 0;
+    public TextMeshProUGUI ammoInfoText;
     void Start()
     {
         SelectWeapon();
@@ -13,6 +15,8 @@ public class WeaponSwitch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        WeaponClass currentWeapon = FindObjectOfType<WeaponClass>();
+        ammoInfoText.text = currentWeapon.currentAmmo + " / " + currentWeapon.playerInventory.TestWeaponAmmo;
         int previousSelectedWeapon = selectedWeapon;
 
         if (Input.mouseScrollDelta.y > 0f)

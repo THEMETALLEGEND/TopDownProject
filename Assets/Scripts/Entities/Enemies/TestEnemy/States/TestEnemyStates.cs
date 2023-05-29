@@ -175,7 +175,6 @@ public class TestEnemyStates : StateMachine
         }
 
         // если не нашли нужное количество лучей, возвращаем false
-        Debug.Log(playerContacts);
         return false;
     }
 

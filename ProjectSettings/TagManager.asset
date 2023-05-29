@@ -38,7 +38,7 @@ TagManager:
   - Camera3
   - Camera4
   - Hitbox
-  - AgentCollider
+  - Objects
   - 
   - 
   - 
