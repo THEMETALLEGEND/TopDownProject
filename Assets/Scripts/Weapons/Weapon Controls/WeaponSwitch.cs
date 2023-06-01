@@ -16,7 +16,7 @@ public class WeaponSwitch : MonoBehaviour
     void Update()
     {
         WeaponClass currentWeapon = FindObjectOfType<WeaponClass>();
-        ammoInfoText.text = currentWeapon.currentAmmo + " / " + currentWeapon.playerInventory.TestWeaponAmmo;
+        //ammoInfoText.text = currentWeapon.currentAmmo + " / " + currentWeapon.playerInventory.TestWeaponAmmo;
         int previousSelectedWeapon = selectedWeapon;
 
         if (Input.mouseScrollDelta.y > 0f)

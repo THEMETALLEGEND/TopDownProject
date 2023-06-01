@@ -1420,10 +1420,8 @@ GameObject:
   - component: {fileID: 405466586}
   - component: {fileID: 405466587}
   - component: {fileID: 405466591}
-  - component: {fileID: 405466592}
   - component: {fileID: 405466593}
   - component: {fileID: 405466594}
-  - component: {fileID: 405466595}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -1528,21 +1526,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1354965506}
   gunGO: {fileID: 0}
---- !u!114 &405466592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405466585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab840d41cdc84ba5aa601d88c04f02d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 2403702848778089556, guid: 675175ba9b0e14265b8ccd280aba440a,
-    type: 3}
-  bulletForce: 35.97
 --- !u!114 &405466593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1571,6 +1554,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TestWeaponAmmo: 0
   TestWeaponMaxAmmo: 100
+  pistolAmmo: 0
+  pistolAmmoMax: 120
+  rifleAmmo: 0
+  rifleAmmoMax: 240
+  energyAmmo: 0
+  energyAmmoMax: 300
   OnStuffCollected:
     m_PersistentCalls:
       m_Calls:
@@ -1586,29 +1575,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &405466595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405466585}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d46e0a37121d2034bac874ffeb1f61c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 8192
-  obstaclesLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  rayLength: 30
-  rayCount: 200
-  angleStep: 2
-  showDebugGizmos: 1
-  raycastHitEnemy: 0
 --- !u!1001 &426483560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2377,16 +2343,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e964e7d4944e86d4598850ee1f052125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmmo: 0
+  ammoLimit: 0
   magCapacity: 0
+  ammoInMag: 0
   hasMagazine: 0
-  fireRate: 0
-  ammoType: 0
   reloadSpeed: 1
-  playerInventory: {fileID: 0}
-  currentAmmo: 0
   needReload: 0
   refilling: 0
+  fireRate: 0
+  bulletPrefab: {fileID: 0}
+  playerInventory: {fileID: 0}
 --- !u!4 &667836083 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6341795866896412858, guid: 4d423dc305a93ad428954a12d736eed9,
@@ -2778,7 +2744,7 @@ GameObject:
   m_Component:
   - component: {fileID: 892325488}
   - component: {fileID: 892325490}
-  - component: {fileID: 892325492}
+  - component: {fileID: 892325491}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -2854,7 +2820,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &892325492
+--- !u!114 &892325491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2863,19 +2829,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 892325487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c84c7464a9efe5d459ad344c056ca399, type: 3}
+  m_Script: {fileID: 11500000, guid: 2371ccd78b259134b87bab9ce5f9b949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmmo: 40
-  magCapacity: 7
+  ammoLimit: 120
+  magCapacity: 0
+  ammoInMag: 0
   hasMagazine: 0
-  fireRate: 100
-  ammoType: 0
-  reloadSpeed: 1
-  playerInventory: {fileID: 0}
-  currentAmmo: 0
+  reloadSpeed: 0
   needReload: 0
   refilling: 0
+  fireRate: 0
+  bulletPrefab: {fileID: 0}
+  playerInventory: {fileID: 0}
+  bullet: {fileID: 8895918990583274388, guid: bb10998cdecf6924a93ed9603f030122, type: 3}
+  firepoint: {fileID: 0}
+  ammoInMag: 0
+  ammoMagCapacity: 7
+  ammoLimit: 120
+  ammoTotal: 0
+  reloadTime: 1
+  bulletForce: 20
 --- !u!1001 &924121109
 PrefabInstance:
   m_ObjectHideFlags: 0
