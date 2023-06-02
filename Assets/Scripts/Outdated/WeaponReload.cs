@@ -6,7 +6,7 @@ using TMPro;
 
 public class WeaponReload : MonoBehaviour
 {
-    public int maxAmmo = 40;
+    /*public int maxAmmo = 40;
     //int currentMaxAmmo;
     public int magCapacity = 7;
     [HideInInspector] public int currentAmmo;
@@ -82,5 +82,5 @@ public class WeaponReload : MonoBehaviour
     public void DecreaseAmmo()
     {
         currentAmmo--;
-    }
+    }*/
 }

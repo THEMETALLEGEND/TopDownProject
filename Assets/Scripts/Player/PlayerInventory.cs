@@ -10,20 +10,8 @@ public class PlayerInventory : MonoBehaviour
     public int StuffCollected { get; private set; }
 
 
-
     //---------OBJECTS--------------
     private List<Key> keys = new List<Key>(); //список ключей в инвентаре
-
-
-    //----------WEAPONS--------------
-    public int TestWeaponAmmo;
-    public int TestWeaponMaxAmmo = 100;
-    public int pistolAmmo;
-    public int pistolAmmoMax = 120;
-    public int rifleAmmo;
-    public int rifleAmmoMax = 240;
-    public int energyAmmo;
-    public int energyAmmoMax = 300;
 
 
     public UnityEvent<PlayerInventory> OnStuffCollected;
@@ -42,5 +30,21 @@ public class PlayerInventory : MonoBehaviour
     public bool HasKey(string keyId)
     {
         return keys.Any(key => key.keyId == keyId);
+    }
+}
+public class AmmoContainer
+{
+    public Dictionary<AmmoType, int> maxAmmoTypeValues = new Dictionary<AmmoType, int>();
+    public Dictionary<AmmoType, int> ammoTypeValues = new Dictionary<AmmoType, int>();
+
+    public AmmoContainer()
+    {
+        maxAmmoTypeValues.Add(AmmoType.Pistol, 120);
+        maxAmmoTypeValues.Add(AmmoType.Rifle, 240);
+        maxAmmoTypeValues.Add(AmmoType.Energy, 400);
+
+        ammoTypeValues.Add(AmmoType.Pistol, 24);
+        ammoTypeValues.Add(AmmoType.Rifle, 60);
+        ammoTypeValues.Add(AmmoType.Energy, 100);
     }
 }

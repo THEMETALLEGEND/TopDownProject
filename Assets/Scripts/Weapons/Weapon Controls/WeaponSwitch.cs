@@ -6,7 +6,8 @@ using TMPro;
 public class WeaponSwitch : MonoBehaviour
 {
     public int selectedWeapon = 0;
-    public TextMeshProUGUI ammoInfoText;
+    public TextMeshProUGUI ammoInfoText; 
+    public static AmmoContainer ammoContainer = new AmmoContainer(); // Статическая переменная для хранения ссылки на экземпляр класса АmmoContainer
     void Start()
     {
         SelectWeapon();
@@ -16,17 +17,17 @@ public class WeaponSwitch : MonoBehaviour
     void Update()
     {
         WeaponClass currentWeapon = FindObjectOfType<WeaponClass>();
-        //ammoInfoText.text = currentWeapon.currentAmmo + " / " + currentWeapon.playerInventory.TestWeaponAmmo;
+        ammoInfoText.text = currentWeapon.ammoInMag + " / " + WeaponClass.ammoContainer.ammoTypeValues[currentWeapon.m_type];
         int previousSelectedWeapon = selectedWeapon;
 
-        if (Input.mouseScrollDelta.y > 0f)
+        if (Input.mouseScrollDelta.y < 0f)
         {
             if (selectedWeapon >= transform.childCount - 1)
                 selectedWeapon = 0;
             else
                 selectedWeapon++;
         }
-        if (Input.mouseScrollDelta.y < 0f)
+        if (Input.mouseScrollDelta.y > 0f)
         {
             if (selectedWeapon <= 0)
                 selectedWeapon = transform.childCount - 1;

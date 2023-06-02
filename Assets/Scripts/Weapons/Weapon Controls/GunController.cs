@@ -16,8 +16,8 @@ public class GunController : MonoBehaviour
     private GameObject playerGO;
     private Transform playerTransform;
     private Rigidbody2D playerRB;
-    private SpriteRenderer weaponSprite;
     private float gunAngle;  //угол пушки до мыши
+    private float fireposition;
 
     Vector2 mousePos;
 
@@ -28,34 +28,38 @@ public class GunController : MonoBehaviour
         playerRB = playerGO.GetComponent<Rigidbody2D>();   //RigidBody игрока
         gunGO = GameObject.Find("GunController");   //ГО контроллера пушек
         gunControllerTransform = gunGO.transform;   //Трансформ контроллера пушек
-        weapon = GameObject.Find("GunController/Weapon");   //ГО пушки
-        weaponSprite = weapon.GetComponent<SpriteRenderer>();
+        //Находим первое оружие в контроллере пушек
         playerAnimation = GetComponent<PlayerAnimation>();  //Скрипт анимации игрока
-        firePointGO = weapon.transform.GetChild(0).gameObject;          //GameObject.Find("GunController/Weapon/Firepoint");
-        firePoint = firePointGO.transform;
 
-        Debug.Log(firePointGO);
     }
 
     private void Update()
     {
+        weapon = gunControllerTransform.GetComponentInChildren<WeaponClass>().gameObject;
+        firePointGO = weapon.transform.GetChild(0).gameObject;
+        firePoint = firePointGO.transform;
+        fireposition = firePoint.position.y;
+        WeaponClass currentWeapon = gunControllerTransform.GetComponentInChildren<WeaponClass>(); //Получаем ссылку на текущее оружие
+
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition); //позиция мышки в мире
 
-        float fireposition = firePoint.position.y;  
+        
 
         gunControllerTransform.transform.position = playerTransform.transform.position; //перемещение guncontroller'а вместе с этим объектом ибо это не child
 
         if (gunAngle <= 90 && gunAngle >= -90) //если мышь смотрит вправо на 180 градусов
         {
             //weaponSprite.flipX = false;
-            weaponSprite.flipY = false; //то переворачиваем спрайт
+            weapon.GetComponent<SpriteRenderer>().flipY = false; //то переворачиваем спрайт
             fireposition *= -1;
+            Debug.Log(firePointGO);
         }
         else// if (gunAngle > 90 && gunAngle < -90)
         {
             //weaponSprite.flipX = true;
-            weaponSprite.flipY = true;
+            weapon.GetComponent<SpriteRenderer>().flipY = true;
             fireposition *= -1;
+            Debug.Log(firePointGO);
         }
         //Debug.Log(firePoint.position.y);
     }

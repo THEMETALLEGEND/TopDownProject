@@ -4,31 +4,46 @@ using UnityEngine;
 
 public class AmmoClass
 {
+    public AmmoType m_Type;
     public int currentAmmoOfType;
     public int maxAmmoOfType;
+    public AmmoContainer ammoContainer;
 
+    public void Refresh()
+    {
+        currentAmmoOfType = ammoContainer.ammoTypeValues[m_Type];
+    }
 }
+
 public class PistolAmmo : AmmoClass
 {
-    public PistolAmmo()
+    public PistolAmmo(AmmoContainer ammoContainer)
     {
-        maxAmmoOfType = 120;
-        currentAmmoOfType = maxAmmoOfType;
+        this.ammoContainer = ammoContainer;
+        m_Type = AmmoType.Pistol;
+        maxAmmoOfType = ammoContainer.maxAmmoTypeValues[m_Type];
+        currentAmmoOfType = ammoContainer.ammoTypeValues[m_Type];
     }
 }
+
 public class RifleAmmo : AmmoClass
 {
-    public RifleAmmo()
+    public RifleAmmo(AmmoContainer ammoContainer)
     {
-        maxAmmoOfType = 240;
-        currentAmmoOfType = maxAmmoOfType;
+        this.ammoContainer = ammoContainer;
+        m_Type = AmmoType.Rifle;
+        maxAmmoOfType = ammoContainer.maxAmmoTypeValues[m_Type];
+        currentAmmoOfType = ammoContainer.ammoTypeValues[m_Type];
     }
 }
+
 public class EnergyAmmo : AmmoClass
 {
-    public EnergyAmmo()
+    public EnergyAmmo(AmmoContainer ammoContainer)
     {
-        maxAmmoOfType = 400;
-        currentAmmoOfType = maxAmmoOfType;
+        this.ammoContainer = ammoContainer;
+        m_Type = AmmoType.Energy;
+        maxAmmoOfType = ammoContainer.maxAmmoTypeValues[m_Type];
+        currentAmmoOfType = ammoContainer.ammoTypeValues[m_Type];
     }
 }

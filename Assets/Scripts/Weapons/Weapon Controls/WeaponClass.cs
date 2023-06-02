@@ -12,10 +12,6 @@ public class WeaponClass : MonoBehaviour
     public AmmoType ammoTypeEnum;
 
     public AmmoClass ammoType;
-    
-    PistolAmmo pistolAmmo = new();
-    RifleAmmo rifleAmmo = new();
-    EnergyAmmo energyAmmo = new();
 
 
     public bool hasMagazine;
@@ -37,12 +33,20 @@ public class WeaponClass : MonoBehaviour
     private Animator anim;
     private Transform firepoint; // Точка выстрела
 
-    public enum AmmoType
-    {
-        Pistol,
-        Rifle,
-        Energy
-    }
+
+
+
+
+
+    public static AmmoContainer ammoContainer = new AmmoContainer(); // Статическая переменная для хранения ссылки на экземпляр класса АmmoContainer
+    public AmmoType m_type;
+
+    PistolAmmo pistol = new PistolAmmo(ammoContainer);
+    RifleAmmo rifle = new RifleAmmo(ammoContainer);
+    EnergyAmmo energy = new EnergyAmmo(ammoContainer);
+
+
+
 
 
     private void Awake()
@@ -58,20 +62,22 @@ public class WeaponClass : MonoBehaviour
         switch (ammoTypeEnum)
         {
             case AmmoType.Pistol:
-                ammoType = pistolAmmo;
+                ammoType = pistol;
+                m_type = AmmoType.Pistol;
                 break;
             case AmmoType.Rifle:
-                ammoType = rifleAmmo;
+                ammoType = rifle;
+                m_type = AmmoType.Rifle;
                 break;
             case AmmoType.Energy:
-                ammoType = energyAmmo;
+                ammoType = energy;
+                m_type = AmmoType.Energy;
                 break;
             default:
-                ammoType = pistolAmmo;
+                ammoType = pistol;
+                m_type = AmmoType.Pistol;
                 break;
         }
-
-        Debug.Log(ammoTypeEnum);
     }
 
 
@@ -95,21 +101,24 @@ public class WeaponClass : MonoBehaviour
 
     public IEnumerator Reload()
     {
-        Debug.Log("Reload" + ammoType.currentAmmoOfType);
+        ammoType.Refresh();
         //anim.SetBool("IsReloading", true);
         yield return new WaitForSeconds(reloadSpeed);
         needReload = false;
 
         if ((magCapacity - ammoInMag) <= ammoType.currentAmmoOfType)
         {
-            ammoType.currentAmmoOfType -= magCapacity - ammoInMag;
+            ammoContainer.ammoTypeValues[m_type] -= magCapacity - ammoInMag;
             ammoInMag += magCapacity - ammoInMag;
+            ammoType.Refresh();
         }
         else
         {
-            ammoInMag += ammoType.currentAmmoOfType;
-            ammoType.currentAmmoOfType = 0;
+            ammoInMag += ammoContainer.ammoTypeValues[m_type];
+            ammoContainer.ammoTypeValues[m_type] = 0;
+            ammoType.Refresh();
         }
+        Debug.Log("Reload" + ammoContainer.ammoTypeValues[m_type]);
 
         //anim.SetBool("IsReloading", false);
 
@@ -140,4 +149,11 @@ public class WeaponClass : MonoBehaviour
             }
         }
     }
+}
+
+public enum AmmoType
+{
+    Pistol,
+    Rifle,
+    Energy
 }
