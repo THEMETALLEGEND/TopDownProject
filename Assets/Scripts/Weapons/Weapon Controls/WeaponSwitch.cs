@@ -5,49 +5,51 @@ using TMPro;
 
 public class WeaponSwitch : MonoBehaviour
 {
+    // Переменные для выбранного оружия и текста с информацией о боезапасе
     public int selectedWeapon = 0;
-    public TextMeshProUGUI ammoInfoText; 
-    public static AmmoContainer ammoContainer = new AmmoContainer(); // Статическая переменная для хранения ссылки на экземпляр класса АmmoContainer
+    public TextMeshProUGUI ammoInfoText;
+
+    // Ссылка на экземпляр класса AmmoContainer
+    public static AmmoContainer ammoContainer = new AmmoContainer();
+
     void Start()
     {
         SelectWeapon();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Получаем текущее оружие
         WeaponClass currentWeapon = FindObjectOfType<WeaponClass>();
+
+        // Обновляем текст с информацией о боезапасе
         ammoInfoText.text = currentWeapon.ammoInMag + " / " + WeaponClass.ammoContainer.ammoTypeValues[currentWeapon.m_type];
+
+        // Сохраняем предыдущее выбранное оружие
         int previousSelectedWeapon = selectedWeapon;
 
+        // Переключение оружия с помощью колесика мыши
         if (Input.mouseScrollDelta.y < 0f)
         {
-            if (selectedWeapon >= transform.childCount - 1)
-                selectedWeapon = 0;
-            else
-                selectedWeapon++;
+            selectedWeapon = (selectedWeapon >= transform.childCount - 1) ? 0 : selectedWeapon + 1;
         }
         if (Input.mouseScrollDelta.y > 0f)
         {
-            if (selectedWeapon <= 0)
-                selectedWeapon = transform.childCount - 1;
-            else
-                selectedWeapon--;
+            selectedWeapon = (selectedWeapon <= 0) ? transform.childCount - 1 : selectedWeapon - 1;
         }
 
+        // Если выбранное оружие изменилось, выбираем его
         if (previousSelectedWeapon != selectedWeapon)
             SelectWeapon();
     }
 
     void SelectWeapon()
     {
+        // Выбираем текущее оружие и деактивируем остальные
         int i = 0;
         foreach (Transform weapon in transform)
         {
-            if (i == selectedWeapon)
-                weapon.gameObject.SetActive(true);
-            else
-                weapon.gameObject.SetActive(false);
+            weapon.gameObject.SetActive(i == selectedWeapon);
             i++;
         }
     }

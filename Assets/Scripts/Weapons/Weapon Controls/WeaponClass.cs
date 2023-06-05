@@ -41,9 +41,9 @@ public class WeaponClass : MonoBehaviour
     public static AmmoContainer ammoContainer = new AmmoContainer(); // Статическая переменная для хранения ссылки на экземпляр класса АmmoContainer
     public AmmoType m_type;
 
-    PistolAmmo pistol = new PistolAmmo(ammoContainer);
-    RifleAmmo rifle = new RifleAmmo(ammoContainer);
-    EnergyAmmo energy = new EnergyAmmo(ammoContainer);
+    PistolAmmo pistol = new(ammoContainer);
+    RifleAmmo rifle = new(ammoContainer);
+    EnergyAmmo energy = new(ammoContainer);
 
 
 

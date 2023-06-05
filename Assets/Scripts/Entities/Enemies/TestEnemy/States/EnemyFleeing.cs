@@ -52,9 +52,6 @@ public class EnemyFleeing : BaseState
             //_sm.isAlerted = false;
             stateMachine.ChangeState(_sm.roamingState);
         }
-
-        
-
     }
 
     public override void UpdatePhysics()
