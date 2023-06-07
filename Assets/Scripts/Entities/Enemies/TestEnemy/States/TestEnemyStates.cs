@@ -72,6 +72,7 @@ public class TestEnemyStates : StateMachine
     public float fleeingSpeed = 15f;
     public float maxTurnAngle = 45f;
     public float fleeingPlayerDistanceExit = 40f;
+    public float fleeingTime = 10f;
 
     [Header("Afraid state")]
     public float afraidPlayerDistanceExit = 20f;
@@ -112,8 +113,6 @@ public class TestEnemyStates : StateMachine
         afraidState = new EnemyAfraid(this);
         GetGameObject(enemyObject);
         aIPath.maxSpeed = defaultSpeed;
-        // добавляем врага в словарь
-        //playerRaycast.raycastHitEnemies.Add(gameObject, false);
     }
 
     public override void ChangeState(BaseState newState)

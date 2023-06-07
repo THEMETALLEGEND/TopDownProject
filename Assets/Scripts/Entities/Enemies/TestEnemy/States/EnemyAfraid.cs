@@ -25,7 +25,7 @@ public class EnemyAfraid : BaseState
     {
         base.UpdateLogic();
 
-        if (!_sm.CheckPlayerInRange(20f))
+        if (!_sm.CheckPlayerInRange(_sm.fleeingPlayerDistanceExit))
         {
             _sm.ReturnToPreviousState();
         }

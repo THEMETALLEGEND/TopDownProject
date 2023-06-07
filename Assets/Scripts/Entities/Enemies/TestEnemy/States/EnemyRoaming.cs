@@ -9,6 +9,7 @@ public class EnemyRoaming : BaseState
     public EnemyRoaming(TestEnemyStates enemyStateMachine) : base("TestEnemyRoaming", enemyStateMachine) {
         _sm = (TestEnemyStates)stateMachine;
     }
+
     //отправляем enemyroaming со стейт машиной которую называем enemystatemachine на родителя (блюпринт состояния) с названием состояния и уже названной стейт машиной.
     //потом присваиваем нужную стейтмашину в переменную чтобы не вводить ее каждый раз
     
@@ -18,6 +19,7 @@ public class EnemyRoaming : BaseState
     {
         base.Enter();
 
+        //_sm.isAlerted = false;
         _sm.startingPosition = _sm.transform.position; //стартовая позиция для отсчета состояния roaming
         _sm.TargetSetter(_sm.pointTarget);    //назначение цели 
         _sm.aIDest.target.position = GetRoamingPosition();      //начальная рандомизация позиции цели от стартовой точки
@@ -27,7 +29,6 @@ public class EnemyRoaming : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-
 
         // --------- РИСОВКА ЛУЧЕЙ И ПЕРЕКЛЮЧЕНИЕ СОСТОЯНИЙ
 
@@ -42,10 +43,11 @@ public class EnemyRoaming : BaseState
         //если в состоянии страха то в зависимости от поведения сменить состояние
         if (_sm.isAlerted && !_sm.isAnNPC)
             _sm.ChangeState(_sm.chasingState);
-        else if (_sm.isAlerted && _sm.isAnNPC && _sm.CheckPlayerContact(48, 1, 30))
+        else if (_sm.isAlerted && _sm.isAnNPC)// && _sm.CheckPlayerContact(48, 1, 30))
             _sm.ChangeState(_sm.fleeingState);
 
 
+        Debug.Log(_sm.isAlerted);
     }
 
     public override void UpdatePhysics()
