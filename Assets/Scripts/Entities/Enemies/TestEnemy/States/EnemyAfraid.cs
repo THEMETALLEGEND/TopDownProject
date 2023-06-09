@@ -27,8 +27,14 @@ public class EnemyAfraid : BaseState
 
         if (!_sm.CheckPlayerInRange(_sm.fleeingPlayerDistanceExit))
         {
-            _sm.ReturnToPreviousState();
+            _sm.StartCoroutine(AfraidToExit());
         }
+    }
+
+    private IEnumerator AfraidToExit()
+    {
+        yield return new WaitForSeconds(3f);
+        _sm.ReturnToPreviousState();
     }
 
     public override void Exit()

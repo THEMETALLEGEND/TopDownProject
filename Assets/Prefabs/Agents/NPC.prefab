@@ -137,7 +137,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: df6475077ddfc4e04bc3a346a83c68a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -317,12 +317,13 @@ MonoBehaviour:
   isAlerted: 0
   alertRadius: 10
   showDebugGizmos: 0
+  showDebugLogs: 1
   defaultSpeed: 8
   isAnNPC: 1
   debugMode: 0
   roamingSpeed: 10
   roamingInterval: 60
-  roamRadius: 4
+  roamRadius: 8
   roamPlayerDistanceEnter: 20
   chasingPlayerDistanceEnter: 15
   chasingPlayerDistanceExit: 40
@@ -335,6 +336,7 @@ MonoBehaviour:
   fleeingSpeed: 12
   maxTurnAngle: 10
   fleeingPlayerDistanceExit: 40
+  fleeingTime: 10
   afraidPlayerDistanceExit: 20
   playerRaycastHit: 0
   obstacleLayer:
@@ -360,7 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 100
+  maxHealth: 10000
   target: {fileID: 0}
   meleeDamage: 1
 --- !u!114 &4984924314396142192
@@ -416,7 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 0.5
+  radius: 0.3
   height: 2
   canMove: 1
   maxSpeed: 8
@@ -535,7 +537,7 @@ MonoBehaviour:
   centerBackingField: 1
   locked: 0
   lockWhenNotMoving: 0
-  agentTimeHorizon: 3.12
+  agentTimeHorizon: 1
   obstacleTimeHorizon: 0
   maxNeighbours: 1
   layer: 1

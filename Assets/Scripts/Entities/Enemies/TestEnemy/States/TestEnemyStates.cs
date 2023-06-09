@@ -46,6 +46,7 @@ public class TestEnemyStates : StateMachine
 
     [Header("General")]
     public bool showDebugGizmos = false;
+    public bool showDebugLogs = false;
     public float defaultSpeed = 12f;
     public bool isAnNPC = false;
     public bool debugMode = false;
@@ -231,6 +232,26 @@ public class TestEnemyStates : StateMachine
         if (stateStack.Count > 0)
         {
             BaseState previousState = stateStack.Pop(); // Извлекаем предыдущее состояние из стека
+            if (previousState.GetType() == typeof(EnemyAfraid)) // Проверяем, является ли предыдущее состояние "afraidState"
+            {
+                if (stateStack.Count > 0) // Проверяем, есть ли еще состояние в стеке
+                {
+                    //previousState = stateStack.Pop(); // Если есть, извлекаем еще одно состояние из стека
+                   // Debug.Log("Returned state other than afraidState");
+
+                    //fleeing, в который должен переключаться агент, сейчас сразу же переключается обратно. fleeing нужны доп. проверки
+                    previousState = new EnemyRoaming(this);
+                }
+                else
+                {
+                    // Если больше нет состояний в стеке, не делаем ничего, так как мы не можем вернуться к состоянию до "afraidState"
+                    //Debug.Log("Нет предыдущего состояния для возврата");
+                    //ChangeState(roamingState);
+
+                    // Если больше нет состояний в стеке, переключаемся на EnemyRoaming
+                    previousState = new EnemyRoaming(this);
+                }
+            }
             ChangeState(previousState); // Переходим в предыдущее состояние
         }
         else
@@ -247,5 +268,7 @@ public class TestEnemyStates : StateMachine
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, chasingPlayerDistanceEnter);
         }
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, fleeingPlayerDistanceExit);
     }
 }
