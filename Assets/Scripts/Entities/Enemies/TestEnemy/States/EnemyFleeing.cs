@@ -10,8 +10,11 @@ public class EnemyFleeing : BaseState
     private float waitTime = 1f; // задержка в 1 секунду
     private bool waiting = false;
 
-    private GameObject player; 
+    private GameObject player;
     private Coroutine fleeTimerCoroutine;
+    private bool fleeTimerCoroutineStarted = false;
+    private Coroutine afraidTimerCoroutine;
+    private bool afraidTimerCoroutineStarted = false;
 
     public EnemyFleeing(TestEnemyStates enemyStateMachine) : base("TestEnemyFleeing", enemyStateMachine)
     {
@@ -27,16 +30,22 @@ public class EnemyFleeing : BaseState
         _sm.TargetSetter(_sm.pointTarget);
 
         // запускаем таймер на отступление
-        fleeTimerCoroutine = null;
-        fleeTimerCoroutine = _sm.StartCoroutine(FleeToRoamTimer());
+        if (!fleeTimerCoroutineStarted)
+        {
+            fleeTimerCoroutineStarted = true;
+            fleeTimerCoroutine = _sm.StartCoroutine(FleeToRoamTimer());
+        }
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
 
-        if (!_sm.isAlerted)
+        if (!_sm.isAlerted && !fleeTimerCoroutineStarted)
+        {
+            fleeTimerCoroutineStarted = true;
             fleeTimerCoroutine = _sm.StartCoroutine(FleeToRoamTimer());
+        }
 
         if (_sm.playerObject != null)
         {
@@ -49,11 +58,16 @@ public class EnemyFleeing : BaseState
             if (_sm.CheckPlayerInRange(_sm.fleeingPlayerDistanceExit))
             {
                 // начинаем таймер заново, если игрок слишком близко
-                if (fleeTimerCoroutine != null)
+                if (fleeTimerCoroutineStarted)
                 {
                     _sm.StopCoroutine(fleeTimerCoroutine);
+                    fleeTimerCoroutineStarted = false;
                 }
-                fleeTimerCoroutine = _sm.StartCoroutine(FleeToRoamTimer());
+                if (!afraidTimerCoroutineStarted)
+                {
+                    afraidTimerCoroutineStarted = true;
+                    afraidTimerCoroutine = _sm.StartCoroutine(FleeToAfraidTimer());
+                }
             }
         }
         else
@@ -69,7 +83,11 @@ public class EnemyFleeing : BaseState
 
         if (_sm.aIPath.velocity.magnitude <= .2f && !_sm.CheckPlayerInRange(_sm.fleeingPlayerDistanceExit))
         {
-            fleeTimerCoroutine = _sm.StartCoroutine(FleeToRoamTimer());
+            if (!fleeTimerCoroutineStarted)
+            {
+                fleeTimerCoroutineStarted = true;
+                fleeTimerCoroutine = _sm.StartCoroutine(FleeToRoamTimer());
+            }
         }
 
         if (_sm.aIDest.target != null && _sm.aIPath.velocity.magnitude <= .2f && _sm.aIPath.reachedEndOfPath)
@@ -90,9 +108,10 @@ public class EnemyFleeing : BaseState
         }
 
 
-        if (_sm.aIPath.velocity.magnitude <= 1f)
+        if (_sm.aIPath.velocity.magnitude <= .1f && !afraidTimerCoroutineStarted)
         {
-            _sm.StartCoroutine(FleeToAfraidTimer());
+            afraidTimerCoroutineStarted = true;
+            afraidTimerCoroutine = _sm.StartCoroutine(FleeToAfraidTimer());
         }
 
         if (_sm.showDebugLogs)
@@ -104,8 +123,17 @@ public class EnemyFleeing : BaseState
     {
         base.Exit();
 
-        _sm.StopCoroutine(fleeTimerCoroutine);
-        fleeTimerCoroutine = null;
+        if (fleeTimerCoroutineStarted)
+        {
+            _sm.StopCoroutine(fleeTimerCoroutine);
+            fleeTimerCoroutineStarted = false;
+        }
+
+        if (afraidTimerCoroutineStarted)
+        {
+            _sm.StopCoroutine(afraidTimerCoroutine);
+            afraidTimerCoroutineStarted = false;
+        }
 
         _sm.isAlerted = false;
     }
@@ -124,4 +152,5 @@ public class EnemyFleeing : BaseState
         _sm.ChangeState(_sm.afraidState);
     }
 }
+
 

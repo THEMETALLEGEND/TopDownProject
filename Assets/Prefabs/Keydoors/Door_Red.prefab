@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ca79c2ba07c024ea29d158ce379e0c31, type: 3}
   m_Color: {r: 1, g: 0.2783019, b: 0.2783019, a: 1}
   m_FlipX: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7622563107394120310}
   - component: {fileID: 7622563107394120308}
   - component: {fileID: 7622563107394120309}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Red
   m_TagString: Door
   m_Icon: {fileID: 0}
@@ -111,8 +111,8 @@ Transform:
   m_GameObject: {fileID: 7622563107394120314}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -21.98, y: 34.14, z: 0}
-  m_LocalScale: {x: 2.15, y: 2.15, z: 2.15}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1.99, y: 2.42, z: 2.15}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8007224082775607387}
   m_Father: {fileID: 0}
