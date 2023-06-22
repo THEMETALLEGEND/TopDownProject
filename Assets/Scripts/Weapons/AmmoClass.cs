@@ -12,7 +12,16 @@ public class AmmoClass {
         currentAmmoOfType = ammoContainer.ammoTypeValues[m_Type];
     }
 }
-
+public class Melee : AmmoClass
+{
+    public Melee(AmmoContainer ammoContainer)
+    {
+        this.ammoContainer = ammoContainer;
+        m_Type = AmmoType.Melee;
+        maxAmmoOfType = ammoContainer.maxAmmoTypeValues[m_Type];
+        currentAmmoOfType = ammoContainer.ammoTypeValues[m_Type];
+    }
+}
 public class PistolAmmo : AmmoClass {
     public PistolAmmo(AmmoContainer ammoContainer) {
         this.ammoContainer = ammoContainer;

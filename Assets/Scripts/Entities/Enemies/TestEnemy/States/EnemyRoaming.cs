@@ -45,9 +45,6 @@ public class EnemyRoaming : BaseState
             _sm.ChangeState(_sm.chasingState);
         else if (_sm.isAlerted && _sm.isAnNPC)// && _sm.CheckPlayerContact(48, 1, 30))
             _sm.ChangeState(_sm.fleeingState);
-
-
-        Debug.Log(_sm.isAlerted);
     }
 
     public override void UpdatePhysics()

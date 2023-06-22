@@ -112,8 +112,6 @@ public class EnemyFleeing : BaseState
             waiting = false; // сбрасываем таймер, если условие больше не выполняется
         }
 
-        Debug.Log(_sm.aIPath.velocity.magnitude);
-
     }
     public override void Exit()
     {

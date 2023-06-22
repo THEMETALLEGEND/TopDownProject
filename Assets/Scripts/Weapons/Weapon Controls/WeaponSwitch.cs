@@ -1,15 +1,15 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class WeaponSwitch : MonoBehaviour
 {
-    // Переменные для выбранного оружия и текста с информацией о боезапасе
+    // РџРµСЂРµРјРµРЅРЅС‹Рµ РґР»СЏ РІС‹Р±СЂР°РЅРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ Рё С‚РµРєСЃС‚Р° СЃ РёРЅС„РѕСЂРјР°С†РёРµР№ Рѕ Р±РѕРµР·Р°РїР°СЃРµ
     public int selectedWeapon = 0;
     public TextMeshProUGUI ammoInfoText;
 
-    // Ссылка на экземпляр класса AmmoContainer
+    // РЎСЃС‹Р»РєР° РЅР° СЌРєР·РµРјРїР»СЏСЂ РєР»Р°СЃСЃР° AmmoContainer
     public static AmmoContainer ammoContainer = new AmmoContainer();
 
     void Start()
@@ -19,16 +19,19 @@ public class WeaponSwitch : MonoBehaviour
 
     void Update()
     {
-        // Получаем текущее оружие
+        // РџРѕР»СѓС‡Р°РµРј С‚РµРєСѓС‰РµРµ РѕСЂСѓР¶РёРµ
         WeaponClass currentWeapon = FindObjectOfType<WeaponClass>();
 
-        // Обновляем текст с информацией о боезапасе
-        ammoInfoText.text = currentWeapon.ammoInMag + " / " + WeaponClass.ammoContainer.ammoTypeValues[currentWeapon.m_type];
+        // РћР±РЅРѕРІР»СЏРµРј С‚РµРєСЃС‚ СЃ РёРЅС„РѕСЂРјР°С†РёРµР№ Рѕ Р±РѕРµР·Р°РїР°СЃРµ
+        if (currentWeapon.ammoType.m_Type == AmmoType.Melee)
+            ammoInfoText.text = "в€ћ";
+        else
+            ammoInfoText.text = currentWeapon.ammoInMag + " / " + WeaponClass.ammoContainer.ammoTypeValues[currentWeapon.m_type];
 
-        // Сохраняем предыдущее выбранное оружие
+        // РЎРѕС…СЂР°РЅСЏРµРј РїСЂРµРґС‹РґСѓС‰РµРµ РІС‹Р±СЂР°РЅРЅРѕРµ РѕСЂСѓР¶РёРµ
         int previousSelectedWeapon = selectedWeapon;
 
-        // Переключение оружия с помощью колесика мыши
+        // РџРµСЂРµРєР»СЋС‡РµРЅРёРµ РѕСЂСѓР¶РёСЏ СЃ РїРѕРјРѕС‰СЊСЋ РєРѕР»РµСЃРёРєР° РјС‹С€Рё
         if (Input.mouseScrollDelta.y < 0f)
         {
             selectedWeapon = (selectedWeapon >= transform.childCount - 1) ? 0 : selectedWeapon + 1;
@@ -38,14 +41,14 @@ public class WeaponSwitch : MonoBehaviour
             selectedWeapon = (selectedWeapon <= 0) ? transform.childCount - 1 : selectedWeapon - 1;
         }
 
-        // Если выбранное оружие изменилось, выбираем его
+        // Р•СЃР»Рё РІС‹Р±СЂР°РЅРЅРѕРµ РѕСЂСѓР¶РёРµ РёР·РјРµРЅРёР»РѕСЃСЊ, РІС‹Р±РёСЂР°РµРј РµРіРѕ
         if (previousSelectedWeapon != selectedWeapon)
             SelectWeapon();
     }
 
     void SelectWeapon()
     {
-        // Выбираем текущее оружие и деактивируем остальные
+        // Р’С‹Р±РёСЂР°РµРј С‚РµРєСѓС‰РµРµ РѕСЂСѓР¶РёРµ Рё РґРµР°РєС‚РёРІРёСЂСѓРµРј РѕСЃС‚Р°Р»СЊРЅС‹Рµ
         int i = 0;
         foreach (Transform weapon in transform)
         {

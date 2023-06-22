@@ -41,6 +41,7 @@ public class WeaponClass : MonoBehaviour
     public static AmmoContainer ammoContainer = new AmmoContainer(); // Статическая переменная для хранения ссылки на экземпляр класса АmmoContainer
     public AmmoType m_type;
 
+    Melee melee = new(ammoContainer);
     PistolAmmo pistol = new(ammoContainer);
     RifleAmmo rifle = new(ammoContainer);
     EnergyAmmo energy = new(ammoContainer);
@@ -61,6 +62,10 @@ public class WeaponClass : MonoBehaviour
 
         switch (ammoTypeEnum)
         {
+            case AmmoType.Melee:
+                ammoType = melee;
+                m_type = AmmoType.Melee;
+                break;
             case AmmoType.Pistol:
                 ammoType = pistol;
                 m_type = AmmoType.Pistol;
@@ -83,6 +88,7 @@ public class WeaponClass : MonoBehaviour
 
     private void Update()
     {
+        ammoType.Refresh(); //Костыль. Обновление пула патронов каждый кадр.
 
         if (ammoInMag <= 0)
             needReload = true;
@@ -97,6 +103,11 @@ public class WeaponClass : MonoBehaviour
         {
             Shoot();
         }
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Debug.Log("general");
+        }
+
     }
 
     public IEnumerator Reload()
@@ -106,24 +117,20 @@ public class WeaponClass : MonoBehaviour
         yield return new WaitForSeconds(reloadSpeed);
         needReload = false;
 
-        if ((magCapacity - ammoInMag) <= ammoType.currentAmmoOfType)
+        int ammoToAdd = Mathf.Min(magCapacity - ammoInMag, ammoContainer.ammoTypeValues[m_type]);
+
+        if (ammoToAdd > 0)
         {
-            ammoContainer.ammoTypeValues[m_type] -= magCapacity - ammoInMag;
-            ammoInMag += magCapacity - ammoInMag;
+            ammoInMag += ammoToAdd;
+            ammoContainer.ammoTypeValues[m_type] -= ammoToAdd;
             ammoType.Refresh();
         }
-        else
-        {
-            ammoInMag += ammoContainer.ammoTypeValues[m_type];
-            ammoContainer.ammoTypeValues[m_type] = 0;
-            ammoType.Refresh();
-        }
+
         Debug.Log("Reload" + ammoContainer.ammoTypeValues[m_type]);
 
         //anim.SetBool("IsReloading", false);
-
-
     }
+
     public virtual void Shoot()
     {
         SetAlerted(true);
@@ -153,6 +160,7 @@ public class WeaponClass : MonoBehaviour
 
 public enum AmmoType
 {
+    Melee,
     Pistol,
     Rifle,
     Energy

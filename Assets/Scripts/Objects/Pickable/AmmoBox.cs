@@ -6,7 +6,13 @@ public class AmmoBox : PickableClass
 {
     public int ammoAvailable = 15; // кол-во патронов в ящике
     public AmmoType ammoType; // тип патронов в ящике
+    public AmmoClass currentAmmoType;
+    public WeaponClass weapon;
 
+    private void Awake()
+    {
+        weapon = FindObjectOfType<WeaponClass>();
+    }
     public override void CollisionCheck(Collider2D other)
     {
         PlayerInventory playerInventory = other.GetComponent<PlayerInventory>();

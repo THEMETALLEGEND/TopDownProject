@@ -39,10 +39,12 @@ public class AmmoContainer
 
     public AmmoContainer()
     {
+        maxAmmoTypeValues.Add(AmmoType.Melee, 0);
         maxAmmoTypeValues.Add(AmmoType.Pistol, 120);
         maxAmmoTypeValues.Add(AmmoType.Rifle, 240);
         maxAmmoTypeValues.Add(AmmoType.Energy, 400);
 
+        ammoTypeValues.Add(AmmoType.Melee, 0);
         ammoTypeValues.Add(AmmoType.Pistol, 24);
         ammoTypeValues.Add(AmmoType.Rifle, 60);
         ammoTypeValues.Add(AmmoType.Energy, 100);
