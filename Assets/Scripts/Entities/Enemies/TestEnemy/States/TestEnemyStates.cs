@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,6 +36,7 @@ public class TestEnemyStates : StateMachine
     public GameObject pointTarget;
     public GameObject bulletPrefab;
     public bool isAlerted = false;
+    public bool isAfraid = false;
     public float alertRadius = 10f;
 
     //-------METHODS--------------
@@ -46,7 +47,6 @@ public class TestEnemyStates : StateMachine
 
     [Header("General")]
     public bool showDebugGizmos = false;
-    public bool showDebugLogs = false;
     public float defaultSpeed = 12f;
     public bool isAnNPC = false;
     public bool debugMode = false;
@@ -83,12 +83,12 @@ public class TestEnemyStates : StateMachine
 
 
     //--------------TEMPORARY------------
-    public LayerMask obstacleLayer; // слой, содержащий объекты с коллизией и тегом obstacles
+    public LayerMask obstacleLayer; // СЃР»РѕР№, СЃРѕРґРµСЂР¶Р°С‰РёР№ РѕР±СЉРµРєС‚С‹ СЃ РєРѕР»Р»РёР·РёРµР№ Рё С‚РµРіРѕРј obstacles
     public LayerMask playerLayer;
-    public float rayLength = 28f; // длина лучей
-    public int rayCount = 48; // количество лучей
-    public float angleStep = 7.5f; // шаг между углами лучей
-    public float playerDetectionDistance = 2f; // расстояние, на котором агент определяет игрока
+    public float rayLength = 28f; // РґР»РёРЅР° Р»СѓС‡РµР№
+    public int rayCount = 48; // РєРѕР»РёС‡РµСЃС‚РІРѕ Р»СѓС‡РµР№
+    public float angleStep = 7.5f; // С€Р°Рі РјРµР¶РґСѓ СѓРіР»Р°РјРё Р»СѓС‡РµР№
+    public float playerDetectionDistance = 2f; // СЂР°СЃСЃС‚РѕСЏРЅРёРµ, РЅР° РєРѕС‚РѕСЂРѕРј Р°РіРµРЅС‚ РѕРїСЂРµРґРµР»СЏРµС‚ РёРіСЂРѕРєР°
 
 
 
@@ -102,11 +102,11 @@ public class TestEnemyStates : StateMachine
         playerObject = GameObject.Find("Player");
         playerRaycast = playerObject.GetComponent<PlayerRaycast>();
         target = aIDest.target;
-        pointTarget = transform.parent.GetChild(1).gameObject; //поиск пустого ГО к которому идет враг во время состояния roaming 
+        pointTarget = transform.parent.GetChild(1).gameObject; //РїРѕРёСЃРє РїСѓСЃС‚РѕРіРѕ Р“Рћ Рє РєРѕС‚РѕСЂРѕРјСѓ РёРґРµС‚ РІСЂР°Рі РІРѕ РІСЂРµРјСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ roaming 
         animator = GetComponent<Animator>();
         model = transform.GetChild(0).gameObject;
         spriteRenderer = model.GetComponent<SpriteRenderer>();
-        waitingState = new EnemyWaiting(this); //присваивание состояний к переменным с этой стейт машиной
+        waitingState = new EnemyWaiting(this); //РїСЂРёСЃРІР°РёРІР°РЅРёРµ СЃРѕСЃС‚РѕСЏРЅРёР№ Рє РїРµСЂРµРјРµРЅРЅС‹Рј СЃ СЌС‚РѕР№ СЃС‚РµР№С‚ РјР°С€РёРЅРѕР№
         roamingState = new EnemyRoaming(this);
         chasingState = new EnemyChasing(this);
         shootingState = new EnemyShooting(this);
@@ -121,14 +121,14 @@ public class TestEnemyStates : StateMachine
         if (currentState != null)
         {
             currentState.Exit();
-            stateStack.Push(currentState); // добавляем текущее состояние в стек перед переходом
+            stateStack.Push(currentState); // РґРѕР±Р°РІР»СЏРµРј С‚РµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РІ СЃС‚РµРє РїРµСЂРµРґ РїРµСЂРµС…РѕРґРѕРј
         }
 
         currentState = newState;
         currentState.Enter();
     }
 
-    protected override BaseState GetInitialState() //начальное состояние в виде состояния ожидания
+    protected override BaseState GetInitialState() //РЅР°С‡Р°Р»СЊРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РІ РІРёРґРµ СЃРѕСЃС‚РѕСЏРЅРёСЏ РѕР¶РёРґР°РЅРёСЏ
     {
         return roamingState;
     }
@@ -139,16 +139,16 @@ public class TestEnemyStates : StateMachine
 
         for (int i = 0; i < rayCount; i++)
         {
-            // вычисляем угол луча
+            // РІС‹С‡РёСЃР»СЏРµРј СѓРіРѕР» Р»СѓС‡Р°
             float angle = i * (360f / rayCount);
 
-            // вычисляем направление луча на основе угла
+            // РІС‹С‡РёСЃР»СЏРµРј РЅР°РїСЂР°РІР»РµРЅРёРµ Р»СѓС‡Р° РЅР° РѕСЃРЅРѕРІРµ СѓРіР»Р°
             Vector3 direction = Quaternion.Euler(0f, 0f, angle) * Vector3.right;
 
-            // выпускаем луч и получаем информацию о столкновении с объектами на слоях obstacleLayer и playerLayer
+            // РІС‹РїСѓСЃРєР°РµРј Р»СѓС‡ Рё РїРѕР»СѓС‡Р°РµРј РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ СЃС‚РѕР»РєРЅРѕРІРµРЅРёРё СЃ РѕР±СЉРµРєС‚Р°РјРё РЅР° СЃР»РѕСЏС… obstacleLayer Рё playerLayer
             RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, rayLength, LayerMask.GetMask("Player", "Obstacles"));
 
-            // выбираем цвет для линии на основе столкновения луча с объектом
+            // РІС‹Р±РёСЂР°РµРј С†РІРµС‚ РґР»СЏ Р»РёРЅРёРё РЅР° РѕСЃРЅРѕРІРµ СЃС‚РѕР»РєРЅРѕРІРµРЅРёСЏ Р»СѓС‡Р° СЃ РѕР±СЉРµРєС‚РѕРј
             Color lineColor = Color.green;
             if (hit.collider != null)
             {
@@ -163,18 +163,18 @@ public class TestEnemyStates : StateMachine
                 }
             }
 
-            // рисуем линию для луча
+            // СЂРёСЃСѓРµРј Р»РёРЅРёСЋ РґР»СЏ Р»СѓС‡Р°
             if (showDebugGizmos)
                 Debug.DrawLine(transform.position, hit.collider != null ? hit.point : transform.position + direction * rayLength, lineColor);
 
-            // если мы нашли нужное количество лучей, касающихся игрока, возвращаем true
+            // РµСЃР»Рё РјС‹ РЅР°С€Р»Рё РЅСѓР¶РЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ Р»СѓС‡РµР№, РєР°СЃР°СЋС‰РёС…СЃСЏ РёРіСЂРѕРєР°, РІРѕР·РІСЂР°С‰Р°РµРј true
             if (playerContacts >= playerRayCount)
             {
                 return true;
             }
         }
 
-        // если не нашли нужное количество лучей, возвращаем false
+        // РµСЃР»Рё РЅРµ РЅР°С€Р»Рё РЅСѓР¶РЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ Р»СѓС‡РµР№, РІРѕР·РІСЂР°С‰Р°РµРј false
         return false;
     }
 
@@ -182,7 +182,7 @@ public class TestEnemyStates : StateMachine
     {
         if (value)
         {
-            // Оповещаем всех агентов в радиусе оповещения
+            // РћРїРѕРІРµС‰Р°РµРј РІСЃРµС… Р°РіРµРЅС‚РѕРІ РІ СЂР°РґРёСѓСЃРµ РѕРїРѕРІРµС‰РµРЅРёСЏ
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, alertRadius);
             foreach (Collider2D collider in colliders)
             {
@@ -196,11 +196,11 @@ public class TestEnemyStates : StateMachine
     }
 
 
-    public bool CheckPlayerInRange(float alertDistance)     // метод проверяющий расстояние до игрока с кастомной переменной
+    public bool CheckPlayerInRange(float alertDistance)     // РјРµС‚РѕРґ РїСЂРѕРІРµСЂСЏСЋС‰РёР№ СЂР°СЃСЃС‚РѕСЏРЅРёРµ РґРѕ РёРіСЂРѕРєР° СЃ РєР°СЃС‚РѕРјРЅРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№
     {
         if (playerObject != null)
         {
-            float distance = Vector3.Distance(enemyObject.transform.position, playerObject.transform.position); //проверка дистанции от объекта а до б
+            float distance = Vector3.Distance(enemyObject.transform.position, playerObject.transform.position); //РїСЂРѕРІРµСЂРєР° РґРёСЃС‚Р°РЅС†РёРё РѕС‚ РѕР±СЉРµРєС‚Р° Р° РґРѕ Р±
             if (distance <= alertDistance)
                 return true;
             else
@@ -217,8 +217,8 @@ public class TestEnemyStates : StateMachine
         aIDest.target = newTarget.transform;
     }
 
-    public void DiceMethod(float successChance, Action methodToRun) //метод который принимает шанс выполнения метода и при успехе выполняет его.
-                                                                            //для использования метода Action нужно указывать ссылку на сборку System
+    public void DiceMethod(float successChance, Action methodToRun) //РјРµС‚РѕРґ РєРѕС‚РѕСЂС‹Р№ РїСЂРёРЅРёРјР°РµС‚ С€Р°РЅСЃ РІС‹РїРѕР»РЅРµРЅРёСЏ РјРµС‚РѕРґР° Рё РїСЂРё СѓСЃРїРµС…Рµ РІС‹РїРѕР»РЅСЏРµС‚ РµРіРѕ.
+                                                                            //РґР»СЏ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РјРµС‚РѕРґР° Action РЅСѓР¶РЅРѕ СѓРєР°Р·С‹РІР°С‚СЊ СЃСЃС‹Р»РєСѓ РЅР° СЃР±РѕСЂРєСѓ System
     {
         float randomValue = UnityEngine.Random.Range(0f, 1f);
         if (randomValue <= successChance / 100f)
@@ -231,32 +231,13 @@ public class TestEnemyStates : StateMachine
     {
         if (stateStack.Count > 0)
         {
-            BaseState previousState = stateStack.Pop(); // Извлекаем предыдущее состояние из стека
-            if (previousState.GetType() == typeof(EnemyAfraid)) // Проверяем, является ли предыдущее состояние "afraidState"
-            {
-                if (stateStack.Count > 0) // Проверяем, есть ли еще состояние в стеке
-                {
-                    //previousState = stateStack.Pop(); // Если есть, извлекаем еще одно состояние из стека
-                   // Debug.Log("Returned state other than afraidState");
-
-                    //fleeing, в который должен переключаться агент, сейчас сразу же переключается обратно. fleeing нужны доп. проверки
-                    previousState = new EnemyRoaming(this);
-                }
-                else
-                {
-                    // Если больше нет состояний в стеке, не делаем ничего, так как мы не можем вернуться к состоянию до "afraidState"
-                    //Debug.Log("Нет предыдущего состояния для возврата");
-                    //ChangeState(roamingState);
-
-                    // Если больше нет состояний в стеке, переключаемся на EnemyRoaming
-                    previousState = new EnemyRoaming(this);
-                }
-            }
-            ChangeState(previousState); // Переходим в предыдущее состояние
+            BaseState previousState = stateStack.Pop(); // РР·РІР»РµРєР°РµРј РїСЂРµРґС‹РґСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ РёР· СЃС‚РµРєР°
+            ChangeState(previousState); // РџРµСЂРµС…РѕРґРёРј РІ РїСЂРµРґС‹РґСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ
         }
         else
-            Debug.Log("стак пуст");
+            Debug.Log("СЃС‚Р°Рє РїСѓСЃС‚");
     }
+
 
     private void OnDrawGizmos()
     {
@@ -268,7 +249,5 @@ public class TestEnemyStates : StateMachine
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, chasingPlayerDistanceEnter);
         }
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, fleeingPlayerDistanceExit);
     }
 }

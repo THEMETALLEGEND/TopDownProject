@@ -16,8 +16,9 @@ public class EnemyAfraid : BaseState
     {
         base.Enter();
 
+        _sm.isAfraid = true;
         _sm.TargetSetter(_sm.pointTarget);
-        _sm.pointTarget.transform.position = this._sm.transform.position;
+        _sm.pointTarget.transform.position = _sm.transform.position;
         _sm.spriteRenderer.color = new Color(0.5f, 0.5f, 1f, 1f); //ставим светло-синий цвет медели
     }
 
@@ -25,22 +26,18 @@ public class EnemyAfraid : BaseState
     {
         base.UpdateLogic();
 
+        _sm.pointTarget.transform.position = _sm.transform.position;
         if (!_sm.CheckPlayerInRange(_sm.fleeingPlayerDistanceExit))
         {
-            _sm.StartCoroutine(AfraidToExit());
+            _sm.ChangeState(_sm.roamingState);
         }
-    }
-
-    private IEnumerator AfraidToExit()
-    {
-        yield return new WaitForSeconds(3f);
-        _sm.ReturnToPreviousState();
     }
 
     public override void Exit()
     {
         base.Exit();
 
+        _sm.isAfraid = false;
         _sm.spriteRenderer.color = new Color(1f, 1f, 1f, 1f); //ставим дефолтный цвет
     }
 }

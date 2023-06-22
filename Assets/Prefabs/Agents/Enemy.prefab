@@ -175,8 +175,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8895918990583274388, guid: bb10998cdecf6924a93ed9603f030122,
     type: 3}
   isAlerted: 0
+  isAfraid: 0
   alertRadius: 10
-  showDebugGizmos: 0
+  showDebugGizmos: 1
   defaultSpeed: 12
   isAnNPC: 0
   debugMode: 0
@@ -195,6 +196,7 @@ MonoBehaviour:
   fleeingSpeed: 15
   maxTurnAngle: 45
   fleeingPlayerDistanceExit: 40
+  fleeingTime: 10
   afraidPlayerDistanceExit: 20
   playerRaycastHit: 0
   obstacleLayer:

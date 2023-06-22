@@ -19,10 +19,10 @@ public class EnemyRoaming : BaseState
     {
         base.Enter();
 
-        _sm.isAlerted = false;
+        //_sm.isAlerted = false;
         _sm.startingPosition = _sm.transform.position; //стартовая позиция для отсчета состояния roaming
         _sm.TargetSetter(_sm.pointTarget);    //назначение цели 
-        //_sm.aIDest.target.position = GetRoamingPosition();      //начальная рандомизация позиции цели от стартовой точки
+        _sm.aIDest.target.position = GetRoamingPosition();      //начальная рандомизация позиции цели от стартовой точки
         _sm.aIPath.maxSpeed = _sm.roamingSpeed;
     }
 
@@ -45,6 +45,9 @@ public class EnemyRoaming : BaseState
             _sm.ChangeState(_sm.chasingState);
         else if (_sm.isAlerted && _sm.isAnNPC)// && _sm.CheckPlayerContact(48, 1, 30))
             _sm.ChangeState(_sm.fleeingState);
+
+
+        Debug.Log(_sm.isAlerted);
     }
 
     public override void UpdatePhysics()
@@ -69,11 +72,12 @@ public class EnemyRoaming : BaseState
             timerEnded = false; //таймер больше не закончен, запускаем заново
         }
 
+
     }
 
 
     private Vector3 GetRoamingPosition()
     {
-        return _sm.startingPosition + Random.insideUnitSphere * _sm.roamRadius; //от стартовой позиции делаем сферу радиуса уже назначенного\
+        return _sm.startingPosition + Random.insideUnitSphere * _sm.roamRadius; //от стартовой позиции делаем сферу радиуса уже назначенного
     }
 }
