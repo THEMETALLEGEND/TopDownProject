@@ -11,7 +11,6 @@ public class Knife : WeaponClass
         if (Input.GetButtonDown("Fire1"))
         {
             Shoot();
-            Debug.Log("knife");
         }
     }
 }

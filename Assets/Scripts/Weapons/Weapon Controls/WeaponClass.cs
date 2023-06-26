@@ -13,16 +13,17 @@ public class WeaponClass : MonoBehaviour
 
     public AmmoClass ammoType;
 
-
+    public bool isAutomatic;
     public bool hasMagazine;
     public float reloadSpeed;
     [HideInInspector] public bool needReload; // Нужно ли перезарядить оружие
     [HideInInspector] public bool refilling; // Происходит ли перезарядка
 
     // Переменные связанные с выстрелами
-    public float fireRate; // Скорострельность
     public GameObject bulletPrefab;
     public float bulletForce; // Сила выстрела
+    public float fireRate = .1f;
+    private float nextFire = 0f;
 
     // Переменные связанные с игроком
     public PlayerInventory playerInventory;
@@ -32,6 +33,7 @@ public class WeaponClass : MonoBehaviour
     // Переменные связанные с ГО
     private Animator anim;
     private Transform firepoint; // Точка выстрела
+
 
 
 
@@ -88,7 +90,7 @@ public class WeaponClass : MonoBehaviour
 
     private void Update()
     {
-        ammoType.Refresh(); //Костыль. Обновление пула патронов каждый кадр.
+        ammoType.Refresh(); //Обновление пула патронов каждый кадр.
 
         if (ammoInMag <= 0)
             needReload = true;
@@ -98,16 +100,23 @@ public class WeaponClass : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
                 StartCoroutine(Reload());
         }
-
-        if (Input.GetButtonDown("Fire1") && !needReload)
+        if (isAutomatic)
         {
-            Shoot();
+            if (Input.GetButton("Fire1") && !needReload && Time.time > nextFire)
+            {
+                nextFire = Time.time + fireRate;
+                Shoot();
+            }
         }
-        if (Input.GetButtonDown("Fire1"))
+        else
         {
-            Debug.Log("general");
+            if (Input.GetButtonDown("Fire1") && !needReload && Time.time > nextFire)
+            {
+                nextFire = Time.time + fireRate;
+                Shoot();
+            }
         }
-
+        
     }
 
     public IEnumerator Reload()
@@ -130,6 +139,7 @@ public class WeaponClass : MonoBehaviour
 
         //anim.SetBool("IsReloading", false);
     }
+
 
     public virtual void Shoot()
     {

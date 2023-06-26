@@ -738,17 +738,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84c7464a9efe5d459ad344c056ca399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magCapacity: 30
+  magCapacity: 20
   ammoInMag: 0
   ammoTypeEnum: 2
+  isAutomatic: 1
   hasMagazine: 1
   reloadSpeed: 1
   needReload: 0
   refilling: 0
-  fireRate: 30
   bulletPrefab: {fileID: 2403702848778089556, guid: 675175ba9b0e14265b8ccd280aba440a,
     type: 3}
-  bulletForce: 20
+  bulletForce: 40
+  fireRate: 0.2
   playerInventory: {fileID: 0}
   m_type: 2
 --- !u!212 &157326049
@@ -2215,6 +2216,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1276982864957032349, guid: 640181c90df6e1e429e8c8358b1a3e4f,
+        type: 3}
+      propertyPath: ammoType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1276982864957032350, guid: 640181c90df6e1e429e8c8358b1a3e4f,
         type: 3}
       propertyPath: m_Name
@@ -2420,14 +2426,15 @@ MonoBehaviour:
   magCapacity: 0
   ammoInMag: 0
   ammoTypeEnum: 0
+  isAutomatic: 0
   hasMagazine: 0
   reloadSpeed: 0
   needReload: 0
   refilling: 0
-  fireRate: 0
   bulletPrefab: {fileID: 2705228288024609159, guid: 18d517e8d810b4a41874f08e28efed05,
     type: 3}
   bulletForce: 40
+  fireRate: 0.1
   playerInventory: {fileID: 0}
   m_type: 0
 --- !u!1 &634496085
@@ -2979,14 +2986,15 @@ MonoBehaviour:
   magCapacity: 7
   ammoInMag: 0
   ammoTypeEnum: 1
+  isAutomatic: 0
   hasMagazine: 1
   reloadSpeed: 1
   needReload: 0
   refilling: 0
-  fireRate: 30
   bulletPrefab: {fileID: 2403702848778089556, guid: 675175ba9b0e14265b8ccd280aba440a,
     type: 3}
   bulletForce: 20
+  fireRate: 0.2
   playerInventory: {fileID: 0}
   m_type: 1
 --- !u!1001 &924121109
@@ -3297,6 +3305,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1276982864957032349, guid: 640181c90df6e1e429e8c8358b1a3e4f,
+        type: 3}
+      propertyPath: ammoType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1276982864957032350, guid: 640181c90df6e1e429e8c8358b1a3e4f,
         type: 3}
       propertyPath: m_Name
@@ -3515,6 +3528,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276982864957032349, guid: 640181c90df6e1e429e8c8358b1a3e4f,
+        type: 3}
+      propertyPath: ammoType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1276982864957032350, guid: 640181c90df6e1e429e8c8358b1a3e4f,
         type: 3}
@@ -3966,6 +3984,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276982864957032349, guid: 640181c90df6e1e429e8c8358b1a3e4f,
+        type: 3}
+      propertyPath: ammoType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1276982864957032350, guid: 640181c90df6e1e429e8c8358b1a3e4f,
         type: 3}
@@ -7676,6 +7699,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1276982864957032349, guid: 640181c90df6e1e429e8c8358b1a3e4f,
+        type: 3}
+      propertyPath: ammoType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1276982864957032350, guid: 640181c90df6e1e429e8c8358b1a3e4f,
         type: 3}
       propertyPath: m_Name
@@ -7886,6 +7914,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276982864957032349, guid: 640181c90df6e1e429e8c8358b1a3e4f,
+        type: 3}
+      propertyPath: ammoType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1276982864957032350, guid: 640181c90df6e1e429e8c8358b1a3e4f,
         type: 3}
@@ -8406,6 +8439,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276982864957032349, guid: 640181c90df6e1e429e8c8358b1a3e4f,
+        type: 3}
+      propertyPath: ammoType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1276982864957032350, guid: 640181c90df6e1e429e8c8358b1a3e4f,
         type: 3}
@@ -8965,6 +9003,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1276982864957032349, guid: 640181c90df6e1e429e8c8358b1a3e4f,
+        type: 3}
+      propertyPath: ammoType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1276982864957032350, guid: 640181c90df6e1e429e8c8358b1a3e4f,
         type: 3}
       propertyPath: m_Name
@@ -9410,6 +9453,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276982864957032349, guid: 640181c90df6e1e429e8c8358b1a3e4f,
+        type: 3}
+      propertyPath: ammoType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1276982864957032350, guid: 640181c90df6e1e429e8c8358b1a3e4f,
         type: 3}

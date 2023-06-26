@@ -23,7 +23,6 @@ public class PlayerAnimation : MonoBehaviour
         animator = childModel.GetComponent<Animator>(); //достаем аниматор из ГО модели
         playerController = GetComponent<CharacterController2D>(); //ищем скрипт типа названия скрипта
         playerTransform = GetComponent<Transform>();
-        Debug.Log(childModel);
     }
 
    
