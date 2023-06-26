@@ -28,11 +28,14 @@ public class WeaponClass : MonoBehaviour
     // Переменные связанные с игроком
     public PlayerInventory playerInventory;
     private GameObject player;
-    private float alertRadius = 20f; // Радиус оповещения
+    public float alertRadius = 20f; // Радиус оповещения
 
     // Переменные связанные с ГО
     private Animator anim;
     private Transform firepoint; // Точка выстрела
+
+    //Camera
+    public Camera cam;
 
 
 
@@ -59,6 +62,8 @@ public class WeaponClass : MonoBehaviour
         player = GameObject.Find("Player");
         playerInventory = player.GetComponent<PlayerInventory>();
         firepoint = transform.GetChild(0);
+        cam = FindObjectOfType<Camera>();
+        Debug.Log(cam);
 
         ammoInMag = magCapacity;
 
@@ -149,6 +154,40 @@ public class WeaponClass : MonoBehaviour
         bulletRigidBody.AddForce(firepoint.right * bulletForce, ForceMode2D.Impulse); //задаем силу пули в сторону красного вектора с силой 20f, тип силы - импульс
         ammoInMag--;
     }
+
+    public virtual void AttackMelee()
+    {
+        SetAlerted(true);
+
+        // Получаем позицию курсора в мировых координатах
+        Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition); //позиция мыши в мировых координатах
+
+        // Преобразуем позицию атакующего в Vector2
+        Vector2 attackerPos = new Vector2(transform.position.x, transform.position.y);
+
+        var direction = mousePos - attackerPos;
+
+        var distance = 7f;
+
+        // Выполняем рейкаст в заданном направлении и на заданную длину
+        RaycastHit2D hit = Physics2D.Raycast(attackerPos, direction, distance, LayerMask.GetMask("Enemies"));
+        if (hit.collider != null)
+        {
+            // Если рейкаст столкнулся с объектом на слое "Enemies", то обрабатываем столкновение
+            var enemy = hit.collider.GetComponent<TestEnemy>();
+            var enemyStates = hit.collider.GetComponent<TestEnemyStates>();
+            if (enemy != null)
+            {
+                if (enemyStates.isAlerted == false)
+                    enemyStates.isAlerted = true;
+                enemy.TakeDamage(20);
+            }
+        }
+
+        // Отобразить рейкаст
+        Debug.DrawRay(attackerPos, direction.normalized * distance, Color.red);
+    }
+
 
     public void SetAlerted(bool value)
     {

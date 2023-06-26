@@ -177,7 +177,7 @@ MonoBehaviour:
   isAlerted: 0
   isAfraid: 0
   alertRadius: 10
-  showDebugGizmos: 1
+  showDebugGizmos: 0
   defaultSpeed: 12
   isAnNPC: 0
   debugMode: 0

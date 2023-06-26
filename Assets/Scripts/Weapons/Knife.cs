@@ -10,7 +10,7 @@ public class Knife : WeaponClass
 
         if (Input.GetButtonDown("Fire1"))
         {
-            Shoot();
+            AttackMelee();
         }
     }
 }
