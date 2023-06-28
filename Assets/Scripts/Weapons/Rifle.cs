@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : WeaponClass
+public class Rifle : WeaponClass
 {
-    private void Update()
+    void Update()
     {
         ammoType.Refresh();
 

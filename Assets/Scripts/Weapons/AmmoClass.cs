@@ -40,6 +40,17 @@ public class RifleAmmo : AmmoClass {
     }
 }
 
+public class ShellsAmmo : AmmoClass
+{
+    public ShellsAmmo(AmmoContainer ammoContainer)
+    {
+        this.ammoContainer = ammoContainer;
+        m_Type = AmmoType.Shells;
+        maxAmmoOfType = ammoContainer.maxAmmoTypeValues[m_Type];
+        currentAmmoOfType = ammoContainer.ammoTypeValues[m_Type];
+    }
+}
+
 public class EnergyAmmo : AmmoClass {
     public EnergyAmmo(AmmoContainer ammoContainer) {
         this.ammoContainer = ammoContainer;

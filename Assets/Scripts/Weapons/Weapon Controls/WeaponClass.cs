@@ -15,6 +15,7 @@ public class WeaponClass : MonoBehaviour
 
     public bool isAutomatic;
     public bool hasMagazine;
+    private bool allowedShooting = true;
     public float reloadSpeed;
     [HideInInspector] public bool needReload; // Нужно ли перезарядить оружие
     [HideInInspector] public bool refilling; // Происходит ли перезарядка
@@ -44,11 +45,12 @@ public class WeaponClass : MonoBehaviour
 
 
     public static AmmoContainer ammoContainer = new AmmoContainer(); // Статическая переменная для хранения ссылки на экземпляр класса АmmoContainer
-    public AmmoType m_type;
+    [HideInInspector] public AmmoType m_type;
 
     Melee melee = new(ammoContainer);
     PistolAmmo pistol = new(ammoContainer);
     RifleAmmo rifle = new(ammoContainer);
+    ShellsAmmo shells = new(ammoContainer);
     EnergyAmmo energy = new(ammoContainer);
 
 
@@ -85,6 +87,10 @@ public class WeaponClass : MonoBehaviour
                 ammoType = energy;
                 m_type = AmmoType.Energy;
                 break;
+            case AmmoType.Shells:
+                ammoType = shells;
+                m_type = AmmoType.Shells;
+                break;
             default:
                 ammoType = pistol;
                 m_type = AmmoType.Pistol;
@@ -96,7 +102,10 @@ public class WeaponClass : MonoBehaviour
     private void Update()
     {
         ammoType.Refresh(); //Обновление пула патронов каждый кадр.
+    }
 
+    public void MagazineReload()
+    {
         if (ammoInMag <= 0)
             needReload = true;
 
@@ -107,7 +116,7 @@ public class WeaponClass : MonoBehaviour
         }
         if (isAutomatic)
         {
-            if (Input.GetButton("Fire1") && !needReload && Time.time > nextFire)
+            if (Input.GetButton("Fire1") && !needReload && Time.time > nextFire && allowedShooting)
             {
                 nextFire = Time.time + fireRate;
                 Shoot();
@@ -115,20 +124,49 @@ public class WeaponClass : MonoBehaviour
         }
         else
         {
-            if (Input.GetButtonDown("Fire1") && !needReload && Time.time > nextFire)
+            if (Input.GetButtonDown("Fire1") && !needReload && Time.time > nextFire && allowedShooting)
             {
                 nextFire = Time.time + fireRate;
                 Shoot();
             }
         }
-        
+    }
+
+    public void ShotgunReload()
+    {
+        if (ammoInMag <= 0)
+            needReload = true;
+
+        if (ammoType.currentAmmoOfType > 0 && ammoInMag < magCapacity)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+                StartCoroutine(Reload());
+        }
+        if (isAutomatic)
+        {
+            if (Input.GetButton("Fire1") && !needReload && Time.time > nextFire && allowedShooting)
+            {
+                nextFire = Time.time + fireRate;
+                ShotgunShoot();
+            }
+        }
+        else
+        {
+            if (Input.GetButtonDown("Fire1") && !needReload && Time.time > nextFire && allowedShooting)
+            {
+                nextFire = Time.time + fireRate;
+                ShotgunShoot();
+            }
+        }
     }
 
     public IEnumerator Reload()
     {
+        allowedShooting = false;
         ammoType.Refresh();
         //anim.SetBool("IsReloading", true);
         yield return new WaitForSeconds(reloadSpeed);
+        allowedShooting = true;
         needReload = false;
 
         int ammoToAdd = Mathf.Min(magCapacity - ammoInMag, ammoContainer.ammoTypeValues[m_type]);
@@ -152,6 +190,35 @@ public class WeaponClass : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation); //выщываем префаб пули из точки и ротации пустого ГО firepoint
         Rigidbody2D bulletRigidBody = bullet.GetComponent<Rigidbody2D>(); //заходим в рб пулии
         bulletRigidBody.AddForce(firepoint.right * bulletForce, ForceMode2D.Impulse); //задаем силу пули в сторону красного вектора с силой 20f, тип силы - импульс
+        ammoInMag--;
+    }
+
+    public virtual void ShotgunShoot()
+    {
+        SetAlerted(true);
+
+        // Количество пуль, которые будут выпущены из дробовика
+        int numBullets = 8;
+
+        for (int i = 0; i < numBullets; i++)
+        {
+            // Создаем пулю
+            GameObject bullet = Instantiate(bulletPrefab, firepoint.position, firepoint.rotation);
+
+            // Получаем Rigidbody2D пули
+            Rigidbody2D bulletRigidBody = bullet.GetComponent<Rigidbody2D>();
+
+            // Генерируем случайное смещение для разброса
+            float scatterAngle = Random.Range(-10f, 10f);
+
+            // Применяем разброс к направлению пули
+            Vector3 bulletDirection = Quaternion.Euler(0f, 0f, scatterAngle) * firepoint.right;
+
+            // Задаем силу пули с незначительным изменением скорости
+            float modifiedBulletForce = bulletForce + Random.Range(-2f, 2f);
+            bulletRigidBody.AddForce(bulletDirection * modifiedBulletForce, ForceMode2D.Impulse);
+        }
+
         ammoInMag--;
     }
 
@@ -212,5 +279,6 @@ public enum AmmoType
     Melee,
     Pistol,
     Rifle,
+    Shells,
     Energy
 }

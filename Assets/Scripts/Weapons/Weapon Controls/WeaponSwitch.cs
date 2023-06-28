@@ -25,6 +25,8 @@ public class WeaponSwitch : MonoBehaviour
         // Обновляем текст с информацией о боезапасе
         if (currentWeapon.ammoType.m_Type == AmmoType.Melee)
             ammoInfoText.text = "∞";
+        else if (currentWeapon.ammoType.m_Type == AmmoType.Energy)
+            ammoInfoText.text = WeaponClass.ammoContainer.ammoTypeValues[currentWeapon.m_type].ToString();
         else
             ammoInfoText.text = currentWeapon.ammoInMag + " / " + WeaponClass.ammoContainer.ammoTypeValues[currentWeapon.m_type];
 

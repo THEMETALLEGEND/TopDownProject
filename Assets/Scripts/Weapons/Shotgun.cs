@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Nailgun : MonoBehaviour
+public class Shotgun : WeaponClass
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        
+        ammoType.Refresh();
+
+        ShotgunReload();
     }
 }
