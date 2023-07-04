@@ -65,7 +65,6 @@ public class WeaponClass : MonoBehaviour
         playerInventory = player.GetComponent<PlayerInventory>();
         firepoint = transform.GetChild(0);
         cam = FindObjectOfType<Camera>();
-        Debug.Log(cam);
 
         ammoInMag = magCapacity;
 

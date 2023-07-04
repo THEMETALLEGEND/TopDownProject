@@ -16,17 +16,24 @@ public class PlayerInventory : MonoBehaviour
 
     public UnityEvent<PlayerInventory> OnStuffCollected;
 
+    public static Transform[] weapons = new Transform[9];
+
+    private void Awake()
+    {
+        weapons[0] = GameObject.Find("Knife").transform;
+    }
+
+
+
     public void StuffCollectedCount()
     {
         StuffCollected++;
         OnStuffCollected.Invoke(this);
     }
-
     public void AddKey(Key key)
     {
         keys.Add(key);
     }
-
     public bool HasKey(string keyId)
     {
         return keys.Any(key => key.keyId == keyId);
