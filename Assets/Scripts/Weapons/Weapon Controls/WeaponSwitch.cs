@@ -45,7 +45,16 @@ public class WeaponSwitch : MonoBehaviour
             selectedWeapon = GetPreviousInitializedWeaponIndex(selectedWeapon);
         }
 
-        
+        // Переключение оружия с помощью клавиш цифр
+        for (int i = 0; i < PlayerInventory.weapons.Length; i++)
+        {
+            if (Input.GetKeyDown((i + 1).ToString()))
+            {
+                if (PlayerInventory.weapons[i] != null)
+                    selectedWeapon = i;
+            }
+        }
+
         if (previousSelectedWeapon != selectedWeapon)   // Если выбранное оружие изменилось, выбираем его
             SelectWeapon();
     }
