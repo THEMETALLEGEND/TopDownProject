@@ -23,6 +23,5 @@ public class WeaponPickup : MonoBehaviour
             Destroy(gameObject);
 
         }
-        Debug.Log("Collided");
     }
 }
