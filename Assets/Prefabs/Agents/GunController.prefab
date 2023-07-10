@@ -355,6 +355,7 @@ MonoBehaviour:
   ammoTypeEnum: 1
   isAutomatic: 0
   hasMagazine: 1
+  allowedShooting: 1
   reloadSpeed: 1
   needReload: 0
   refilling: 0
@@ -362,6 +363,7 @@ MonoBehaviour:
     type: 3}
   bulletForce: 30
   fireRate: 0.2
+  nextFire: 0
   playerInventory: {fileID: 0}
   alertRadius: 20
   cam: {fileID: 0}
@@ -510,13 +512,15 @@ MonoBehaviour:
   ammoTypeEnum: 0
   isAutomatic: 0
   hasMagazine: 0
+  allowedShooting: 1
   reloadSpeed: 0
   needReload: 0
   refilling: 0
   bulletPrefab: {fileID: 2705228288024609159, guid: 18d517e8d810b4a41874f08e28efed05,
     type: 3}
   bulletForce: 40
-  fireRate: 0
+  fireRate: 0.3
+  nextFire: 0
   playerInventory: {fileID: 0}
   alertRadius: 15
   cam: {fileID: 0}
@@ -624,6 +628,7 @@ MonoBehaviour:
   ammoTypeEnum: 3
   isAutomatic: 0
   hasMagazine: 1
+  allowedShooting: 1
   reloadSpeed: 2
   needReload: 0
   refilling: 0
@@ -631,6 +636,7 @@ MonoBehaviour:
     type: 3}
   bulletForce: 35
   fireRate: 0.8
+  nextFire: 0
   playerInventory: {fileID: 0}
   alertRadius: 40
   cam: {fileID: 0}
@@ -771,6 +777,7 @@ MonoBehaviour:
   ammoTypeEnum: 2
   isAutomatic: 1
   hasMagazine: 1
+  allowedShooting: 1
   reloadSpeed: 1
   needReload: 0
   refilling: 0
@@ -778,6 +785,7 @@ MonoBehaviour:
     type: 3}
   bulletForce: 40
   fireRate: 0.2
+  nextFire: 0
   playerInventory: {fileID: 0}
   alertRadius: 25
   cam: {fileID: 0}

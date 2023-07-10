@@ -913,11 +913,6 @@ PrefabInstance:
       propertyPath: OnStuffCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 800354135}
-    - target: {fileID: 5174921513954625322, guid: 3426c1e1c75df2c4a9c2f1d4c4512a1c,
-        type: 3}
-      propertyPath: OnStuffCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdateStuffCollectedText
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3426c1e1c75df2c4a9c2f1d4c4512a1c, type: 3}
 --- !u!4 &450804630 stripped
