@@ -21,7 +21,7 @@ public class EntityClass : MonoBehaviour    //класс любого живог
         //Debug.Log(gameObject.name + currentHealth + " - current health");
     }
 
-    public void TakeDamage(float damageAmount)  //метод отвечающий за прием дамага, принимающий float
+    public virtual void TakeDamage(float damageAmount)  //метод отвечающий за прием дамага, принимающий float
     {
         currentHealth -= damageAmount;  //при вызове метода отнимаем вложенный float из настоящего здоровья
 

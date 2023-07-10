@@ -63,6 +63,7 @@ public class TestEnemyStates : StateMachine
 
     [Header("Shooting state")]
     public float dodgeSpeed = 25f;
+    public float shootingBulletSpeed = 20f;
     public float shootingInaccuracySize = 0.4f;
     public float shootingPlayerDistanceExit = 35f;
     public float shootingBurstShortTiming = .2f;

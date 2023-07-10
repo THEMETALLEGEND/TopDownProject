@@ -24,6 +24,9 @@ public class WeaponBullet : MonoBehaviour
             testEnemy.TakeDamage(bulletDamageAmount); //вкладываем в назначенную переменную со скриптом метод TakeDamage и назначаем float
                                                       //if (testEnemyStates.isAnNPC)
                                                       //testEnemyStates.ChangeState(testEnemyStates.fleeingState);
+
+            ParticleSystem particleSystem = collision.gameObject.GetComponentInParent<ParticleSystem>();
+            particleSystem.Play();
         }
         Destroy(gameObject); //при любом столкновении дестрой себя
     }

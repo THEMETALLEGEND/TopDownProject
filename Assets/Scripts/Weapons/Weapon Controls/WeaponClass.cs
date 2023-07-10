@@ -15,7 +15,7 @@ public class WeaponClass : MonoBehaviour
 
     public bool isAutomatic;
     public bool hasMagazine;
-    private bool allowedShooting = true;
+    public bool allowedShooting = true;
     public float reloadSpeed;
     [HideInInspector] public bool needReload; // Нужно ли перезарядить оружие
     [HideInInspector] public bool refilling; // Происходит ли перезарядка
@@ -24,7 +24,7 @@ public class WeaponClass : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletForce; // Сила выстрела
     public float fireRate = .1f;
-    private float nextFire = 0f;
+    public float nextFire = 0f;
 
     // Переменные связанные с игроком
     public PlayerInventory playerInventory;
@@ -248,6 +248,8 @@ public class WeaponClass : MonoBehaviour
                     enemyStates.isAlerted = true;
                 enemy.TakeDamage(20);
             }
+            ParticleSystem particleSystem = hit.collider.gameObject.GetComponentInParent<ParticleSystem>();
+            particleSystem.Play();
         }
 
         // Отобразить рейкаст

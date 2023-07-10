@@ -11,9 +11,33 @@ public class TestEnemy : EnemyClass
     public Transform target;
     public float meleeDamage = 1f;
 
+    private TestEnemyStates _sm;
+    private ParticleSystem _ps;
+
     private void Awake()
     {
+        _sm = GetComponent<TestEnemyStates>();
+        _ps = GetComponent<ParticleSystem>();
         aIPath = GetComponent<AIPath>();
+    }
+
+    public override void TakeDamage(float damageAmount)
+    {
+        currentHealth -= damageAmount;
+
+        if (currentHealth <= 0f)
+        {
+            _sm.ChangeState(_sm.waitingState);
+            var main = _ps.main;
+            main.loop = true;
+            StartCoroutine(TimerOnDying()); // Запускаем Coroutine
+        }
+    }
+
+    IEnumerator TimerOnDying()
+    {
+        yield return new WaitForSeconds(.7f);
+        Destroy(gameObject);
     }
 
     private void Update()

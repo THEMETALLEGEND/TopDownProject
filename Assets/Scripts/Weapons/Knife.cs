@@ -8,8 +8,9 @@ public class Knife : WeaponClass
     {
         ammoType.Refresh(); //Костыль. Обновление пула патронов каждый кадр.
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1") && Time.time > nextFire && allowedShooting)
         {
+            nextFire = Time.time + fireRate;
             AttackMelee();
         }
     }
