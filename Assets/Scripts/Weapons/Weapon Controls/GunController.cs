@@ -14,6 +14,7 @@ public class GunController : MonoBehaviour
         gunGO = GameObject.Find("GunController"); //находит объект контроллера пушек по имени
         gunControllerTransform = gunGO.transform; //получает трансформ контроллера пушек
         player = GameObject.Find("Player");
+        cam = FindObjectOfType<Camera>();
     }
 
     private void Update()

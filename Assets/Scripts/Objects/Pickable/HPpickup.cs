@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HPpickup : PickableClass
 {
+    public float healthAmount = 10f;
     public override void CollisionCheck(Collider2D other)
     {
         PlayerInventory playerInventory = other.GetComponent<PlayerInventory>();
@@ -11,7 +12,7 @@ public class HPpickup : PickableClass
 
         if (playerInventory != null)
         {
-            characterController.currentHealth += 2f;
+            characterController.currentHealth += healthAmount;
             Destroy(gameObject);
         }
     }

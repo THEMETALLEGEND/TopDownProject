@@ -100,7 +100,7 @@ public class CharacterController2D : EntityClass
 
     public void TryOpenDoor(Door door)
     {
-        if (inventory.HasKey(door.keyId))
+        if (string.IsNullOrEmpty(door.keyId) || inventory.HasKey(door.keyId)) //если ключ пустой или уже есть в инвентаре открываем дверь
         {
             door.Open();
         }
