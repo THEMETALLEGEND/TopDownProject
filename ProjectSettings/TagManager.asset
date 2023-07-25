@@ -13,6 +13,8 @@ TagManager:
   - Obstacles
   - Door
   - Key
+  - Bullet
+  - Ricochetullet
   layers:
   - Default
   - TransparentFX
@@ -40,7 +42,7 @@ TagManager:
   - Hitbox
   - Objects
   - Multiprojectile
-  - 
+  - Ricochetullet
   - 
   - 
   - 

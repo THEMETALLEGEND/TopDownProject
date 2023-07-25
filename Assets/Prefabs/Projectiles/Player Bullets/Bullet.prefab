@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 8352344319254396964}
   - component: {fileID: 2456356647715572441}
   - component: {fileID: 7851967551558455160}
+  - component: {fileID: -4482300274969127242}
   - component: {fileID: 2198259791348450954}
   - component: {fileID: 7913597575869851440}
   m_Layer: 18
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,6 +109,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-4482300274969127242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2403702848778089556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c41cc1cb41189d445bb2140ff7e4cecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8818918516087049187, guid: 592be062c41b96540aea657eb7d74fbf,
+    type: 3}
+  angleDeviancy: 0
+  bulletForce: -90
 --- !u!114 &2198259791348450954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamageAmount: 15
+  isRicochetullet: 0
 --- !u!61 &7913597575869851440
 BoxCollider2D:
   m_ObjectHideFlags: 0

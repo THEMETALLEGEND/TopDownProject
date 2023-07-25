@@ -4,30 +4,52 @@ using UnityEngine;
 
 public class WeaponBullet : MonoBehaviour
 {
-    public float bulletDamageAmount = 40f; //урон пули
+    public float bulletDamageAmount = 40f; // Урон пули
+
+    private Rigidbody2D rb; // Компонент Rigidbody2D пули
+    private Vector2 initialVelocity; // Начальная скорость пули
+    public bool isRicochetullet;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>(); // Получаем компонент Rigidbody2D пули
+    }
+
+    private void Start()
+    {
+        // Сохраняем начальную скорость пули
+        initialVelocity = rb.velocity;
+    }
 
     private void Update()
     {
-        Destroy(gameObject, 3f); //если пуля не сталкивается ни с чем 3 секунды то она пропадет
+        Destroy(gameObject, 3f); // Если пуля не сталкивается ни с чем в течение 3 секунд, она пропадет
+        if(isRicochetullet && rb.velocity.magnitude < .01f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Hitbox") //если этот ГО сталкивается с ГО с тэгом hitbox
+        if (collision.gameObject.tag == "Hitbox") // Если этот гейм объект сталкивается с гейм объектом с тэгом "Hitbox"
         {
-            TestEnemy testEnemy = collision.gameObject.GetComponentInParent<TestEnemy>(); //создаем переменную типа TestEnemy (имя скрипта) и
-                                                                                          //назначаем скрипт TestEnemy из родителя объекта, с которым столкнулись (ибо хитбокс всегда child)
-
+            TestEnemy testEnemy = collision.gameObject.GetComponentInParent<TestEnemy>(); // Создаем переменную типа TestEnemy
             TestEnemyStates testEnemyStates = collision.gameObject.GetComponentInParent<TestEnemyStates>();
             if (testEnemyStates.isAlerted == false)
                 testEnemyStates.isAlerted = true;
-            testEnemy.TakeDamage(bulletDamageAmount); //вкладываем в назначенную переменную со скриптом метод TakeDamage и назначаем float
-                                                      //if (testEnemyStates.isAnNPC)
-                                                      //testEnemyStates.ChangeState(testEnemyStates.fleeingState);
+            testEnemy.TakeDamage(bulletDamageAmount); // Вызываем метод TakeDamage у врага
 
-            ParticleSystem particleSystem = collision.gameObject.GetComponentInParent<ParticleSystem>();
+            ParticleSystem particleSystem = collision.gameObject.GetComponentInParent<ParticleSystem>(); // Воспроизводим систему частиц
             particleSystem.Play();
+
+            Destroy(gameObject); // Уничтожаем пулю после столкновения (Код уничтожения пули с другими объектами в BulletRicochet
         }
-        Destroy(gameObject); //при любом столкновении дестрой себя
+        else if(isRicochetullet && collision.gameObject.tag == "Player") //если рикошеченная пуля трогает игрока
+        {
+            CharacterController2D player = collision.gameObject.GetComponent<CharacterController2D>(); //то достаем скрипт игрока
+            player.TakeDamage(bulletDamageAmount); //и нахуяриваем ему дамага
+            Destroy(gameObject);
+        }
     }
 }
