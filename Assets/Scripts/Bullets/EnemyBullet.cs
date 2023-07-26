@@ -6,6 +6,20 @@ public class EnemyBullet : MonoBehaviour
 
 {
     public float bulletDamageAmount = 15f; //урон пули
+    private Rigidbody2D rb;
+    public Vector2 bulletVector;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(BulletVectorCheck());
+    }
+
+    IEnumerator BulletVectorCheck()
+    {
+        yield return new WaitForSeconds(.01f);
+        bulletVector = rb.velocity;
+    }
 
     private void Update()
     {

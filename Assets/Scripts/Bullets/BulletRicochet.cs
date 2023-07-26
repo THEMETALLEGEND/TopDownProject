@@ -6,15 +6,19 @@ public class BulletRicochet : MonoBehaviour
 {
     public GameObject bulletPrefab; // Префаб пули
     public float angleDeviancy = 20f; // Погрешность в градусах
-    public float bulletForce = 50f; // Сила пули (значение от 0 до 100)
+    public int bulletForce = 50; // Сила пули (значение от 0 до 100)
     private Vector2 bullet1Velocity;
 
     private Rigidbody2D bullet1Rigidbody;
     private Vector2 initialPosition;
 
+    private WeaponBullet bullet1Script;
+    private EnemyBullet bullet2Script;
+
     void Start()
     {
         bullet1Rigidbody = GetComponent<Rigidbody2D>();
+        bullet1Script = GetComponent<WeaponBullet>();
         initialPosition = bullet1Rigidbody.position;
         StartCoroutine(CalculateBulletVelocity());
     }
@@ -33,29 +37,31 @@ public class BulletRicochet : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             Rigidbody2D bullet2Rigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
+            bullet2Script = collision.gameObject.GetComponent<EnemyBullet>();
 
-            Vector2 bullet2Velocity = bullet2Rigidbody.velocity;
+            //Vector2 bullet2Velocity = bullet2Rigidbody.velocity;
+            Vector2 bullet2Velocity = bullet2Script.bulletVector;
 
             // Добавляем погрешность в направление нового вектора
             Quaternion randomRotation = Quaternion.Euler(0f, 0f, Random.Range(-angleDeviancy, angleDeviancy));
 
             // Вычисляем направление рикошета с учетом bulletForce
             Vector2 ricochetDirection;
-            if (bulletForce >= 100f)
+            if (bulletForce >= 100)
             {
                 ricochetDirection = bullet1Velocity.normalized;
             }
-            else if (bulletForce < 100f && bulletForce >= 0f)
+            else if (bulletForce < 100 && bulletForce >= 0)
             {
                 Vector2 midpoint = (bullet1Velocity.normalized + bullet2Velocity.normalized).normalized;
-                ricochetDirection = Vector2.Lerp(midpoint, bullet1Velocity.normalized, bulletForce / 100f).normalized;
+                ricochetDirection = Vector2.Lerp(midpoint, bullet1Velocity.normalized, bulletForce / 100).normalized;
             }
-            else if (bulletForce > -100f)
+            else if (bulletForce > -100)
             {
                 Vector2 midpoint = (bullet1Velocity.normalized + bullet2Velocity.normalized).normalized;
-                ricochetDirection = Vector2.Lerp(midpoint, -bullet1Velocity.normalized, -bulletForce / 100f).normalized;
+                ricochetDirection = Vector2.Lerp(midpoint, -bullet1Velocity.normalized, -bulletForce / 100).normalized;
             }
-            else //if (bulletForce >= -100f)
+            else 
             {
                 ricochetDirection = -bullet1Velocity.normalized;
             }
@@ -64,7 +70,7 @@ public class BulletRicochet : MonoBehaviour
             Vector2 ricochetVector = ricochetDirection * bullet1Velocity.magnitude;
 
             // Запускаем корутину для задержки спавна пули
-            StartCoroutine(SpawnRicochetBullet(ricochetVector, randomRotation));
+            SpawnRicochetBullet(ricochetVector, randomRotation);
         }
         else
         {
@@ -72,9 +78,9 @@ public class BulletRicochet : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnRicochetBullet(Vector2 velocity, Quaternion rotation)
+    void SpawnRicochetBullet(Vector2 velocity, Quaternion rotation)
     {
-        yield return new WaitForSeconds(0f);
+        //yield return new WaitForSeconds(0f);
 
         // Создаем новую пулю
         GameObject newBullet = Instantiate(bulletPrefab, transform.position, rotation);

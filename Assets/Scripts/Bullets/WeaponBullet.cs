@@ -7,18 +7,21 @@ public class WeaponBullet : MonoBehaviour
     public float bulletDamageAmount = 40f; // Урон пули
 
     private Rigidbody2D rb; // Компонент Rigidbody2D пули
-    private Vector2 initialVelocity; // Начальная скорость пули
+    public Vector2 bulletVector;
     public bool isRicochetullet;
-
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>(); // Получаем компонент Rigidbody2D пули
-    }
 
     private void Start()
     {
         // Сохраняем начальную скорость пули
-        initialVelocity = rb.velocity;
+        //initialVelocity = rb.velocity;
+        rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(BulletVectorCheck());
+    }
+
+    IEnumerator BulletVectorCheck()
+    {
+        yield return new WaitForSeconds(.01f);
+        bulletVector = rb.velocity;
     }
 
     private void Update()
