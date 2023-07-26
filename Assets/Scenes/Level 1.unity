@@ -15780,6 +15780,16 @@ PrefabInstance:
       propertyPath: ammoInfoText
       value: 
       objectReference: {fileID: 1266838000}
+    - target: {fileID: 4667179522426633047, guid: 2fbd4338d0c14924c8a5c4e38a32a62d,
+        type: 3}
+      propertyPath: fireRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667179522426633047, guid: 2fbd4338d0c14924c8a5c4e38a32a62d,
+        type: 3}
+      propertyPath: isAutomatic
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fbd4338d0c14924c8a5c4e38a32a62d, type: 3}
 --- !u!4 &1235429254 stripped

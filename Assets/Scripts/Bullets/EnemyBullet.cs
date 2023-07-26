@@ -15,6 +15,7 @@ public class EnemyBullet : MonoBehaviour
         StartCoroutine(BulletVectorCheck());
     }
 
+    //высчитываем вектор через мгновение после запуска пули (чтобы успела примениться скорость)
     IEnumerator BulletVectorCheck()
     {
         yield return new WaitForSeconds(.01f);

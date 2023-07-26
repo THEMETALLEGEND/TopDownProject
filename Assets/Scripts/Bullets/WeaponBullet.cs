@@ -12,16 +12,7 @@ public class WeaponBullet : MonoBehaviour
 
     private void Start()
     {
-        // Сохраняем начальную скорость пули
-        //initialVelocity = rb.velocity;
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(BulletVectorCheck());
-    }
-
-    IEnumerator BulletVectorCheck()
-    {
-        yield return new WaitForSeconds(.01f);
-        bulletVector = rb.velocity;
     }
 
     private void Update()

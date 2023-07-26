@@ -12,13 +12,11 @@ public class BulletRicochet : MonoBehaviour
     private Rigidbody2D bullet1Rigidbody;
     private Vector2 initialPosition;
 
-    private WeaponBullet bullet1Script;
     private EnemyBullet bullet2Script;
 
     void Start()
     {
         bullet1Rigidbody = GetComponent<Rigidbody2D>();
-        bullet1Script = GetComponent<WeaponBullet>();
         initialPosition = bullet1Rigidbody.position;
         StartCoroutine(CalculateBulletVelocity());
     }
@@ -36,10 +34,9 @@ public class BulletRicochet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            Rigidbody2D bullet2Rigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
             bullet2Script = collision.gameObject.GetComponent<EnemyBullet>();
 
-            //Vector2 bullet2Velocity = bullet2Rigidbody.velocity;
+            // ¬ектор второй пули, который высчитываетс€ через 0.01 секунду после выстрела
             Vector2 bullet2Velocity = bullet2Script.bulletVector;
 
             // ƒобавл€ем погрешность в направление нового вектора
@@ -54,16 +51,27 @@ public class BulletRicochet : MonoBehaviour
             else if (bulletForce < 100 && bulletForce >= 0)
             {
                 Vector2 midpoint = (bullet1Velocity.normalized + bullet2Velocity.normalized).normalized;
-                ricochetDirection = Vector2.Lerp(midpoint, bullet1Velocity.normalized, bulletForce / 100).normalized;
+                ricochetDirection = Vector2.Lerp(midpoint, bullet1Velocity.normalized, bulletForce / 100f).normalized;
             }
             else if (bulletForce > -100)
             {
                 Vector2 midpoint = (bullet1Velocity.normalized + bullet2Velocity.normalized).normalized;
-                ricochetDirection = Vector2.Lerp(midpoint, -bullet1Velocity.normalized, -bulletForce / 100).normalized;
+                ricochetDirection = Vector2.Lerp(midpoint, -bullet1Velocity.normalized, -bulletForce / 100f).normalized;
             }
-            else 
+            else
             {
                 ricochetDirection = -bullet1Velocity.normalized;
+            }
+
+            // ѕровер€ем, образует ли направление рикошета пр€мой угол с bullet1Velocity
+            if (Vector2.Angle(ricochetDirection, bullet1Velocity.normalized) <= 95f && Vector2.Angle(ricochetDirection, bullet1Velocity.normalized) >= 85f)
+            {
+                // ¬ектор отражаетс€, если образуетс€ пр€мой угол
+                float randomValue = Random.Range(0f, 1f);
+                if (randomValue <= 50 / 100f)
+                {
+                    ricochetDirection *= -1;
+                }
             }
 
             // ¬ычисл€ем вектор рикошета
