@@ -13,11 +13,13 @@ public class TestEnemy : EnemyClass
 
     private TestEnemyStates _sm;
     private ParticleSystem _ps;
+    private DropOnDeath _dod;
 
     private void Awake()
     {
         _sm = GetComponent<TestEnemyStates>();
         _ps = GetComponent<ParticleSystem>();
+        _dod = GetComponent<DropOnDeath>();
         aIPath = GetComponent<AIPath>();
     }
 
@@ -37,6 +39,7 @@ public class TestEnemy : EnemyClass
     IEnumerator TimerOnDying()
     {
         yield return new WaitForSeconds(.7f);
+        _dod.DropItemsOnDeath();
         Destroy(gameObject);
     }
 

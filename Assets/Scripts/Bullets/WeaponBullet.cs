@@ -45,5 +45,9 @@ public class WeaponBullet : MonoBehaviour
             player.TakeDamage(bulletDamageAmount); //и нахуяриваем ему дамага
             Destroy(gameObject);
         }
+        else if (isRicochetullet)
+        {
+            Destroy(gameObject);
+        }
     }
 }

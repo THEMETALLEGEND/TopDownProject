@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8710797532811444866}
   - component: {fileID: 8710797532811444867}
   - component: {fileID: 8710797532811444924}
+  - component: {fileID: 6082985369502394151}
   m_Layer: 0
   m_Name: Jewel
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8710797532811444864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -57.77, y: 9.07, z: 0}
-  m_LocalScale: {x: 1.44, y: 4.4016495, z: 0.742268}
+  m_LocalScale: {x: 3, y: 3, z: 1.5463917}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,8 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa,
-    type: 3}
+  m_Sprite: {fileID: 462732884, guid: 405ffa3c64dac7c4c9b91caa6e8d4aac, type: 3}
   m_Color: {r: 0.32039872, g: 0.81675756, b: 0.9056604, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -116,7 +116,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.5}
+    oldSize: {x: 0.625, y: 0.9375}
     newSize: {x: 1, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -125,3 +125,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &6082985369502394151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710797532811444864}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa710fae7fb50114f93dcdeef2994280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings:
+    YReducer: 1.5
+    XReducer: 1.296
+    numberOfBounces: 3
+    velocity: 25
+    horizontalForce: 5
+    gravity: -80
+    collectorTag: Player
+    pickUpType: 2
+    shadow: 1
+    destroyTime: 0
