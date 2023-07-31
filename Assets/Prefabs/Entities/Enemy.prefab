@@ -5026,7 +5026,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3b00728c0ff9f4798d53c2af9ca1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPrefabs: []
+  itemPrefabs:
+  - {fileID: 8710797532811444864, guid: c20a3e5db883e3641bc86696d8e02b36, type: 3}
+  - {fileID: 2660682458083279784, guid: 4d423dc305a93ad428954a12d736eed9, type: 3}
+  - {fileID: 1276982864957032350, guid: 640181c90df6e1e429e8c8358b1a3e4f, type: 3}
+  - {fileID: 6649867702519854789, guid: dd26d03be42f30042a63030f762075b1, type: 3}
+  - {fileID: 996265690336046909, guid: 4ae18e4953af9e34780ae7b132d159cc, type: 3}
 --- !u!114 &2652802638391646755
 MonoBehaviour:
   m_ObjectHideFlags: 0

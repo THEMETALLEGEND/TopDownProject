@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6649867702519854788}
   - component: {fileID: 6649867702519854793}
   - component: {fileID: 6649867702519854790}
+  - component: {fileID: -8459224392564660137}
   m_Layer: 0
   m_Name: RifleAmmo
   m_TagString: Untagged
@@ -127,3 +128,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoAvailable: 20
   ammoType: 2
+--- !u!114 &-8459224392564660137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6649867702519854789}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa710fae7fb50114f93dcdeef2994280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings:
+    YReducer: 1.5
+    XReducer: 1.5
+    numberOfBounces: 3
+    velocity: 20
+    horizontalForce: 10
+    gravity: -80
+    collectorTag: Player
+    pickUpType: 2
+    shadow: 1
+    destroyTime: 0

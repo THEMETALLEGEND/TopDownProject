@@ -139,10 +139,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     YReducer: 1.5
-    XReducer: 1.296
+    XReducer: 1.5
     numberOfBounces: 3
-    velocity: 25
-    horizontalForce: 5
+    velocity: 20
+    horizontalForce: 10
     gravity: -80
     collectorTag: Player
     pickUpType: 2

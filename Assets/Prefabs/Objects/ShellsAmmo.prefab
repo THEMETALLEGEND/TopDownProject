@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 996265690336046908}
   - component: {fileID: 996265690336046897}
   - component: {fileID: 996265690336046910}
+  - component: {fileID: 8563408067839911343}
   m_Layer: 0
   m_Name: ShellsAmmo
   m_TagString: Untagged
@@ -127,3 +128,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoAvailable: 6
   ammoType: 3
+--- !u!114 &8563408067839911343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996265690336046909}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa710fae7fb50114f93dcdeef2994280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings:
+    YReducer: 1.5
+    XReducer: 1.5
+    numberOfBounces: 3
+    velocity: 20
+    horizontalForce: 10
+    gravity: -80
+    collectorTag: Player
+    pickUpType: 2
+    shadow: 1
+    destroyTime: 0

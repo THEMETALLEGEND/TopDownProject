@@ -9,8 +9,9 @@ public class LootBounce : MonoBehaviour
 	// You can chose to use Scriptable Object or Serialized.
 	// One settings for SplashSetting is already created
 	// [SerializeField] SplashSettings settings;	// Scriptable Object
-	[SerializeField] LootSettings settings;			// Serialized
-	
+	[SerializeField] LootSettings settings;         // Serialized
+	LootSettings lootSettings = new();
+
 	private int bounces = 0;
 	private bool isGrounded = true;
 	private Vector2 groundVelocity;
@@ -54,7 +55,6 @@ public class LootBounce : MonoBehaviour
 		CreateShadow();
 		SimulateDrop();
 
-		LootSettings lootSettings = new();
 		lootSettings.RandomizeVariables();
 		Debug.Log(lootSettings.YReducer);
 	}
@@ -68,7 +68,7 @@ public class LootBounce : MonoBehaviour
 	{
 		isGrounded = false;
 		// Slow down the height of bounce
-		afterVelocity /= settings.YReducer;
+		afterVelocity /= lootSettings.YReducer;
 		this.groundVelocity = groundvelocity;
 		this.verticalVelocity = afterVelocity;
 		bounces++;
@@ -119,7 +119,7 @@ public class LootBounce : MonoBehaviour
 
 			if (bounces < settings.numberOfBounces)
 			{
-				Initialize(new Vector2(groundVelocity.x / settings.XReducer, groundVelocity.y / settings.YReducer));
+				Initialize(new Vector2(groundVelocity.x / settings.XReducer, groundVelocity.y / lootSettings.YReducer));
 			}
 			else {
 
@@ -228,9 +228,8 @@ public class LootSettings
 
 	public void RandomizeVariables()
 	{
-		YReducer += Random.Range(-0.3f, 0.3f);
-		XReducer += Random.Range(-0.3f, 0.3f);
-		horizontalForce += Random.Range(-1f, 1f);
+		YReducer += Random.Range(-0.2f, .4f);
+		XReducer += Random.Range(-0.1f, 0.2f);
 	}
 
 }
