@@ -14,9 +14,9 @@ public class WeaponPickup : MonoBehaviour
     public WeaponType weaponType;
     public int inventoryPlace;
     private PlayerInventory playerInventory;
-    private WeaponClass weaponClass;
+    public WeaponClass weaponClass;
 
-    private void Awake()
+    private void Start()
     {
         playerInventory = FindObjectOfType<PlayerInventory>();
 
@@ -35,16 +35,32 @@ public class WeaponPickup : MonoBehaviour
 
     private WeaponClass GetWeaponObject(WeaponType type)
     {
-        GameObject weaponObject = GameObject.Find(type.ToString());
-        if (weaponObject != null)
+        WeaponClass findWeaponClass = null;
+        GameObject weaponObject = FindInactiveObjectByName(type.ToString());
+        findWeaponClass = weaponType switch
         {
-            return weaponObject.GetComponent<WeaponClass>();
-        }
-        else
-        {
-            Debug.LogError("GameObject named '" + type.ToString() + "' not found in the scene");
-        }
+            WeaponType.Pistol => weaponObject.GetComponent<Pistol>(),
+            WeaponType.Rifle => weaponObject.GetComponent<Rifle>(),
+            WeaponType.Shotgun => weaponObject.GetComponent<Shotgun>(),
+            _ => null
+        };
 
-        return null;
+        return findWeaponClass;
+
+        GameObject FindInactiveObjectByName(string name)
+        {
+            Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>() as Transform[];
+            for (int i = 0; i < objs.Length; i++)
+            {
+                if (objs[i].hideFlags == HideFlags.None)
+                {
+                    if (objs[i].name == name)
+                    {
+                        return objs[i].gameObject;
+                    }
+                }
+            }
+            return null;
+        }
     }
 }
