@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class DropOnDeath : MonoBehaviour
 {
-    public GameObject[] itemPrefabs; // Массив префабов предметов
+    public GameObject[] guaranteedItemPrefabs;
+    public GameObject[] randomItemPrefabs; // Массив префабов предметов
 
     // Метод, вызываемый при смерти существа
     public void DropItemsOnDeath()
+    {
+        GuaranteedItemDrop();
+        RandomItemDrop();
+    }
+
+    public void RandomItemDrop()
     {
         int numItemsToDrop = 1; // Количество предметов, которые будут выпадать по умолчанию
 
@@ -40,7 +47,7 @@ public class DropOnDeath : MonoBehaviour
         for (int i = 0; i < numItemsToDrop; i++)
         {
             // Выбираем случайный префаб из массива
-            GameObject itemPrefab = itemPrefabs[Random.Range(0, itemPrefabs.Length)];
+            GameObject itemPrefab = randomItemPrefabs[Random.Range(0, randomItemPrefabs.Length)];
 
             // Создаем экземпляр префаба на позиции существа, которое умерло
             GameObject newItem = Instantiate(itemPrefab, transform.position, Quaternion.identity);
@@ -49,6 +56,21 @@ public class DropOnDeath : MonoBehaviour
             LootBounce lootBounce = newItem.GetComponent<LootBounce>();
 
             // Если компонент существует, включаем его
+            if (lootBounce != null)
+            {
+                lootBounce.enabled = true;
+            }
+        }
+    }
+
+    public void GuaranteedItemDrop()
+    {
+        foreach (GameObject guaranteedItemPrefab in guaranteedItemPrefabs)
+        {
+            GameObject newItem = Instantiate(guaranteedItemPrefab, transform.position, Quaternion.identity);
+
+            LootBounce lootBounce = newItem.GetComponent<LootBounce>();
+
             if (lootBounce != null)
             {
                 lootBounce.enabled = true;

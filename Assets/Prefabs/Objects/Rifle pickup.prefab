@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 0}
-  weaponClass: {fileID: 0}
+  weaponType: 1
   inventoryPlace: 2
 --- !u!1 &6100177490474454587
 GameObject:

@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 0}
-  weaponClass: {fileID: 0}
+  weaponType: 2
   inventoryPlace: 3
 --- !u!61 &7686951626233772746
 BoxCollider2D:

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 109591090754061650}
   - component: {fileID: 109591090754061651}
   - component: {fileID: 109591090754061648}
+  - component: {fileID: 5328245429039085359}
   m_Layer: 0
   m_Name: Pistol pickup
   m_TagString: Untagged
@@ -128,6 +129,29 @@ MonoBehaviour:
   playerInventory: {fileID: 0}
   weaponClass: {fileID: 0}
   inventoryPlace: 1
+--- !u!114 &5328245429039085359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109591090754061649}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa710fae7fb50114f93dcdeef2994280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings:
+    YReducer: 1.5
+    XReducer: 1.5
+    numberOfBounces: 3
+    velocity: 10
+    horizontalForce: 2
+    gravity: -30
+    collectorTag: Player
+    pickUpType: 2
+    shadow: 0
+    destroyTime: 0
 --- !u!1 &2780616906382008975
 GameObject:
   m_ObjectHideFlags: 0
