@@ -52,6 +52,14 @@ public class DropOnDeath : MonoBehaviour
             // Создаем экземпляр префаба на позиции существа, которое умерло
             GameObject newItem = Instantiate(itemPrefab, transform.position, Quaternion.identity);
 
+            // Проверяем, находится ли созданный предмет в классе PickableClass
+            PickableClass pickableItem = newItem.GetComponent<PickableClass>();
+            if (pickableItem != null)
+            {
+                // Увеличиваем переменную magnetSpeed в два раза
+                pickableItem.magnetSpeed *= 1.5f;
+            }
+
             // Получаем компонент LootBounce из созданного предмета
             LootBounce lootBounce = newItem.GetComponent<LootBounce>();
 
@@ -68,6 +76,14 @@ public class DropOnDeath : MonoBehaviour
         foreach (GameObject guaranteedItemPrefab in guaranteedItemPrefabs)
         {
             GameObject newItem = Instantiate(guaranteedItemPrefab, transform.position, Quaternion.identity);
+
+            // Проверяем, находится ли созданный предмет в классе PickableClass
+            PickableClass pickableItem = newItem.GetComponent<PickableClass>();
+            if (pickableItem != null)
+            {
+                // Увеличиваем переменную magnetSpeed в два раза
+                pickableItem.magnetSpeed *= 1.5f;
+            }
 
             LootBounce lootBounce = newItem.GetComponent<LootBounce>();
 

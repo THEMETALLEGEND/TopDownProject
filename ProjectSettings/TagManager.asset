@@ -15,6 +15,7 @@ TagManager:
   - Key
   - Bullet
   - Ricochetullet
+  - LootMagnet
   layers:
   - Default
   - TransparentFX

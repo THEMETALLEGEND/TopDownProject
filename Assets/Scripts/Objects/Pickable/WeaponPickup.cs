@@ -25,7 +25,7 @@ public class WeaponPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (playerInventory != null)
+        if (playerInventory != null && other.CompareTag("Player"))
         {
             Debug.Log("weaponclass not null");
             PlayerInventory.weapons[inventoryPlace] = weaponClass.transform;
