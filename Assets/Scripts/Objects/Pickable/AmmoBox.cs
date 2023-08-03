@@ -8,22 +8,25 @@ public class AmmoBox : PickableClass
     public AmmoType ammoType; // тип патронов в €щике
     public override void CollisionCheck(Collider2D other)
     {
-        PlayerInventory playerInventory = other.GetComponent<PlayerInventory>();
-
-        if (playerInventory != null)
+        if (other.name == "Hitbox")
         {
-            AmmoContainer ammoContainer = WeaponClass.ammoContainer;
+            PlayerInventory playerInventory = other.transform.parent.GetComponent<PlayerInventory>();
 
-            if (ammoContainer.ammoTypeValues[ammoType] < ammoContainer.maxAmmoTypeValues[ammoType]) // провер€ем, есть ли у игрока место дл€ патронов в инвентаре
+            if (playerInventory != null)
             {
-                int ammoToTake = Mathf.Min(ammoAvailable, ammoContainer.maxAmmoTypeValues[ammoType] - ammoContainer.ammoTypeValues[ammoType]); //выбираем наименьшее - сколько патронов нужно или сколько патронов осталось
+                AmmoContainer ammoContainer = WeaponClass.ammoContainer;
 
-                ammoContainer.ammoTypeValues[ammoType] += ammoToTake; // ƒобавл€ем патроны в инвентарь игрока
-                ammoAvailable -= ammoToTake;
-
-                if (ammoAvailable <= 0) // ≈сли патроны закончились, удал€ем объект €щика
+                if (ammoContainer.ammoTypeValues[ammoType] < ammoContainer.maxAmmoTypeValues[ammoType]) // провер€ем, есть ли у игрока место дл€ патронов в инвентаре
                 {
-                    Destroy(gameObject);
+                    int ammoToTake = Mathf.Min(ammoAvailable, ammoContainer.maxAmmoTypeValues[ammoType] - ammoContainer.ammoTypeValues[ammoType]); //выбираем наименьшее - сколько патронов нужно или сколько патронов осталось
+
+                    ammoContainer.ammoTypeValues[ammoType] += ammoToTake; // ƒобавл€ем патроны в инвентарь игрока
+                    ammoAvailable -= ammoToTake;
+
+                    if (ammoAvailable <= 0) // ≈сли патроны закончились, удал€ем объект €щика
+                    {
+                        Destroy(gameObject);
+                    }
                 }
             }
         }

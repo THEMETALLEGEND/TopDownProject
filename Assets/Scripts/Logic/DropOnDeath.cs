@@ -57,7 +57,7 @@ public class DropOnDeath : MonoBehaviour
             if (pickableItem != null)
             {
                 // Увеличиваем переменную magnetSpeed в два раза
-                pickableItem.magnetSpeed *= 1.5f;
+                pickableItem.magnetSpeed *= 1.75f;
             }
 
             // Получаем компонент LootBounce из созданного предмета
@@ -82,7 +82,7 @@ public class DropOnDeath : MonoBehaviour
             if (pickableItem != null)
             {
                 // Увеличиваем переменную magnetSpeed в два раза
-                pickableItem.magnetSpeed *= 1.5f;
+                pickableItem.magnetSpeed *= 1.7f;
             }
 
             LootBounce lootBounce = newItem.GetComponent<LootBounce>();

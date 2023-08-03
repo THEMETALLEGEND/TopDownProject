@@ -14,6 +14,7 @@ public class TestEnemy : EnemyClass
     private TestEnemyStates _sm;
     private ParticleSystem _ps;
     private DropOnDeath _dod;
+    private bool isAlreadyDead = false;
 
     private void Awake()
     {
@@ -25,10 +26,14 @@ public class TestEnemy : EnemyClass
 
     public override void TakeDamage(float damageAmount)
     {
+        if (isAlreadyDead) // Проверяем, не мертв ли уже враг
+            return;
+
         currentHealth -= damageAmount;
 
         if (currentHealth <= 0f)
         {
+            isAlreadyDead = true;
             _sm.ChangeState(_sm.waitingState);
             var main = _ps.main;
             main.loop = true;
@@ -55,7 +60,7 @@ public class TestEnemy : EnemyClass
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player") //если сталкиваемся с игроком
+        if(collision.gameObject.tag == "Player" && !_sm.isAnNPC) //если сталкиваемся с игроком (нпс дамага не наносит)
         {
             CharacterController2D player = collision.gameObject.GetComponent<CharacterController2D>(); //то достаем его скрипт
             player.TakeDamage(meleeDamage); //и нахуяриваем ему дамага

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9087497442430089204}
   - component: {fileID: 3529757226939478613}
   - component: {fileID: 4794702201946127271}
+  - component: {fileID: 6084876228726847308}
   - component: {fileID: 3591975350500596253}
   m_Layer: 18
   m_Name: Rifle Bullet
@@ -121,6 +122,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamageAmount: 10
+  bulletVector: {x: 0, y: 0}
+  isRicochetullet: 0
+--- !u!114 &6084876228726847308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9029812483083356537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c41cc1cb41189d445bb2140ff7e4cecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8818918516087049187, guid: 592be062c41b96540aea657eb7d74fbf,
+    type: 3}
+  angleDeviancy: 0
+  bulletForce: -30
 --- !u!61 &3591975350500596253
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -145,5 +164,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.08, y: 0.08}
+  m_Size: {x: 0.17, y: 0.17}
   m_EdgeRadius: 0

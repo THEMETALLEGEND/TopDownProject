@@ -32,7 +32,8 @@ public class PickableClass : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        CollisionCheck(other);
+        if (other.name == "Hitbox")
+            CollisionCheck(other);
     }
 
     public virtual void CollisionCheck(Collider2D other)

@@ -32,7 +32,7 @@ public class BulletRicochet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.layer == LayerMask.NameToLayer("Multiprojectile"))
         {
             bullet2Script = collision.gameObject.GetComponent<EnemyBullet>();
 

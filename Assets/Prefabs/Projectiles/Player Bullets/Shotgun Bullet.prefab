@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 6453940325809520094}
   - component: {fileID: 1688974317799962751}
   - component: {fileID: 7279631678940197261}
+  - component: {fileID: 7210920697856162799}
   - component: {fileID: 1609197674344288311}
   m_Layer: 25
   m_Name: Shotgun Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,6 +123,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamageAmount: 7
+  bulletVector: {x: 0, y: 0}
+  isRicochetullet: 0
+--- !u!114 &7210920697856162799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6547126452732773203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c41cc1cb41189d445bb2140ff7e4cecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8818918516087049187, guid: 592be062c41b96540aea657eb7d74fbf,
+    type: 3}
+  angleDeviancy: 0
+  bulletForce: 80
 --- !u!61 &1609197674344288311
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -146,5 +165,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.08, y: 0.08}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
