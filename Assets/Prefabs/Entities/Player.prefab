@@ -117,7 +117,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.55, y: 0.63}
+  m_Size: {x: 0.45, y: 0.57}
   m_EdgeRadius: 0
 --- !u!1 &5174921512944177505
 GameObject:
@@ -237,7 +237,6 @@ GameObject:
   - component: {fileID: 5174921513954625299}
   - component: {fileID: 5174921513954625303}
   - component: {fileID: 5174921513954625321}
-  - component: {fileID: 5174921513954625322}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -331,30 +330,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFacingRight: 1
   isMoving: 0
---- !u!114 &5174921513954625322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5174921513954625297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5f157d4cda12df409d2fdc96466e9cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnStuffCollected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: UpdateStuffCollectedText
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

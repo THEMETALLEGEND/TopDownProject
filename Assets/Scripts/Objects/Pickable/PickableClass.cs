@@ -9,6 +9,7 @@ public class PickableClass : MonoBehaviour
     Rigidbody2D rb;
     bool hasTarget;
     Vector3 targetPosition;
+    //private PlayerInventory playerInventory;
 
     private void Awake()
     {
@@ -38,7 +39,7 @@ public class PickableClass : MonoBehaviour
 
     public virtual void CollisionCheck(Collider2D other)
     {
-        if (other.transform.parent.TryGetComponent(out PlayerInventory playerInventory) && other.name == "Hitbox")
+        if (GameObject.Find("Player Inventory").TryGetComponent(out PlayerInventory playerInventory) && other.name == "Hitbox")
         {
             // Компонент PlayerInventory найден в родителе объекта other
             playerInventory.StuffCollectedCount();

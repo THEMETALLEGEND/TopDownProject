@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using System.Linq;
 
 public class PlayerInventory : MonoBehaviour
@@ -18,10 +19,14 @@ public class PlayerInventory : MonoBehaviour
 
     public static Transform[] weapons = new Transform[9];
 
-    private void Awake()
+    private void Start()
     {
+        SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
+        InventoryUI inventoryUI = GameObject.Find("StuffCollectedCountText").GetComponent<InventoryUI>();
+        OnStuffCollected.AddListener(inventoryUI.UpdateStuffCollectedText);
         weapons[0] = GameObject.Find("Knife").transform;
     }
+
 
 
 

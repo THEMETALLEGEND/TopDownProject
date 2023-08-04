@@ -16,6 +16,8 @@ public class WeaponSwitch : MonoBehaviour
     void Start()
     {
         SelectWeapon();
+        playerInventory = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
+        ammoInfoText = GameObject.Find("AmmoCount").GetComponentInChildren<TextMeshProUGUI>();
     }
 
 

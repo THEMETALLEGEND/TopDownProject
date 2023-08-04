@@ -10,7 +10,7 @@ public class AmmoBox : PickableClass
     {
         if (other.name == "Hitbox")
         {
-            PlayerInventory playerInventory = other.transform.parent.GetComponent<PlayerInventory>();
+            PlayerInventory playerInventory = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
 
             if (playerInventory != null)
             {

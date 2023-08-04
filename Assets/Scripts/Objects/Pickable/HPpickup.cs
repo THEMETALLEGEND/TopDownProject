@@ -9,10 +9,10 @@ public class HPpickup : PickableClass
     {
         if (other.name == "Hitbox")
         {
-            PlayerInventory playerInventory = other.transform.parent.GetComponent<PlayerInventory>();
+            //PlayerInventory playerInventory = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
             CharacterController2D characterController = other.transform.parent.GetComponent<CharacterController2D>();
 
-            if (playerInventory != null)
+            if (characterController != null)
             {
                 characterController.currentHealth += healthAmount;
                 Destroy(gameObject);

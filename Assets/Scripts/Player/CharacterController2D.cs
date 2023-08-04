@@ -29,7 +29,7 @@ public class CharacterController2D : EntityClass
         rb = GetComponent<Rigidbody2D>();
         model = GameObject.Find("Model");
         animator = model.GetComponent<Animator>();
-        inventory = GetComponent<PlayerInventory>();
+        inventory = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
     }
 
 
