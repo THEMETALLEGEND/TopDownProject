@@ -58,7 +58,7 @@ public class WeaponPickup : MonoBehaviour
 
         return findWeaponClass;
 
-        GameObject FindInactiveObjectByName(string name)
+        static GameObject FindInactiveObjectByName(string name)
         {
             Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>() as Transform[];
             for (int i = 0; i < objs.Length; i++)

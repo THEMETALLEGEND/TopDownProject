@@ -56,7 +56,9 @@ public class WeaponClass : MonoBehaviour
 
 
 
-
+    private void Awake()
+    {
+    }
     private void Start()
     {
         needReload = false;
@@ -182,6 +184,17 @@ public class WeaponClass : MonoBehaviour
         //anim.SetBool("IsReloading", false);
     }
 
+
+
+    public void SaveGunOnLoad(bool hasGun, int inventorySlot)
+    {
+        playerInventory = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
+        Debug.Log(playerInventory);
+        if (hasGun)
+        {
+            PlayerInventory.weapons[inventorySlot] = transform;
+        }
+    }
 
     public virtual void Shoot()
     {

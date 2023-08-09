@@ -9,7 +9,6 @@ public class HPpickup : PickableClass
     {
         if (other.name == "Hitbox")
         {
-            //PlayerInventory playerInventory = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
             CharacterController2D characterController = other.transform.parent.GetComponent<CharacterController2D>();
 
             if (characterController != null)
