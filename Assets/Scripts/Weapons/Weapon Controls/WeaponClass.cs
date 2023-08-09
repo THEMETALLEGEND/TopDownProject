@@ -57,7 +57,7 @@ public class WeaponClass : MonoBehaviour
 
 
 
-    private void Awake()
+    private void Start()
     {
         needReload = false;
         anim = GetComponent<Animator>();

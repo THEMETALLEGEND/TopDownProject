@@ -18,13 +18,16 @@ public class PlayerInventory : MonoBehaviour
     public UnityEvent<PlayerInventory> OnStuffCollected;
 
     public static Transform[] weapons = new Transform[9];
+    public bool hasPistol = false;
+    public bool hasRifle = false;
+    public bool hasShotgun = false;
 
     private void Start()
     {
-        SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
         InventoryUI inventoryUI = GameObject.Find("StuffCollectedCountText").GetComponent<InventoryUI>();
         OnStuffCollected.AddListener(inventoryUI.UpdateStuffCollectedText);
         weapons[0] = GameObject.Find("Knife").transform;
+
     }
 
 
