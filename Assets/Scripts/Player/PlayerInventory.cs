@@ -18,9 +18,17 @@ public class PlayerInventory : MonoBehaviour
     public UnityEvent<PlayerInventory> OnStuffCollected;
 
     public static Transform[] weapons = new Transform[9];
+    public int selectedWeapon = -1;
+
+    //Костыль: Система проверки наличия оружия и система автовыбора при подборе
     public bool hasPistol = false;
+    [HideInInspector]public bool pickedPistol = false;
+
     public bool hasRifle = false;
+    [HideInInspector] public bool pickedRifle = false;
+
     public bool hasShotgun = false;
+    [HideInInspector] public bool pickedShotgun = false;
 
     private void Start()
     {

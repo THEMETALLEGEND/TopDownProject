@@ -58,6 +58,7 @@ public class WeaponClass : MonoBehaviour
 
     private void Awake()
     {
+
     }
     private void Start()
     {

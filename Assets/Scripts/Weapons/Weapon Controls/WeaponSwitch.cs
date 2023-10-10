@@ -10,17 +10,21 @@ public class WeaponSwitch : MonoBehaviour
     public TextMeshProUGUI ammoInfoText;
     public PlayerInventory playerInventory;
 
+
     // Ссылка на экземпляр класса AmmoContainer
     public static AmmoContainer ammoContainer = new AmmoContainer();
 
+    private void Awake()
+    {
+        playerInventory = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
+    }
     void Start()
     {
+        if (playerInventory.selectedWeapon != -1) //если выбранное оружие инициализировано, то при запуске скрипта выбираем его вновь (выбранное оружие остается таковым при смене сцены)
+            selectedWeapon = playerInventory.selectedWeapon;
         SelectWeapon();
-        playerInventory = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
         ammoInfoText = GameObject.Find("AmmoCount").GetComponentInChildren<TextMeshProUGUI>();
     }
-
-
     void Update()
     {
         // Получаем текущее оружие
@@ -56,6 +60,9 @@ public class WeaponSwitch : MonoBehaviour
                     selectedWeapon = i;
             }
         }
+
+        //Переключение оружия при подборе при помощи костыля
+        SelectOnPickup();
 
         if (previousSelectedWeapon != selectedWeapon)   // Если выбранное оружие изменилось, выбираем его
             SelectWeapon();
@@ -99,6 +106,27 @@ public class WeaponSwitch : MonoBehaviour
         {
             weapon.gameObject.SetActive(i == selectedWeapon);
             i++;
+            playerInventory.selectedWeapon = selectedWeapon; // сохранение выбранного оружия в инвентарь
+        }
+        Debug.Log(playerInventory);
+    }
+
+    void SelectOnPickup()
+    {
+        if (playerInventory.hasPistol && !playerInventory.pickedPistol)
+        {
+            selectedWeapon = 1;
+            playerInventory.pickedPistol = true;
+        }
+        else if(playerInventory.hasRifle && !playerInventory.pickedRifle)
+        {
+            selectedWeapon = 2;
+            playerInventory.pickedRifle = true;
+        }
+        else if(playerInventory.hasShotgun && !playerInventory.pickedShotgun)
+        {
+            selectedWeapon = 3;
+            playerInventory.pickedShotgun = true;
         }
     }
 }

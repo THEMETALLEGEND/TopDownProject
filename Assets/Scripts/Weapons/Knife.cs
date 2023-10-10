@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Knife : WeaponClass
 {
+    private void Awake()
+    {
+        //Нож всегда подобран, при загрузке добавляем его обратно в Контроллер Пушек
+        playerInventory = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
+        Debug.Log(playerInventory);
+        PlayerInventory.weapons[0] = transform;
+    }
     private void Update()
     {
         ammoType.Refresh(); //Костыль. Обновление пула патронов каждый кадр.

@@ -13,13 +13,14 @@ public class WeaponPickup : MonoBehaviour
 
     public WeaponType weaponType;
     public int inventoryPlace;
+    private WeaponSwitch weaponSwitch;
     private PlayerInventory playerInventory;
     public WeaponClass weaponClass;
 
     private void Start()
     {
         playerInventory = FindObjectOfType<PlayerInventory>();
-
+        weaponSwitch = FindObjectOfType<WeaponSwitch>();
         weaponClass = GetWeaponObject(weaponType);
     }
 
@@ -30,25 +31,35 @@ public class WeaponPickup : MonoBehaviour
             Debug.Log("weaponclass not null");
             PlayerInventory.weapons[inventoryPlace] = weaponClass.transform;
             Destroy(gameObject);
+
+            switch (weaponType)
+            {
+                case WeaponType.Pistol:
+                    playerInventory.hasPistol = true;
+                    break;
+                case WeaponType.Rifle:
+                    playerInventory.hasRifle = true;
+                    break;
+                case WeaponType.Shotgun:
+                    playerInventory.hasShotgun = true;
+                    break;
+            }
         }
     }
 
     private WeaponClass GetWeaponObject(WeaponType type)
     {
-        WeaponClass findWeaponClass = null;
+        WeaponClass findWeaponClass;
         GameObject weaponObject = FindInactiveObjectByName(type.ToString());
         switch (weaponType)
         {
             case WeaponType.Pistol:
-                playerInventory.hasPistol = true;
                 findWeaponClass = weaponObject.GetComponent<Pistol>();
                 break;
             case WeaponType.Rifle:
-                playerInventory.hasRifle = true;
                 findWeaponClass = weaponObject.GetComponent<Rifle>();
                 break;
             case WeaponType.Shotgun:
-                playerInventory.hasShotgun = true;
                 findWeaponClass = weaponObject.GetComponent<Shotgun>();
                 break;
             default:
