@@ -8,7 +8,7 @@ public class DDOL : MonoBehaviour
 
     private static DDOL instance;
 
-    private void Awake()
+    private void Start()
     {
         if (useSingleton)
         {

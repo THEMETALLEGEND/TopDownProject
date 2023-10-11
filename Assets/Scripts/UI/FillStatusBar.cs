@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class FillStatusBar : MonoBehaviour
 {
-    public EntityClass entityHealth;
+    private EntityClass entityHealth;
     private GameObject fillImageGameObject;
     private Image fillImage;
     private Slider slider;
@@ -15,6 +15,10 @@ public class FillStatusBar : MonoBehaviour
         slider = GetComponent<Slider>();
         fillImageGameObject = GameObject.Find("Fill Area/Fill");
         fillImage = fillImageGameObject.GetComponent<Image>();
+    }
+    private void Start()
+    {
+        entityHealth = GameObject.Find("Player").GetComponent<EntityClass>();
     }
 
 

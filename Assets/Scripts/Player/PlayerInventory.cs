@@ -35,11 +35,20 @@ public class PlayerInventory : MonoBehaviour
         InventoryUI inventoryUI = GameObject.Find("StuffCollectedCountText").GetComponent<InventoryUI>();
         OnStuffCollected.AddListener(inventoryUI.UpdateStuffCollectedText);
         weapons[0] = GameObject.Find("Knife").transform;
-
+        CheckIfPlayerInventoryExists();
     }
 
 
-
+    private void CheckIfPlayerInventoryExists()
+    {
+        // Проверяем наличие объекта PlayerInventory в активной сцене
+        PlayerInventory existingInventory = FindObjectOfType<PlayerInventory>();
+        if (existingInventory != null && existingInventory != this)
+        {
+            // Если объект уже существует в активной сцене, удаляем его
+            Destroy(this);
+        }
+    }
 
     public void StuffCollectedCount()
     {
