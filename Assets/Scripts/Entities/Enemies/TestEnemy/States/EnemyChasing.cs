@@ -21,8 +21,6 @@ public class EnemyChasing : BaseState
             _sm.TargetSetter(_sm.playerObject);
             _sm.aIPath.maxSpeed = _sm.defaultSpeed;
         }
-        else
-            _sm.ChangeState(_sm.roamingState); 
     }
 
     public override void UpdateLogic()
@@ -31,11 +29,11 @@ public class EnemyChasing : BaseState
 
         _sm.SetAlerted(true);
 
-        //_sm.CheckPlayerInRange(40); //если дальше 60
         if (!_sm.CheckPlayerInRange(_sm.chasingPlayerDistanceExit)) //если дальше указанного значения
             stateMachine.ChangeState(_sm.roamingState);
 
         if (_sm.CheckPlayerContact(100, 5, 30)) //если ближе указанного значения
-            stateMachine.ChangeState(_sm.shootingState);
+            if (!_sm.isMelee)
+                stateMachine.ChangeState(_sm.shootingState);
     }
 }

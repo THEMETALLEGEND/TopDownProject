@@ -11,6 +11,7 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public EnemyRoaming roamingState;
     [HideInInspector] public EnemyChasing chasingState;
     [HideInInspector] public EnemyShooting shootingState;
+    [HideInInspector] public EnemyHitting hittingState;
     [HideInInspector] public EnemyFleeing fleeingState;
     [HideInInspector] public EnemyAfraid afraidState;
 
@@ -35,8 +36,8 @@ public class TestEnemyStates : StateMachine
     //-------LOGIC---------------
     public GameObject pointTarget;
     public GameObject bulletPrefab;
-    public bool isAlerted = false;
-    public bool isAfraid = false;
+    [HideInInspector] public bool isAlerted = false;
+    [HideInInspector] public bool isAfraid = false;
     public float alertRadius = 10f;
 
     //-------METHODS--------------
@@ -48,7 +49,9 @@ public class TestEnemyStates : StateMachine
     [Header("General")]
     public bool showDebugGizmos = false;
     public float defaultSpeed = 12f;
+    public float meleeSpeed = 20f;
     public bool isAnNPC = false;
+    public bool isMelee = false; //ITERATION 2
     public bool debugMode = false;
 
     [Header("Roaming state")]
@@ -69,6 +72,10 @@ public class TestEnemyStates : StateMachine
     public float shootingBurstShortTiming = .2f;
     public float shootingBurstLongTiming = 2f;
     [HideInInspector] public float dodgeRandom;
+
+    [Header("Hitting State")]
+    public float strikeTiming = .5f;
+    public float hittingPlayerDistanceExit = 40f;
 
     [Header("Fleeing state")]
     public float fleeingSpeed = 15f;
@@ -111,9 +118,13 @@ public class TestEnemyStates : StateMachine
         roamingState = new EnemyRoaming(this);
         chasingState = new EnemyChasing(this);
         shootingState = new EnemyShooting(this);
+        hittingState = new EnemyHitting(this);
         fleeingState = new EnemyFleeing(this);
         afraidState = new EnemyAfraid(this);
         GetGameObject(enemyObject);
+
+        if (isMelee)
+            defaultSpeed = meleeSpeed;
         aIPath.maxSpeed = defaultSpeed;
     }
 

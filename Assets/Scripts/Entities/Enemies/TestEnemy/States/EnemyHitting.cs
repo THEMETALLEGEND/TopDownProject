@@ -6,7 +6,7 @@ public class EnemyHitting : BaseState
 {
 
     private TestEnemyStates _sm;
-    private Coroutine _shootBurstCoroutine; //здесь объявляем переменную корутины ShootBurst 
+    private Coroutine _strikeCoroutine; //здесь объявляем переменную корутины ShootBurst 
     public EnemyHitting(TestEnemyStates enemyStateMachine) : base("TestEnemyHitting", enemyStateMachine)
     {
         _sm = (TestEnemyStates)stateMachine;
@@ -23,7 +23,7 @@ public class EnemyHitting : BaseState
                                                                                                                                     //остановился и обнулил desiredVelocity и все еще был повернут к игроку лицом
         _sm.TargetSetter(_sm.pointTarget);
 
-        _shootBurstCoroutine = _sm.StartCoroutine(ShootBurst()); //назначаем корутину и вызываем ее
+        _strikeCoroutine = _sm.StartCoroutine(StrikeEnum()); //назначаем корутину и вызываем ее
     }
 
     public override void UpdateLogic()
@@ -32,10 +32,9 @@ public class EnemyHitting : BaseState
 
         if (!_sm.CheckPlayerInRange(_sm.shootingPlayerDistanceExit)) //если дальше указанного значения
             stateMachine.ChangeState(_sm.chasingState);
-
     }
 
-    IEnumerator ShootBurst()
+    IEnumerator StrikeEnum()
     {
         while (true)
         {
@@ -47,65 +46,28 @@ public class EnemyHitting : BaseState
             }
 
             // если агент сталкивается с лучом, то продолжаем стрельбу
-            Shoot();
-            yield return new WaitForSeconds(_sm.shootingBurstShortTiming);
-            Shoot();
-            yield return new WaitForSeconds(_sm.shootingBurstShortTiming);
-            Shoot();
-            yield return new WaitForSeconds(_sm.shootingBurstShortTiming);
-            Dodge();
-            yield return new WaitForSeconds(_sm.shootingBurstLongTiming);
+            Strike();
+            yield return new WaitForSeconds(_sm.strikeTiming);
         }
     }
 
-
-    private void Shoot()
-    {
-        Vector2 direction = (_sm.playerObject.transform.position - _sm.enemyObject.transform.position).normalized; // Вычисляем вектор направления от врага до игрока
-
-        float accuracy = 0.2f; // Устанавливаем точность стрельбы
-        float rand = Random.Range(-accuracy, accuracy); // Генерируем случайное смещение для направления выстрела
-
-        Vector2 shootOffset = new Vector2(direction.y, -direction.x) * rand; //вычисляем перпендикулярный вектор и выбираем по нему рандомную точку согласно rand
-        Vector2 newDirection = direction + shootOffset; //новое направление пули с небольшой погрешностью
-
-        // Вычисляем позицию, в которой нужно создать пулю, немного впереди от врага.
-        Vector2 firePointOffset = newDirection * 3.5f;
-        Vector3 position = new Vector3(_sm.enemyObject.transform.position.x + firePointOffset.x, _sm.enemyObject.transform.position.y + firePointOffset.y, 0f); //явное преобразование в vector3 с добавлением пустой z координаты
-
-        GameObject bullet = Object.Instantiate(_sm.bulletPrefab, position, Quaternion.identity); // Создаем экземпляр префаба пули в позиции врага и с нулевым поворотом
-        Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>(); // Получаем ссылку на Rigidbody2D экземпляра пули
-        bulletRigidbody.AddForce(direction * _sm.shootingBulletSpeed, ForceMode2D.Impulse); // Применяем силу в направлении игрока, используя вычисленный вектор направления и мощность силы 20
-    }
-
-    private void Dodge()
+    private void Strike()
     {
         _sm.aIPath.maxSpeed = _sm.dodgeSpeed; //на время доджа сильно увеличиваем скорость
         Vector2 direction = (_sm.playerObject.transform.position - _sm.enemyObject.transform.position).normalized; //высчитываем нормализованный вектор от агента до игрока
-        Vector2 perpendicularVector = new Vector2(direction.y, -direction.x); //высчитываем вектор перпендикулярный вектору выше
 
-        int dodgeDirectionDecision = Random.Range(0, 2); //рандомно решаем бежать влево или вправо
-        if (dodgeDirectionDecision == 0) //если влево
-        {
-            _sm.dodgeRandom = Random.Range(-10f, -5f);
-        }
-        else //если вправо
-        {
-            _sm.dodgeRandom = Random.Range(5f, 10f);
-        }
-
-        Vector3 dodgePoint = perpendicularVector * _sm.dodgeRandom; //ставим точку на перпендикулярный вектор
-        _sm.pointTarget.transform.position = _sm.enemyObject.transform.position + dodgePoint; //ставим таргет ГО на ранд точку перпендикулярного вектора относительно себя
+        Vector3 dodgePoint = direction * 20; //ставим точку за игроком
+        _sm.pointTarget.transform.position = _sm.enemyObject.transform.position + dodgePoint; //ставим таргет ГО на точку за игроком
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        if (_shootBurstCoroutine != null) //если корутина сейчас проигрывается
+        if (_strikeCoroutine != null) //если корутина сейчас проигрывается
         {
-            _sm.StopCoroutine(_shootBurstCoroutine); //то останавливаем её
-            _shootBurstCoroutine = null;  //и назначаем переменной null (по другому корутина не останавливалась)
+            _sm.StopCoroutine(_strikeCoroutine); //то останавливаем её
+            _strikeCoroutine = null;  //и назначаем переменной null (по другому корутина не останавливалась)
         }
     }
 }

@@ -41,7 +41,7 @@ public class EnemyRoaming : BaseState
         }
 
         //если в состоянии страха то в зависимости от поведения сменить состояние
-        if (_sm.isAlerted && !_sm.isAnNPC)
+        if (_sm.isAlerted && !_sm.isAnNPC && _sm.playerObject != null)
             _sm.ChangeState(_sm.chasingState);
         else if (_sm.isAlerted && _sm.isAnNPC)// && _sm.CheckPlayerContact(48, 1, 30))
             _sm.ChangeState(_sm.fleeingState);
@@ -72,9 +72,9 @@ public class EnemyRoaming : BaseState
 
     }
 
-
     private Vector3 GetRoamingPosition()
     {
         return _sm.startingPosition + Random.insideUnitSphere * _sm.roamRadius; //от стартовой позиции делаем сферу радиуса уже назначенного
     }
+
 }
