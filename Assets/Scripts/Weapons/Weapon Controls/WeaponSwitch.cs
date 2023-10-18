@@ -108,7 +108,6 @@ public class WeaponSwitch : MonoBehaviour
             i++;
             playerInventory.selectedWeapon = selectedWeapon; // сохранение выбранного оружия в инвентарь
         }
-        Debug.Log(playerInventory);
     }
 
     void SelectOnPickup()

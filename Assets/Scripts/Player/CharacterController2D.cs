@@ -6,7 +6,7 @@ public class CharacterController2D : EntityClass
 {
     public float walkSpeed = 7f;  //публичное значение скорости
     public float runSpeed = 10f;
-    private float currentSpeed;
+    public float currentSpeed;
     private float moveVariable;
 
     private Rigidbody2D rb;

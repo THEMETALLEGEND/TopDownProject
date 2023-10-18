@@ -8,7 +8,6 @@ public class Shotgun : WeaponClass
     {
         //Если в инвентаре игрока эта пушка уже подобрана, при загрузке добавляем её обратно в Контроллер Пушек
         playerInventory = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
-        Debug.Log(playerInventory);
         if (playerInventory.hasShotgun)
         {
             PlayerInventory.weapons[3] = transform;

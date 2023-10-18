@@ -16,6 +16,7 @@ TagManager:
   - Bullet
   - Ricochetullet
   - LootMagnet
+  - MeleeHitbox
   layers:
   - Default
   - TransparentFX

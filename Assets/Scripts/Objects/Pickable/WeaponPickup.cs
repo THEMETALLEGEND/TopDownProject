@@ -28,7 +28,6 @@ public class WeaponPickup : MonoBehaviour
     {
         if (playerInventory != null && other.CompareTag("Player"))
         {
-            Debug.Log("weaponclass not null");
             PlayerInventory.weapons[inventoryPlace] = weaponClass.transform;
             Destroy(gameObject);
 

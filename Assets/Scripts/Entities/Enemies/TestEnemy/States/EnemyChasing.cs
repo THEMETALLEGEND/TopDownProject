@@ -29,11 +29,19 @@ public class EnemyChasing : BaseState
 
         _sm.SetAlerted(true);
 
+
+        /*if (_sm.testEnemy.isDamaging)
+            _sm.aIPath.maxSpeed = _sm.defaultSpeed / 3;
+        else if (!_sm.testEnemy.isDamaging)
+            _sm.aIPath.maxSpeed = _sm.defaultSpeed;*/
+
         if (!_sm.CheckPlayerInRange(_sm.chasingPlayerDistanceExit)) //если дальше указанного значения
             stateMachine.ChangeState(_sm.roamingState);
 
-        if (_sm.CheckPlayerContact(100, 5, 30)) //если ближе указанного значения
-            if (!_sm.isMelee)
-                stateMachine.ChangeState(_sm.shootingState);
+        if (_sm.CheckPlayerContact(100, 5, 30) && !_sm.isMelee) //если ближе указанного значения и не ближник
+            stateMachine.ChangeState(_sm.shootingState);
+
+        if (_sm.testEnemy.isDamaging && _sm.isMelee) //если касаемся игрока и ближник
+            stateMachine.ChangeState(_sm.hittingState);
     }
 }

@@ -8,7 +8,6 @@ public class Knife : WeaponClass
     {
         //Нож всегда подобран, при загрузке добавляем его обратно в Контроллер Пушек
         playerInventory = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
-        Debug.Log(playerInventory);
         PlayerInventory.weapons[0] = transform;
     }
     private void Update()

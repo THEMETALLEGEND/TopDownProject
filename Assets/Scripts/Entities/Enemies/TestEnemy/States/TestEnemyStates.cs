@@ -114,6 +114,7 @@ public class TestEnemyStates : StateMachine
         animator = GetComponent<Animator>();
         model = transform.GetChild(0).gameObject;
         spriteRenderer = model.GetComponent<SpriteRenderer>();
+        testEnemy = GetComponent<TestEnemy>();
         waitingState = new EnemyWaiting(this); //присваивание состояний к переменным с этой стейт машиной
         roamingState = new EnemyRoaming(this);
         chasingState = new EnemyChasing(this);

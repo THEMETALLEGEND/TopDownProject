@@ -10,11 +10,13 @@ public class TestEnemy : EnemyClass
 
     public Transform target;
     public float meleeDamage = 1f;
+    public bool isDamaging = false;
 
     private TestEnemyStates _sm;
     private ParticleSystem _ps;
     private DropOnDeath _dod;
     private bool isAlreadyDead = false;
+    private GameObject meleeCollider;
 
     private void Awake()
     {
@@ -22,6 +24,7 @@ public class TestEnemy : EnemyClass
         _ps = GetComponent<ParticleSystem>();
         _dod = GetComponent<DropOnDeath>();
         aIPath = GetComponent<AIPath>();
+        meleeCollider = transform.GetChild(3).gameObject;
     }
 
     public override void TakeDamage(float damageAmount)
@@ -56,14 +59,23 @@ public class TestEnemy : EnemyClass
         }
         else
             return;
+
+        Debug.Log(isDamaging);
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player" && !_sm.isAnNPC) //если сталкиваемся с игроком (нпс дамага не наносит)
+        if (collision.gameObject.tag == "Player" && !_sm.isAnNPC) //если сталкиваемся с игроком (нпс дамага не наносит)
         {
             CharacterController2D player = collision.gameObject.GetComponent<CharacterController2D>(); //то достаем его скрипт
             player.TakeDamage(meleeDamage); //и нахуяриваем ему дамага
+            isDamaging = true;
+            if (player != null)
+                meleeCollider.SetActive(true);
         }
     }
+
+    
 }
