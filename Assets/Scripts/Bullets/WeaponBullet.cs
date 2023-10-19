@@ -34,6 +34,11 @@ public class WeaponBullet : MonoBehaviour
                 testEnemyStates.isAlerted = true;
             testEnemy.TakeDamage(bulletDamageAmount); // Вызываем метод TakeDamage у врага
 
+            Rigidbody2D hitboxRigidbody = collision.gameObject.GetComponentInParent<Rigidbody2D>(); // Получаем Rigidbody2D гейм объекта с тегом "Hitbox"
+            Vector2 direction = collision.contacts[0].point - (Vector2)transform.position; // Вычисляем направление от пули до hitbox
+            direction = -direction.normalized; // Инвертируем направление и нормализуем его
+            hitboxRigidbody.AddForce(direction * 100, ForceMode2D.Impulse); // Применяем отталкивающую силу к hitbox
+
             ParticleSystem particleSystem = collision.gameObject.GetComponentInParent<ParticleSystem>(); // Воспроизводим систему частиц
             particleSystem.Play();
 

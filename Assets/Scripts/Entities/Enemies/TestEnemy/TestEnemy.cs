@@ -72,8 +72,7 @@ public class TestEnemy : EnemyClass
             CharacterController2D player = collision.gameObject.GetComponent<CharacterController2D>(); //то достаем его скрипт
             player.TakeDamage(meleeDamage); //и нахуяриваем ему дамага
             isDamaging = true;
-            if (player != null)
-                meleeCollider.SetActive(true);
+            meleeCollider.SetActive(true);
         }
     }
 
