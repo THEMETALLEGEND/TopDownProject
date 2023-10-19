@@ -65,14 +65,14 @@ public class TestEnemy : EnemyClass
 
     
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision) //change to Enter
     {
         if (collision.gameObject.tag == "Player" && !_sm.isAnNPC) //если сталкиваемся с игроком (нпс дамага не наносит)
         {
             CharacterController2D player = collision.gameObject.GetComponent<CharacterController2D>(); //то достаем его скрипт
             player.TakeDamage(meleeDamage); //и нахуяриваем ему дамага
             isDamaging = true;
-            meleeCollider.SetActive(true);
+            //meleeCollider.SetActive(true);
         }
     }
 
