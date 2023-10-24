@@ -24,7 +24,8 @@ public class TestEnemy : EnemyClass
         _ps = GetComponent<ParticleSystem>();
         _dod = GetComponent<DropOnDeath>();
         aIPath = GetComponent<AIPath>();
-        meleeCollider = transform.GetChild(3).gameObject;
+        if(_sm.isMelee)
+            meleeCollider = transform.GetChild(3).gameObject;
     }
 
     public override void TakeDamage(float damageAmount)

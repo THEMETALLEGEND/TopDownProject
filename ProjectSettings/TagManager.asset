@@ -17,6 +17,7 @@ TagManager:
   - Ricochetullet
   - LootMagnet
   - MeleeHitbox
+  - Knockback circle
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - NoPathfinding
   - Enemies
   - NoCollisions
-  - Hole
+  - Knockback
   - MovingPlatform
   - FallingPlatform
   - Projectile
