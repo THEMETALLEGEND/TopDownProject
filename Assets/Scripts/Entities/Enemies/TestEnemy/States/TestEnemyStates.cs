@@ -14,6 +14,7 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public EnemyHitting hittingState;
     [HideInInspector] public EnemyFleeing fleeingState;
     [HideInInspector] public EnemyAfraid afraidState;
+    [HideInInspector] public EnemyStunned stunnedState;
 
     //-------SCRIPTS--------
     [HideInInspector] public TestEnemy testEnemy;
@@ -32,6 +33,7 @@ public class TestEnemyStates : StateMachine
     [HideInInspector] public GameObject model;
     [HideInInspector] public SpriteRenderer spriteRenderer;
     [HideInInspector] public PlayerRaycast playerRaycast;
+    [HideInInspector] public GameObject hitbox;
 
     //-------LOGIC---------------
     public GameObject pointTarget;
@@ -110,7 +112,8 @@ public class TestEnemyStates : StateMachine
         playerObject = GameObject.Find("Player");
         playerRaycast = playerObject.GetComponent<PlayerRaycast>();
         target = aIDest.target;
-        pointTarget = transform.parent.GetChild(1).gameObject; //поиск пустого ГО к которому идет враг во время состояния roaming 
+        pointTarget = transform.parent.GetChild(1).gameObject; //поиск пустого ГО к которому идет враг всегда - так называемая цель
+        hitbox = transform.GetChild(1).gameObject;
         animator = GetComponent<Animator>();
         model = transform.GetChild(0).gameObject;
         spriteRenderer = model.GetComponent<SpriteRenderer>();
@@ -122,6 +125,7 @@ public class TestEnemyStates : StateMachine
         hittingState = new EnemyHitting(this);
         fleeingState = new EnemyFleeing(this);
         afraidState = new EnemyAfraid(this);
+        stunnedState = new EnemyStunned(this);
         GetGameObject(enemyObject);
 
         if (isMelee)

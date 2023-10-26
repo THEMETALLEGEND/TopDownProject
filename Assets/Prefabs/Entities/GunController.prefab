@@ -126,6 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4667179522371955531}
   - component: {fileID: 4667179522371955540}
+  - component: {fileID: 1240900984}
   m_Layer: 0
   m_Name: GunController
   m_TagString: Untagged
@@ -167,6 +168,22 @@ MonoBehaviour:
   selectedWeapon: 0
   ammoInfoText: {fileID: 0}
   playerInventory: {fileID: 0}
+--- !u!114 &1240900984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4667179522371955530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e3a4dd85d0fa494ca8d5fa2c9563ce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circlePrefab: {fileID: 6219965067195887565, guid: a556f033252f4a04bb04c596ae354434,
+    type: 3}
+  distance: 2
+  duration: 0.1
 --- !u!1 &4667179522402153354
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,7 +801,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 9029812483083356537, guid: 5c223787bc8b2d14696d5e69714ad2c9,
     type: 3}
   bulletForce: 40
-  fireRate: 0.2
+  fireRate: 0.1
   nextFire: 0
   playerInventory: {fileID: 0}
   alertRadius: 25

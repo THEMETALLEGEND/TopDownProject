@@ -25,6 +25,7 @@ public class EnemyFleeing : BaseState
     public override void Enter()
     {
         base.Enter();
+        _sm.isAlerted = true;
         player = GameObject.Find("Player");
         _sm.aIPath.maxSpeed = _sm.fleeingSpeed; //назначаем скорость больше дефолтной на момент отступления
         //_fleeTarget = new GameObject("FleeTarget"); // создаем пустой объект-цель

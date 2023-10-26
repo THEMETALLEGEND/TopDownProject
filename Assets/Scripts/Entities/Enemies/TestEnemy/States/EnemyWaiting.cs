@@ -16,5 +16,7 @@ public class EnemyWaiting : BaseState
         base.Enter();
         var aiPath = _sm.GetComponent<AIPath>();
         aiPath.canMove = false;
+        var col = _sm.hitbox.GetComponent<BoxCollider2D>();
+        col.enabled = false;
     }
 }

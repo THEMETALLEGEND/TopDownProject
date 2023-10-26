@@ -1365,6 +1365,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5174921513954625299, guid: 3426c1e1c75df2c4a9c2f1d4c4512a1c,
+        type: 3}
+      propertyPath: maxHealth
+      value: 1000000
+      objectReference: {fileID: 0}
     - target: {fileID: 5174921513954625302, guid: 3426c1e1c75df2c4a9c2f1d4c4512a1c,
         type: 3}
       propertyPath: m_RootOrder
@@ -16244,12 +16249,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useSingleton: 1
---- !u!1 &1136329450 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4667179522371955530, guid: 2fbd4338d0c14924c8a5c4e38a32a62d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1200377361}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1138209971
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16633,31 +16632,6 @@ PrefabInstance:
       propertyPath: ammoInfoText
       value: 
       objectReference: {fileID: 1266838000}
-    - target: {fileID: 4667179522371955540, guid: 2fbd4338d0c14924c8a5c4e38a32a62d,
-        type: 3}
-      propertyPath: selectedWeapon
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4667179522426633047, guid: 2fbd4338d0c14924c8a5c4e38a32a62d,
-        type: 3}
-      propertyPath: fireRate
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4667179522426633047, guid: 2fbd4338d0c14924c8a5c4e38a32a62d,
-        type: 3}
-      propertyPath: isAutomatic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4667179523437506502, guid: 2fbd4338d0c14924c8a5c4e38a32a62d,
-        type: 3}
-      propertyPath: fireRate
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4667179523437506502, guid: 2fbd4338d0c14924c8a5c4e38a32a62d,
-        type: 3}
-      propertyPath: bulletForce
-      value: 40
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fbd4338d0c14924c8a5c4e38a32a62d, type: 3}
 --- !u!4 &1235429254 stripped
@@ -16672,22 +16646,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1200377361}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1240900984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1136329450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e3a4dd85d0fa494ca8d5fa2c9563ce5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  circlePrefab: {fileID: 6219965067195887565, guid: a556f033252f4a04bb04c596ae354434,
-    type: 3}
-  distance: 2
-  duration: 0.1
 --- !u!4 &1243400099 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1276982864957032348, guid: 640181c90df6e1e429e8c8358b1a3e4f,
