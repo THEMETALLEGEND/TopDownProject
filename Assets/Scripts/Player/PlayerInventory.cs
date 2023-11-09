@@ -30,7 +30,7 @@ public class PlayerInventory : MonoBehaviour
     public bool hasShotgun = false;
     [HideInInspector] public bool pickedShotgun = false;
 
-    private void Start()
+    private void Awake()
     {
         InventoryUI inventoryUI = GameObject.Find("StuffCollectedCountText").GetComponent<InventoryUI>();
         OnStuffCollected.AddListener(inventoryUI.UpdateStuffCollectedText);

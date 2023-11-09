@@ -18,6 +18,11 @@ public class FillStatusBar : MonoBehaviour
     }
     private void Start()
     {
+        //entityHealth = GameObject.Find("Player").GetComponent<EntityClass>();
+    }
+
+    public void FindPlayerHealth()
+    {
         entityHealth = GameObject.Find("Player").GetComponent<EntityClass>();
     }
 

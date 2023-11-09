@@ -1461,6 +1461,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Inventory
       objectReference: {fileID: 0}
+    - target: {fileID: 8403223891757520212, guid: 25db0ffa65ac7a242a8faf754789fa60,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8403223891757520215, guid: 25db0ffa65ac7a242a8faf754789fa60,
         type: 3}
       propertyPath: m_RootOrder

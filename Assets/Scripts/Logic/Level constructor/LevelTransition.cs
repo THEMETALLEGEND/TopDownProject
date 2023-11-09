@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class LevelTransition : MonoBehaviour
 {
-    public int transitionSceneIndex;
+    public string sceneName;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.name == "Hitbox")
+        if (other.name == "Hitbox" && other.transform.parent.name == "Player")
         {
-            SceneManager.LoadScene(transitionSceneIndex, LoadSceneMode.Single);
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
         }
     }
 }
