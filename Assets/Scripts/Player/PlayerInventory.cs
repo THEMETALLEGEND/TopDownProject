@@ -10,6 +10,8 @@ public class PlayerInventory : MonoBehaviour
     public int AmmoCount { get; private set; }
     public int StuffCollected { get; private set; }
 
+    public float currentHealth;
+
 
     //---------OBJECTS--------------
     private List<Key> keys = new List<Key>(); //список ключей в инвентаре

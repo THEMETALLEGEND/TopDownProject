@@ -33,10 +33,9 @@ public class CharacterController2D : EntityClass
     }
 
 
-
     private void Update()
     {
-        HealthCheck();
+        HealthCheck(); //!!пофиксить чтобы было только при восполнении хп
 
         moveX = Input.GetAxisRaw("Horizontal"); //управление по Х (A, D)
         moveY = Input.GetAxisRaw("Vertical");   //управление по Y (W, S)
