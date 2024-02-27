@@ -4,30 +4,42 @@ using UnityEngine;
 
 public class EntityClass : MonoBehaviour    //класс любого живого существа
 {
-    //HEALTH SYSTEM
-    public float currentHealth;
-    public float maxHealth = 100f;
+	//HEALTH SYSTEM
+	public float currentHealth;
+	public float maxHealth = 100f;
 
-    void Start() 
-    {
-        currentHealth = maxHealth; //на запуске ГО даем ему максимум ХП
-    }
+	void Start()
+	{
+		InitializeEntity();
+	}
 
-    public void HealthCheck()
-    {
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
+	protected virtual void InitializeEntity()
+	{
+		// Default initialization for entities
+		currentHealth = maxHealth;
+	}
 
-        //Debug.Log(gameObject.name + currentHealth + " - current health");
-    }
+	public void SetCurrentHealth(float health)
+	{
+		currentHealth = Mathf.Clamp(health, 0f, maxHealth);
 
-    public virtual void TakeDamage(float damageAmount)  //метод отвечающий за прием дамага, принимающий float
-    {
-        currentHealth -= damageAmount;  //при вызове метода отнимаем вложенный float из настоящего здоровья
+		// Additional health-related checks or actions can be added here if needed in the future
 
-        if (currentHealth <= 0f) //если ХП 0 то смерть и дестрой себя
-        {
-            Destroy(gameObject);
-        }
-    }
+		// For now, this method is straightforward and doesn't include a separate HealthCheck method
+	}
+
+	public virtual void TakeDamage(float damageAmount)
+	{
+		SetCurrentHealth(currentHealth - damageAmount);
+
+		if (currentHealth <= 0f)
+		{
+			DestroyEntity();
+		}
+	}
+
+	protected virtual void DestroyEntity()
+	{
+		Destroy(gameObject);
+	}
 }

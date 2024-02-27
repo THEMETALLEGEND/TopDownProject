@@ -59,7 +59,7 @@ public class StateMachine : MonoBehaviour
 
             GUI.Label(new Rect(labelPosition.x - 50, labelPosition.y, 200, 50), content); // отображаем текст над агентом
         }
-        
+
     }
 
     /*private void OnGUI() //тут рисуем состояние в верхнем левом углу

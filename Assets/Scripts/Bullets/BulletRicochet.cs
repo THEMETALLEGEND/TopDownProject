@@ -27,7 +27,7 @@ public class BulletRicochet : MonoBehaviour
 
         Vector2 currentPosition = bullet1Rigidbody.position;
         bullet1Velocity = currentPosition - initialPosition;
-        Debug.Log("Вектор движения пули: " + bullet1Velocity);
+        Debug.Log("Bullet vector: " + bullet1Velocity);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

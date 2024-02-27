@@ -1,36 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class FillStatusBar : MonoBehaviour
 {
-    private EntityClass entityHealth;
-    private GameObject fillImageGameObject;
-    private Image fillImage;
+    private CharacterController2D playerController;  // Assuming the player's health is stored in PlayerInventory
     private Slider slider;
 
     private void Awake()
     {
         slider = GetComponent<Slider>();
-        fillImageGameObject = GameObject.Find("Fill Area/Fill");
-        fillImage = fillImageGameObject.GetComponent<Image>();
     }
+
     private void Start()
     {
-        //entityHealth = GameObject.Find("Player").GetComponent<EntityClass>();
+        // Find the PlayerInventory component
+        FindPlayer();
     }
 
-    public void FindPlayerHealth()
+    private void FindPlayer()
     {
-        entityHealth = GameObject.Find("Player").GetComponent<EntityClass>();
-    }
+        // Look for the GameObject with the PlayerInventory script in the scene
+        GameObject playerObject = GameObject.Find("Player");
 
+        if (playerObject != null)
+        {
+            playerController = playerObject.GetComponent<CharacterController2D>();
+        }
+        else
+        {
+            Debug.LogError("Player GameObject not found in the scene.");
+        }
+    }
 
     private void Update()
     {
-        float fillvalue = entityHealth.currentHealth / entityHealth.maxHealth;
-        slider.value = fillvalue;
+        // Update only if playerInventory is null
+        if (playerController == null)
+        {
+            FindPlayer();
+        }
+        else
+        {
+            // Calculate fill value based on player's health
+            float fillValue = playerController.currentHealth / playerController.maxHealth;
+
+            // Update the slider's value
+            slider.value = fillValue;
+        }
     }
 }
-

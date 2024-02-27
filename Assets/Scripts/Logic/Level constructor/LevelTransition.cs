@@ -11,11 +11,6 @@ public class LevelTransition : MonoBehaviour
     {
         if (other.name == "Hitbox" && other.transform.parent.name == "Player")
         {
-            CharacterController2D characterController2D = other.GetComponent<CharacterController2D>();
-            PlayerInventory playerInventory = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
-            characterController2D.currentHealth = playerInventory.currentHealth;
-
-
             SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
         }
     }
