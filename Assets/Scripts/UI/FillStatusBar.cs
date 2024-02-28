@@ -28,7 +28,7 @@ public class FillStatusBar : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Player GameObject not found in the scene.");
+            Debug.Log("Player GameObject not found in the scene.");
         }
     }
 

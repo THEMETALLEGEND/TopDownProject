@@ -39,6 +39,7 @@ public class PlayerInventory : MonoBehaviour
 	{
 		InventoryUI inventoryUI = GameObject.Find("StuffCollectedCountText").GetComponent<InventoryUI>();
 		OnStuffCollected.AddListener(inventoryUI.UpdateStuffCollectedText);
+
 		weapons[0] = GameObject.Find("Knife").transform;
 
 		// Implementing the Singleton pattern

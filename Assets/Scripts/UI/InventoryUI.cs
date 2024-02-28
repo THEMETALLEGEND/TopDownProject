@@ -5,16 +5,24 @@ using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
-    private TextMeshProUGUI stuffCollectedText;
+	private TextMeshProUGUI stuffCollectedText;
+	private PlayerInventory playerInventoryLocal;
 
-    private void Start()
-    {
-        stuffCollectedText = GetComponent<TextMeshProUGUI>();
-    }
+	private void Start()
+	{
+		stuffCollectedText = GetComponent<TextMeshProUGUI>();
+		playerInventoryLocal = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
 
-    public void UpdateStuffCollectedText(PlayerInventory playerInventory)
-    {
-        stuffCollectedText.text = playerInventory.StuffCollected.ToString();
-    }
+		// Register UpdateStuffCollectedText as a listener to OnStuffCollected event
+		playerInventoryLocal.OnStuffCollected.AddListener(UpdateStuffCollectedText);
 
+		// Update the text initially
+		UpdateStuffCollectedText(playerInventoryLocal);
+	}
+
+	// This method will be automatically called when OnStuffCollected event is triggered
+	public void UpdateStuffCollectedText(PlayerInventory playerInventory)
+	{
+		stuffCollectedText.text = playerInventory.StuffCollected.ToString();
+	}
 }

@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1729348351
 Transform:
   m_ObjectHideFlags: 0
@@ -5038,6 +5038,7 @@ MonoBehaviour:
   model: {fileID: 0}
   spriteRenderer: {fileID: 0}
   playerRaycast: {fileID: 0}
+  hitbox: {fileID: 0}
   pointTarget: {fileID: 8405167257549551187}
   bulletPrefab: {fileID: 8895918990583274388, guid: bb10998cdecf6924a93ed9603f030122,
     type: 3}

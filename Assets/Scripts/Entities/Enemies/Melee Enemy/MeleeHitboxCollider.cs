@@ -12,7 +12,7 @@ public class MeleeHitboxCollider : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player") //если сталкиваемс€ с игроком (нпс дамага не наносит)
+        if (collision.gameObject.CompareTag("Player")) //если сталкиваемс€ с игроком (нпс дамага не наносит)
         {
             CharacterController2D player = collision.gameObject.GetComponentInParent<CharacterController2D>(); //то достаем его скрипт
             player.TakeDamage(parent.meleeDamage); //и наху€риваем ему дамага
@@ -23,7 +23,7 @@ public class MeleeHitboxCollider : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player") 
+        if (collision.gameObject.tag == "Player")
         {
             CharacterController2D player = collision.gameObject.GetComponent<CharacterController2D>();
             if (player != null)
