@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class CharacterController2D : EntityClass
 {
@@ -59,14 +60,49 @@ public class CharacterController2D : EntityClass
 	{
 		SetCurrentHealth(currentHealth - damageAmount);
 
-		if (currentHealth <= 0f)
-		{
-			DestroyEntity();
-		}
-
 		// Update the player's health in PlayerInventory when it changes
 		UpdatePlayerHealth();
+
+		if (currentHealth == 0f)
+		{
+			Debug.Log("game over");
+			{
+
+			}
+			GameOverScreen gameOverScreen = FindInactiveObjectByName("Game Over Screen")?.GetComponent<GameOverScreen>();
+
+			if (gameOverScreen != null)
+			{
+				gameOverScreen.GameOverScreenOn(1); //inventory.StuffCollected);
+				Debug.Log("GameOverScreen: " + gameOverScreen + ", StuffCollected: " + inventory.StuffCollected);
+			}
+
+			DestroyEntity();
+
+			GameObject inventoryGO = GameObject.Find("Player Inventory");
+			Destroy(inventoryGO);
+		}
 	}
+
+	//Костыль: Метод за поиск неактивного объекта находится здесь. В будущем переместить в свою библиотеку!
+	//Внимание!! Метод использует много ресурсов!
+	private GameObject FindInactiveObjectByName(string objectName)
+	{
+		// FindObjectsOfTypeAll returns all objects in the project, including inactive ones
+		UnityEngine.Object[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
+
+		// Iterate through all objects with the specified name
+		foreach (UnityEngine.Object obj in objects)
+		{
+			if (obj is GameObject && obj.name == objectName && !((GameObject)obj).activeSelf)
+			{
+				return (GameObject)obj;
+			}
+		}
+
+		return null;
+	}
+
 
 	public void UpdatePlayerHealth()
 	{

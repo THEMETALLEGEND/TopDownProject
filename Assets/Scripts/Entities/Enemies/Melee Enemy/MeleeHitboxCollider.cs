@@ -29,8 +29,7 @@ public class MeleeHitboxCollider : MonoBehaviour
             if (player != null)
                 player.currentSpeed = player.walkSpeed;
             parent.isDamaging = false;
-            this.gameObject.SetActive(false);
-            Debug.Log("Hello");
+            gameObject.SetActive(false);
         }
     }
 }

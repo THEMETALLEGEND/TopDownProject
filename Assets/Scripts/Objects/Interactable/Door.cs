@@ -20,7 +20,7 @@ public class Door : MonoBehaviour
     public void Open()
     {
         col.enabled = false;
-        Debug.Log("opened");
+        //Debug.Log("opened");
 
         // Получаем компонент AstarPath с объекта A* в сцене
         AstarPath astarPath = GameObject.FindObjectOfType<AstarPath>();
