@@ -34,12 +34,7 @@ public class EntityClass : MonoBehaviour    //класс любого живог
 
 		if (currentHealth <= 0f)
 		{
-			DestroyEntity();
+			Destroy(gameObject);
 		}
-	}
-
-	protected virtual void DestroyEntity()
-	{
-		Destroy(gameObject);
 	}
 }

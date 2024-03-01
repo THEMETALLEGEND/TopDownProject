@@ -63,7 +63,7 @@ public class CharacterController2D : EntityClass
 		// Update the player's health in PlayerInventory when it changes
 		UpdatePlayerHealth();
 
-		if (currentHealth == 0f)
+		if (currentHealth <= 0f)
 		{
 			Debug.Log("game over");
 			{
@@ -73,14 +73,15 @@ public class CharacterController2D : EntityClass
 
 			if (gameOverScreen != null)
 			{
-				gameOverScreen.GameOverScreenOn(1); //inventory.StuffCollected);
+				gameOverScreen.GameOverScreenOn(inventory.StuffCollected);
 				Debug.Log("GameOverScreen: " + gameOverScreen + ", StuffCollected: " + inventory.StuffCollected);
 			}
 
-			DestroyEntity();
-
 			GameObject inventoryGO = GameObject.Find("Player Inventory");
+			GameObject gunController = GameObject.Find("GunController");
+			Destroy(gunController);
 			Destroy(inventoryGO);
+			Destroy(gameObject);
 		}
 	}
 
