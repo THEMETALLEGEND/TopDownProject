@@ -5000,7 +5000,7 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 50
   target: {fileID: 0}
-  meleeDamage: 1
+  meleeDamage: 0.5
   isDamaging: 0
 --- !u!114 &2473143494153175077
 MonoBehaviour:

@@ -35,11 +35,12 @@ public class GameOverScreen : MonoBehaviour
 
 	public void RestartButton()
 	{
-		SceneManager.LoadScene("Zombie test level");
+		//// Get the name of the currently active scene and load it
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 
 	public void MenuButton()
 	{
-		SceneManager.LoadScene("Level 1");
+		SceneManager.LoadScene("Main menu");
 	}
 }

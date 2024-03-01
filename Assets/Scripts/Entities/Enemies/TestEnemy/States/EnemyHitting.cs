@@ -17,7 +17,7 @@ public class EnemyHitting : BaseState
         base.Enter();
 
         _sm.TargetSetter(_sm.playerObject);
-        //_sm.aIPath.maxSpeed = _sm.defaultSpeed / 3;
+        _sm.aIPath.maxSpeed = _sm.defaultSpeed / 3;
     }
 
     public override void UpdateLogic()
