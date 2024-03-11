@@ -36,11 +36,23 @@ public class GameOverScreen : MonoBehaviour
 	public void RestartButton()
 	{
 		//// Get the name of the currently active scene and load it
+		DeleteInventory();
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 
 	public void MenuButton()
 	{
+		DeleteInventory();
 		SceneManager.LoadScene("Main menu");
+	}
+
+	private void DeleteInventory()
+	{
+		GameObject inventory = GameObject.Find("Player Inventory");
+
+		if (inventory != null)
+			Destroy(inventory);
+		else
+			Debug.LogWarning("Player Inventory not found. Unable to delete.");
 	}
 }

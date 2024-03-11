@@ -26,7 +26,7 @@ public class WeaponPickup : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		playerInventory = FindObjectOfType<PlayerInventory>();
-		Debug.Log("player inventory: " + playerInventory + "; player tag: " + other.tag);
+		//Debug.Log("player inventory: " + playerInventory + "; player tag: " + other.tag);
 		if (playerInventory != null && other.CompareTag("Player"))
 		{
 			PlayerInventory.weapons[inventoryPlace] = weaponClass.transform;

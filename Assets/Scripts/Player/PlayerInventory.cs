@@ -12,6 +12,7 @@ public class PlayerInventory : MonoBehaviour
 
 	// Player-related data
 	[SerializeField] private float playerHealth;
+	private WeaponClass weaponClass;
 
 
 	public int AmmoCount { get; private set; }
@@ -54,6 +55,19 @@ public class PlayerInventory : MonoBehaviour
 		}
 	}
 
+	private void Start()
+	{
+		weaponClass = GameObject.Find("Knife").GetComponent<WeaponClass>();
+		//Debug.Log(weaponClass);
+		if (weaponClass == null)
+		{
+			weaponClass = FindInactiveObjectByName("Knife").gameObject.GetComponent<WeaponClass>();
+			//Debug.Log("is null, setting inactive");
+		}
+		//Debug.Log(weaponClass);
+		weaponClass.ResetAmmo();
+	}
+
 	// Method to set the player's health
 	public void SetPlayerHealth(float health)
 	{
@@ -71,13 +85,32 @@ public class PlayerInventory : MonoBehaviour
 		StuffCollected++;
 		OnStuffCollected.Invoke(this);
 	}
+
 	public void AddKey(Key key)
 	{
 		keys.Add(key);
 	}
+
 	public bool HasKey(string keyId)
 	{
 		return keys.Any(key => key.keyId == keyId);
+	}
+
+	private GameObject FindInactiveObjectByName(string objectName)
+	{
+		// FindObjectsOfTypeAll returns all objects in the project, including inactive ones
+		UnityEngine.Object[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
+
+		// Iterate through all objects with the specified name
+		foreach (UnityEngine.Object obj in objects)
+		{
+			if (obj is GameObject && obj.name == objectName && !((GameObject)obj).activeSelf)
+			{
+				return (GameObject)obj;
+			}
+		}
+
+		return null;
 	}
 }
 public class AmmoContainer
