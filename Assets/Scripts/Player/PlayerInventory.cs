@@ -80,9 +80,9 @@ public class PlayerInventory : MonoBehaviour
 		return playerHealth;
 	}
 
-	public void StuffCollectedCount()
+	public void StuffCollectedCount(int value)
 	{
-		StuffCollected++;
+		StuffCollected += value;
 		OnStuffCollected.Invoke(this);
 	}
 

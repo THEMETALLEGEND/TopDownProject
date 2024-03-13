@@ -17,6 +17,8 @@ public class TestEnemy : EnemyClass
 	private DropOnDeath _dod;
 	private bool isAlreadyDead = false;
 	private GameObject meleeCollider;
+	[SerializeField] private int value;
+	private PlayerInventory playerInventory;
 
 	private void Awake()
 	{
@@ -49,6 +51,8 @@ public class TestEnemy : EnemyClass
 	{
 		yield return new WaitForSeconds(.7f);
 		_dod.DropItemsOnDeath();
+		playerInventory = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
+		playerInventory.StuffCollectedCount(value);
 		Destroy(gameObject);
 	}
 

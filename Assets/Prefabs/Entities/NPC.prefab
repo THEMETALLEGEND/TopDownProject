@@ -5079,6 +5079,7 @@ MonoBehaviour:
   model: {fileID: 0}
   spriteRenderer: {fileID: 0}
   playerRaycast: {fileID: 0}
+  hitbox: {fileID: 0}
   pointTarget: {fileID: 0}
   bulletPrefab: {fileID: 8895918990583274388, guid: bb10998cdecf6924a93ed9603f030122,
     type: 3}
@@ -5087,7 +5088,9 @@ MonoBehaviour:
   alertRadius: 10
   showDebugGizmos: 0
   defaultSpeed: 8
+  meleeSpeed: 20
   isAnNPC: 1
+  isMelee: 0
   debugMode: 0
   roamingSpeed: 10
   roamingInterval: 60
@@ -5102,6 +5105,8 @@ MonoBehaviour:
   shootingBurstShortTiming: 0.2
   shootingBurstLongTiming: 2
   dodgeRandom: 0
+  strikeTiming: 0.5
+  hittingPlayerDistanceExit: 40
   fleeingSpeed: 12
   maxTurnAngle: 10
   fleeingPlayerDistanceExit: 40
@@ -5134,6 +5139,8 @@ MonoBehaviour:
   maxHealth: 40
   target: {fileID: 0}
   meleeDamage: 1
+  isDamaging: 0
+  value: 25
 --- !u!114 &4984924314396142192
 MonoBehaviour:
   m_ObjectHideFlags: 0

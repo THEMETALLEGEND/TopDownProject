@@ -248,12 +248,12 @@ public class WeaponClass : MonoBehaviour
 		var distance = 7f;
 
 		// Выполняем рейкаст в заданном направлении и на заданную длину
-		RaycastHit2D hit = Physics2D.Raycast(attackerPos, direction, distance, LayerMask.GetMask("Enemies"));
+		RaycastHit2D hit = Physics2D.Raycast(attackerPos, direction, distance, LayerMask.GetMask("Hitbox"));
 		if (hit.collider != null)
 		{
 			// Если рейкаст столкнулся с объектом на слое "Enemies", то обрабатываем столкновение
-			var enemy = hit.collider.GetComponent<TestEnemy>();
-			var enemyStates = hit.collider.GetComponent<TestEnemyStates>();
+			var enemy = hit.collider.GetComponentInParent<TestEnemy>();
+			var enemyStates = hit.collider.GetComponentInParent<TestEnemyStates>();
 			if (enemy != null)
 			{
 				if (enemyStates.isAlerted == false)

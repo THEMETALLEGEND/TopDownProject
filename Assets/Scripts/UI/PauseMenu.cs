@@ -7,8 +7,6 @@ public class PauseMenu : MonoBehaviour
 {
 	private GameObject playerUI;
 	private GameObject pauseMenu;
-	private GameObject resumeButton;
-	private GameObject menuButton;
 	private GameObject playerObject;
 	private CharacterController2D playerController;
 	private GunController gunController;
@@ -67,7 +65,7 @@ public class PauseMenu : MonoBehaviour
 		DeleteInventory();
 		isPaused = false;
 		Time.timeScale = 1f;
-		SceneManager.LoadScene("Main menu");
+		SceneManager.LoadScene("M1 Main menu");
 	}
 
 	private void DeleteInventory()

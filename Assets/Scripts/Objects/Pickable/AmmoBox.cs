@@ -4,31 +4,36 @@ using UnityEngine;
 
 public class AmmoBox : PickableClass
 {
-    public int ammoAvailable = 15; // кол-во патронов в €щике
-    public AmmoType ammoType; // тип патронов в €щике
-    public override void CollisionCheck(Collider2D other)
-    {
-        if (other.name == "Hitbox")
-        {
-            PlayerInventory playerInventory = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
+	public int ammoAvailable = 15; // кол-во патронов в €щике
+	public AmmoType ammoType; // тип патронов в €щике
 
-            if (playerInventory != null)
-            {
-                AmmoContainer ammoContainer = WeaponClass.ammoContainer;
+	private WeaponClass weaponClass; //ищем активное оружие в сцене
 
-                if (ammoContainer.ammoTypeValues[ammoType] < ammoContainer.maxAmmoTypeValues[ammoType]) // провер€ем, есть ли у игрока место дл€ патронов в инвентаре
-                {
-                    int ammoToTake = Mathf.Min(ammoAvailable, ammoContainer.maxAmmoTypeValues[ammoType] - ammoContainer.ammoTypeValues[ammoType]); //выбираем наименьшее - сколько патронов нужно или сколько патронов осталось
+	public override void CollisionCheck(Collider2D other)
+	{
+		if (other.name == "Hitbox")
+		{
+			PlayerInventory playerInventory = GameObject.Find("Player Inventory").GetComponent<PlayerInventory>();
 
-                    ammoContainer.ammoTypeValues[ammoType] += ammoToTake; // ƒобавл€ем патроны в инвентарь игрока
-                    ammoAvailable -= ammoToTake;
+			if (playerInventory != null)
+			{
+				AmmoContainer ammoContainer = WeaponClass.ammoContainer;
+				weaponClass = FindObjectOfType<WeaponClass>();
 
-                    if (ammoAvailable <= 0) // ≈сли патроны закончились, удал€ем объект €щика
-                    {
-                        Destroy(gameObject);
-                    }
-                }
-            }
-        }
-    }
+				if (ammoContainer.ammoTypeValues[ammoType] < ammoContainer.maxAmmoTypeValues[ammoType]) // провер€ем, есть ли у игрока место дл€ патронов в инвентаре
+				{
+					int ammoToTake = Mathf.Min(ammoAvailable, ammoContainer.maxAmmoTypeValues[ammoType] - ammoContainer.ammoTypeValues[ammoType]); //выбираем наименьшее - сколько патронов нужно или сколько патронов осталось
+
+					ammoContainer.ammoTypeValues[ammoType] += ammoToTake; // ƒобавл€ем патроны в инвентарь игрока
+					ammoAvailable -= ammoToTake;
+					weaponClass.ammoType.Refresh(); //при подборе патронов игроком обновл€ем пул патронов до актуального
+
+					if (ammoAvailable <= 0) // ≈сли патроны закончились, удал€ем объект €щика
+					{
+						Destroy(gameObject);
+					}
+				}
+			}
+		}
+	}
 }

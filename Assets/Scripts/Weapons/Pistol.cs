@@ -15,8 +15,6 @@ public class Pistol : WeaponClass
     }
     private void Update()
     {
-        ammoType.Refresh();
-
         MagazineReload();
     }
 }

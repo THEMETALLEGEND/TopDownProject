@@ -4939,6 +4939,8 @@ MonoBehaviour:
   maxHealth: 50
   target: {fileID: 0}
   meleeDamage: 1
+  isDamaging: 0
+  value: 50
 --- !u!114 &2652802638391646778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4975,6 +4977,7 @@ MonoBehaviour:
   model: {fileID: 0}
   spriteRenderer: {fileID: 0}
   playerRaycast: {fileID: 0}
+  hitbox: {fileID: 0}
   pointTarget: {fileID: 8225785140343745612}
   bulletPrefab: {fileID: 8895918990583274388, guid: bb10998cdecf6924a93ed9603f030122,
     type: 3}
@@ -4983,7 +4986,9 @@ MonoBehaviour:
   alertRadius: 10
   showDebugGizmos: 0
   defaultSpeed: 12
+  meleeSpeed: 20
   isAnNPC: 0
+  isMelee: 0
   debugMode: 0
   roamingSpeed: 10
   roamingInterval: 30
@@ -4998,6 +5003,8 @@ MonoBehaviour:
   shootingBurstShortTiming: 0.2
   shootingBurstLongTiming: 2
   dodgeRandom: 0
+  strikeTiming: 0.5
+  hittingPlayerDistanceExit: 40
   fleeingSpeed: 15
   maxTurnAngle: 45
   fleeingPlayerDistanceExit: 40
@@ -5029,6 +5036,8 @@ MonoBehaviour:
   guaranteedItemPrefabs: []
   randomItemPrefabs:
   - {fileID: 8710797532811444864, guid: c20a3e5db883e3641bc86696d8e02b36, type: 3}
+  - {fileID: 4218109963910938197, guid: 998456523b4d64bfbb3ef7dec42dc8ff, type: 3}
+  - {fileID: 1682944958809429141, guid: 4fce974fc72254e33982d4de92f5b8a6, type: 3}
 --- !u!114 &2652802638391646755
 MonoBehaviour:
   m_ObjectHideFlags: 0

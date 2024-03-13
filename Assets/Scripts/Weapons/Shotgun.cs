@@ -15,8 +15,6 @@ public class Shotgun : WeaponClass
     }
     void Update()
     {
-        ammoType.Refresh();
-
         ShotgunReload();
     }
 }

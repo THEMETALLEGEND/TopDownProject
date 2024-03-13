@@ -20,7 +20,7 @@ public class MenuController : MonoBehaviour
 	void StartButtonOnClick()
 	{
 		// Load the Level 1 scene
-		SceneManager.LoadScene("Level 1");
+		SceneManager.LoadScene("L1 Level 1");
 	}
 
 	// Method to handle ExitButton click
