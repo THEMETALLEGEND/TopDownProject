@@ -6,7 +6,7 @@ using System.Linq;
 public class CharacterController2D : EntityClass
 {
 	public float walkSpeed = 7f;  //РїСѓР±Р»РёС‡РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ СЃРєРѕСЂРѕСЃС‚Рё
-	public float runSpeed = 10f;
+	public float runSpeed = 30f;
 	public float currentSpeed;
 	private float moveVariable;
 
@@ -129,15 +129,20 @@ public class CharacterController2D : EntityClass
 
 		moveDir = new Vector3(moveX, moveY).normalized; //РІРµРєС‚РѕСЂ РґРІРёР¶РµРЅРёСЏ РёРіСЂРѕРєР°, РЅРµ РїСЂРµРІС‹С€Р°СЋС‰РёР№ 1
 
+		//Запрещаем стрельбу активного оружия если бегаем
+		WeaponClass currentWeapon = GameObject.FindObjectOfType<WeaponClass>();
 
 		if (Input.GetButtonDown("Sprint") && playerAnimation.isMoving)
 		{
 			currentSpeed = runSpeed;
+			currentWeapon.allowedShooting = false;
 		}
 		else if (Input.GetButtonUp("Sprint") || !playerAnimation.isMoving)
 		{
 			currentSpeed = walkSpeed;
+			currentWeapon.allowedShooting = true;
 		}
+
 
 		if (Input.GetKeyDown(KeyCode.E) && currentDoor != null)
 		{

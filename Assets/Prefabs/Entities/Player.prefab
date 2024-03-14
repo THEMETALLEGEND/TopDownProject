@@ -299,6 +299,7 @@ MonoBehaviour:
   maxHealth: 100
   walkSpeed: 15
   runSpeed: 30
+  currentSpeed: 0
   playerVelocity: {x: 0, y: 0, z: 0}
   moveX: 0
   moveY: 0

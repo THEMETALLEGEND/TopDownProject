@@ -13,7 +13,7 @@ public class PlayerAnimation : MonoBehaviour
     private Transform playerTransform;
     //[SerializeField]
     private Vector3 scale;
-    [HideInInspector]public bool isFacingRight = true;
+    [HideInInspector] public bool isFacingRight = true;
     public bool isMoving = false;
 
     private void Awake()
@@ -25,7 +25,7 @@ public class PlayerAnimation : MonoBehaviour
         playerTransform = GetComponent<Transform>();
     }
 
-   
+
     void Update()
     {
         Vector2 vel = playerController.playerVelocity; //переменная публичной переменной из скрипта charactercontroller2d
@@ -39,14 +39,13 @@ public class PlayerAnimation : MonoBehaviour
             animator.SetBool("IsMoving", false); //если не двигаемся то idle
             isMoving = false;
         }
-            
+
 
         if (Input.GetButtonDown("Sprint") && isMoving) //если зажат шифт И мы двигаемся то анимация бега
             animator.SetBool("IsRunning", true);
         else if (Input.GetButtonUp("Sprint") || !isMoving) //отпускаем кнопку или не двигаемся - выключаем бег
             animator.SetBool("IsRunning", false);
 
-        //
         if (playerController.moveX <= -.1) //если input по горизонтали внутри скрипта выше (т.е. двигаемся влево)
         {
             if (isFacingRight)    //доп проверка булом защита от поворота каждый кадр
@@ -69,7 +68,7 @@ public class PlayerAnimation : MonoBehaviour
 
         }
 
-        
-            
+
+
     }
 }

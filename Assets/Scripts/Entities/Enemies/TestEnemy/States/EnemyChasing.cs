@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyChasing : BaseState
 {
-    // Start is called before the first frame update
-
     private TestEnemyStates _sm;
     public EnemyChasing(TestEnemyStates enemyStateMachine) : base("TestEnemyChasing", enemyStateMachine)
     {
@@ -38,7 +36,7 @@ public class EnemyChasing : BaseState
         if (!_sm.CheckPlayerInRange(_sm.chasingPlayerDistanceExit)) //если дальше указанного значения
             stateMachine.ChangeState(_sm.roamingState);
 
-        if (_sm.CheckPlayerContact(100, 5, 30) && !_sm.isMelee) //если ближе указанного значения и не ближник
+        if (_sm.CheckPlayerContact(100, 3, 30) && !_sm.isMelee) //если ближе указанного значения и не ближник
             stateMachine.ChangeState(_sm.shootingState);
 
         if (_sm.testEnemy.isDamaging && _sm.isMelee) //если касаемся игрока и ближник

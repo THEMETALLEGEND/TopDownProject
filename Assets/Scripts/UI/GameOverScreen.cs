@@ -43,7 +43,7 @@ public class GameOverScreen : MonoBehaviour
 	public void MenuButton()
 	{
 		DeleteInventory();
-		SceneManager.LoadScene("Main menu");
+		SceneManager.LoadScene("M1 Main menu");
 	}
 
 	private void DeleteInventory()
