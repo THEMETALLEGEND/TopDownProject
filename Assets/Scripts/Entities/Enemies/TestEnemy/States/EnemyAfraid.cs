@@ -5,7 +5,6 @@ using Pathfinding;
 
 public class EnemyAfraid : BaseState
 {
-
     private TestEnemyStates _sm;
     public EnemyAfraid(TestEnemyStates enemyStateMachine) : base("TestEnemyAfraid", enemyStateMachine)
     {
@@ -19,7 +18,7 @@ public class EnemyAfraid : BaseState
         _sm.isAfraid = true;
         _sm.TargetSetter(_sm.pointTarget);
         _sm.pointTarget.transform.position = _sm.transform.position;
-        _sm.spriteRenderer.color = new Color(0.5f, 0.5f, 1f, 1f); //ставим светло-синий цвет медели
+        _sm.spriteRenderer.color = new Color(0.5f, 0.5f, 1f, 1f); //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     }
 
     public override void UpdateLogic()
@@ -38,6 +37,6 @@ public class EnemyAfraid : BaseState
         base.Exit();
 
         _sm.isAfraid = false;
-        _sm.spriteRenderer.color = new Color(1f, 1f, 1f, 1f); //ставим дефолтный цвет
+        _sm.spriteRenderer.color = new Color(1f, 1f, 1f, 1f); //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     }
 }

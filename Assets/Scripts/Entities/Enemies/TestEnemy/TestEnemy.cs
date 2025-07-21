@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
 public class TestEnemy : EnemyClass
-
 {
 	private AIPath aIPath;
 
@@ -83,5 +81,11 @@ public class TestEnemy : EnemyClass
 		}
 	}
 
+    IEnumerator TimerOnDying()
+    {
+        yield return new WaitForSeconds(.7f);
+        _dod.DropItemsOnDeath();
+        Destroy(gameObject);
+    }
 
 }
