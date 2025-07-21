@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
@@ -43,31 +42,27 @@ public class TestEnemyStates : StateMachine
     public float alertRadius = 10f;
 
     //-------METHODS--------------
-    [HideInInspector] public Stack<BaseState> stateStack = new Stack<BaseState>();
+    private Stack<BaseState> stateStack = new();
 
     //-------INSPECTOR VALUES--------
-    [Header("State values")]
-
-    [Header("General")]
+    [Header("State values")] [Header("General")]
     public bool showDebugGizmos = false;
+
     public float defaultSpeed = 12f;
     public float meleeSpeed = 20f;
     public bool isAnNPC = false;
     public bool isMelee = false; //ITERATION 2
     public bool debugMode = false;
 
-    [Header("Roaming state")]
-    public float roamingSpeed = 10f;
+    [Header("Roaming state")] public float roamingSpeed = 10f;
     public float roamingInterval = 30f;
     public float roamRadius = 10f;
     public float roamPlayerDistanceEnter = 20f;
 
-    [Header("Chasing state")]
-    public float chasingPlayerDistanceEnter = 28f;
+    [Header("Chasing state")] public float chasingPlayerDistanceEnter = 28f;
     public float chasingPlayerDistanceExit = 65f;
 
-    [Header("Shooting state")]
-    public float dodgeSpeed = 25f;
+    [Header("Shooting state")] public float dodgeSpeed = 25f;
     public float shootingBulletSpeed = 20f;
     public float shootingInaccuracySize = 0.4f;
     public float shootingPlayerDistanceExit = 35f;
@@ -75,22 +70,17 @@ public class TestEnemyStates : StateMachine
     public float shootingBurstLongTiming = 2f;
     [HideInInspector] public float dodgeRandom;
 
-    [Header("Hitting State")]
-    public float strikeTiming = .5f;
+    [Header("Hitting State")] public float strikeTiming = .5f;
     public float hittingPlayerDistanceExit = 40f;
 
-    [Header("Fleeing state")]
-    public float fleeingSpeed = 15f;
+    [Header("Fleeing state")] public float fleeingSpeed = 15f;
     public float maxTurnAngle = 45f;
     public float fleeingPlayerDistanceExit = 40f;
     public float fleeingTime = 10f;
 
-    [Header("Afraid state")]
-    public float afraidPlayerDistanceExit = 20f;
+    [Header("Afraid state")] public float afraidPlayerDistanceExit = 20f;
 
-    [Header("Detecting")]
-    public bool playerRaycastHit;
-
+    [Header("Detecting")] public bool playerRaycastHit;
 
     //--------------TEMPORARY------------
     public LayerMask obstacleLayer; // слой, содержащий объекты с коллизией и тегом obstacles
@@ -100,17 +90,14 @@ public class TestEnemyStates : StateMachine
     public float angleStep = 7.5f; // шаг между углами лучей
     public float playerDetectionDistance = 2f; // расстояние, на котором агент определяет игрока
 
-
-
-
     public void Awake()
     {
         aIPath = GetComponent<AIPath>();
         aIDest = GetComponent<AIDestinationSetter>();
         rb = GetComponent<Rigidbody2D>();
         enemyObject = gameObject;
-        playerObject = GameObject.Find("Player");
-        playerRaycast = playerObject.GetComponent<PlayerRaycast>();
+        //playerObject = GameObject.Find("Player");
+        //playerRaycast = playerObject.GetComponent<PlayerRaycast>();
         target = aIDest.target;
         pointTarget = transform.parent.GetChild(1).gameObject; //поиск пустого ГО к которому идет враг всегда - так называемая цель
         hitbox = transform.GetChild(1).gameObject;
@@ -163,7 +150,8 @@ public class TestEnemyStates : StateMachine
             Vector3 direction = Quaternion.Euler(0f, 0f, angle) * Vector3.right;
 
             // выпускаем луч и получаем информацию о столкновении с объектами на слоях obstacleLayer и playerLayer
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, rayLength, LayerMask.GetMask("Player", "Obstacles"));
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, rayLength,
+                LayerMask.GetMask("Player", "Obstacles"));
 
             // выбираем цвет для линии на основе столкновения луча с объектом
             Color lineColor = Color.green;
@@ -182,7 +170,8 @@ public class TestEnemyStates : StateMachine
 
             // рисуем линию для луча
             if (showDebugGizmos)
-                Debug.DrawLine(transform.position, hit.collider != null ? hit.point : transform.position + direction * rayLength, lineColor);
+                Debug.DrawLine(transform.position,
+                    hit.collider != null ? hit.point : transform.position + direction * rayLength, lineColor);
 
             // если мы нашли нужное количество лучей, касающихся игрока, возвращаем true
             if (playerContacts >= playerRayCount)
@@ -213,11 +202,13 @@ public class TestEnemyStates : StateMachine
     }
 
 
-    public bool CheckPlayerInRange(float alertDistance)     // метод проверяющий расстояние до игрока с кастомной переменной
+    public bool CheckPlayerInRange(float alertDistance) // метод проверяющий расстояние до игрока с кастомной переменной
     {
         if (playerObject != null)
         {
-            float distance = Vector3.Distance(enemyObject.transform.position, playerObject.transform.position); //проверка дистанции от объекта а до б
+            float distance =
+                Vector3.Distance(enemyObject.transform.position,
+                    playerObject.transform.position); //проверка дистанции от объекта а до б
             if (distance <= alertDistance)
                 return true;
             else
@@ -234,8 +225,10 @@ public class TestEnemyStates : StateMachine
         aIDest.target = newTarget.transform;
     }
 
-    public void DiceMethod(float successChance, Action methodToRun) //метод который принимает шанс выполнения метода и при успехе выполняет его.
-                                                                            //для использования метода Action нужно указывать ссылку на сборку System
+    public void
+        DiceMethod(float successChance,
+            Action methodToRun) //метод который принимает шанс выполнения метода и при успехе выполняет его.
+        //для использования метода Action нужно указывать ссылку на сборку System
     {
         float randomValue = UnityEngine.Random.Range(0f, 1f);
         if (randomValue <= successChance / 100f)
