@@ -33,13 +33,13 @@ public class EnemyChasing : BaseState
         else if (!_sm.testEnemy.isDamaging)
             _sm.aIPath.maxSpeed = _sm.defaultSpeed;*/
 
-        if (!_sm.CheckPlayerInRange(_sm.chasingPlayerDistanceExit)) //если дальше указанного значения
-            stateMachine.ChangeState(_sm.roamingState);
+        if (!_sm.CheckPlayerInRange(_sm.chasingPlayerDistanceExit)) //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            stateMachine.ChangeState(_sm.pathMovingState);
 
-        if (_sm.CheckPlayerContact(100, 3, 30) && !_sm.isMelee) //если ближе указанного значения и не ближник
+        if (_sm.CheckPlayerContact(100, 3, 30) && !_sm.isMelee) //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             stateMachine.ChangeState(_sm.shootingState);
 
-        if (_sm.testEnemy.isDamaging && _sm.isMelee) //если касаемся игрока и ближник
+        if (_sm.testEnemy.isDamaging && _sm.isMelee) //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             stateMachine.ChangeState(_sm.hittingState);
     }
 }

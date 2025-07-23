@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Configs;
 using UnityEngine;
 using Pathfinding;
 
@@ -8,6 +9,7 @@ public class TestEnemyStates : StateMachine
 	//-------STATES--------
 	[HideInInspector] public EnemyWaiting waitingState;
 	[HideInInspector] public EnemyRoaming roamingState;
+	[HideInInspector] public EnemyPathMoving pathMovingState;
 	[HideInInspector] public EnemyChasing chasingState;
 	[HideInInspector] public EnemyShooting shootingState;
 	[HideInInspector] public EnemyHitting hittingState;
@@ -94,6 +96,9 @@ public class TestEnemyStates : StateMachine
 
 	[Header("Detecting")]
 	public bool playerRaycastHit;
+	
+	[Header("Path Moving State")]
+	public PathConfig pathConfig;
 
 	[Header("One Shot")]
 	public float oneShotTiming = 2f;
@@ -106,17 +111,14 @@ public class TestEnemyStates : StateMachine
 	public float angleStep = 7.5f; // шаг между углами лучей
 	public float playerDetectionDistance = 2f; // расстояние, на котором агент определяет игрока
 
-
-
-
 	public void Awake()
 	{
 		aIPath = GetComponent<AIPath>();
 		aIDest = GetComponent<AIDestinationSetter>();
 		rb = GetComponent<Rigidbody2D>();
 		enemyObject = gameObject;
-		playerObject = GameObject.Find("Player");
-		playerRaycast = playerObject.GetComponent<PlayerRaycast>();
+		//playerObject = GameObject.Find("Player");
+		//playerRaycast = playerObject.GetComponent<PlayerRaycast>();
 		target = aIDest.target;
 		pointTarget = transform.parent.GetChild(1).gameObject; //поиск пустого ГО к которому идет враг всегда - так называемая цель
 		hitbox = transform.GetChild(1).gameObject;
@@ -126,6 +128,7 @@ public class TestEnemyStates : StateMachine
 		testEnemy = GetComponent<TestEnemy>();
 		waitingState = new EnemyWaiting(this); //присваивание состояний к переменным с этой стейт машиной
 		roamingState = new EnemyRoaming(this);
+		pathMovingState = new EnemyPathMoving(this, pathConfig);
 		chasingState = new EnemyChasing(this);
 		shootingState = new EnemyShooting(this);
 		hittingState = new EnemyHitting(this);
@@ -155,7 +158,7 @@ public class TestEnemyStates : StateMachine
 
 	protected override BaseState GetInitialState() //начальное состояние в виде состояния ожидания
 	{
-		return roamingState;
+		return pathMovingState;
 	}
 
 	public bool CheckPlayerContact(int rayCount, int playerRayCount, float rayLength)
