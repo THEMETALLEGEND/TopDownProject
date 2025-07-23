@@ -98,8 +98,6 @@ public class TestEnemyStates : StateMachine
 	[Header("One Shot")]
 	public float oneShotTiming = 2f;
 
-    [Header("Detecting")] public bool playerRaycastHit;
-
 	//--------------TEMPORARY------------
 	public LayerMask obstacleLayer; // слой, содержащий объекты с коллизией и тегом obstacles
 	public LayerMask playerLayer;

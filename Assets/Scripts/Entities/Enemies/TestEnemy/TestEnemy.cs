@@ -66,8 +66,6 @@ public class TestEnemy : EnemyClass
 		Debug.Log(isDamaging);
 	}
 
-
-
 	private void OnCollisionStay2D(Collision2D collision) //change to Enter
 	{
 		if (collision.gameObject.tag == "Player" && !_sm.isAnNPC) //если сталкиваемся с игроком (нпс дамага не наносит)
@@ -80,12 +78,4 @@ public class TestEnemy : EnemyClass
 				meleeCollider.SetActive(true);
 		}
 	}
-
-    IEnumerator TimerOnDying()
-    {
-        yield return new WaitForSeconds(.7f);
-        _dod.DropItemsOnDeath();
-        Destroy(gameObject);
-    }
-
 }
