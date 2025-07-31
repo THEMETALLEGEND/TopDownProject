@@ -15,20 +15,20 @@ public class EnemyAfraid : BaseState
     {
         base.Enter();
 
-        _sm.isAfraid = true;
-        _sm.TargetSetter(_sm.pointTarget);
-        _sm.pointTarget.transform.position = _sm.transform.position;
-        _sm.spriteRenderer.color = new Color(0.5f, 0.5f, 1f, 1f); //������ ������-����� ���� ������
+        _sm.IsAfraid = true;
+        _sm.TargetSetter(_sm.PointTarget);
+        _sm.PointTarget.transform.position = _sm.transform.position;
+        _sm.SpriteRenderer.color = new Color(0.5f, 0.5f, 1f, 1f); //������ ������-����� ���� ������
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
 
-        _sm.pointTarget.transform.position = _sm.transform.position;
+        _sm.PointTarget.transform.position = _sm.transform.position;
         if (!_sm.CheckPlayerInRange(_sm.fleeingPlayerDistanceExit))
         {
-            _sm.ChangeState(_sm.roamingState);
+            _sm.ChangeState(_sm.RoamingState);
         }
     }
 
@@ -36,7 +36,7 @@ public class EnemyAfraid : BaseState
     {
         base.Exit();
 
-        _sm.isAfraid = false;
-        _sm.spriteRenderer.color = new Color(1f, 1f, 1f, 1f); //������ ��������� ����
+        _sm.IsAfraid = false;
+        _sm.SpriteRenderer.color = new Color(1f, 1f, 1f, 1f); //������ ��������� ����
     }
 }

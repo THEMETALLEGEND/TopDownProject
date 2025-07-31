@@ -5,7 +5,7 @@ using System.Linq;
 
 public class CharacterController2D : EntityClass
 {
-	public float walkSpeed = 7f;  //РїСѓР±Р»РёС‡РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ СЃРєРѕСЂРѕСЃС‚Рё
+	public float walkSpeed = 7f;  //публичное значение скорости
 	public float runSpeed = 30f;
 	public float currentSpeed;
 	private float moveVariable;
@@ -85,8 +85,8 @@ public class CharacterController2D : EntityClass
 		}
 	}
 
-	//Костыль: Метод за поиск неактивного объекта находится здесь. В будущем переместить в свою библиотеку!
-	//Внимание!! Метод использует много ресурсов!
+	//???????: ????? ?? ????? ??????????? ??????? ????????? ?????. ? ??????? ??????????? ? ???? ??????????!
+	//????????!! ????? ?????????? ????? ????????!
 	private GameObject FindInactiveObjectByName(string objectName)
 	{
 		// FindObjectsOfTypeAll returns all objects in the project, including inactive ones
@@ -124,12 +124,12 @@ public class CharacterController2D : EntityClass
 
 	private void Update()
 	{
-		moveX = Input.GetAxisRaw("Horizontal"); //СѓРїСЂР°РІР»РµРЅРёРµ РїРѕ РҐ (A, D)
-		moveY = Input.GetAxisRaw("Vertical");   //СѓРїСЂР°РІР»РµРЅРёРµ РїРѕ Y (W, S)
+		moveX = Input.GetAxisRaw("Horizontal"); //управление по Х (A, D)
+		moveY = Input.GetAxisRaw("Vertical");   //управление по Y (W, S)
 
-		moveDir = new Vector3(moveX, moveY).normalized; //РІРµРєС‚РѕСЂ РґРІРёР¶РµРЅРёСЏ РёРіСЂРѕРєР°, РЅРµ РїСЂРµРІС‹С€Р°СЋС‰РёР№ 1
+		moveDir = new Vector3(moveX, moveY).normalized; //вектор движения игрока, не превышающий 1
 
-		//Запрещаем стрельбу активного оружия если бегаем
+		//????????? ???????? ????????? ?????? ???? ??????
 		WeaponClass currentWeapon = GameObject.FindObjectOfType<WeaponClass>();
 
 		if (Input.GetButtonDown("Sprint") && playerAnimation.isMoving)
@@ -155,28 +155,28 @@ public class CharacterController2D : EntityClass
 	private void FixedUpdate()
 	{
 		rb.velocity = playerVelocity;
-		playerVelocity = moveDir * currentSpeed;  //РІРµРєС‚РѕСЂ СѓРјРЅРѕР¶Р°РµС‚СЃСЏ РЅР° СЃРєРѕСЂРѕСЃС‚СЊ. С„РёР·РёРєР° РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚СЃСЏ РІ fixed
+		playerVelocity = moveDir * currentSpeed;  //вектор умножается на скорость. физика обрабатывается в fixed
 	}
 
 	private void OnCollisionEnter2D(Collision2D other)
 	{
 		if (other.gameObject.CompareTag("Door"))
 		{
-			// Р•СЃР»Рё РёРіСЂРѕРє СЃС‚Р°Р»РєРёРІР°РµС‚СЃСЏ СЃ РґРІРµСЂСЊСЋ, СЃРѕС…СЂР°РЅСЏРµРј РµРµ
+			// Если игрок сталкивается с дверью, сохраняем ее
 			currentDoor = other.gameObject.GetComponent<Door>();
 		}
 
 		if (other.gameObject.CompareTag("Key"))
 		{
-			// РџРѕР»СѓС‡Р°РµРј РєРѕРјРїРѕРЅРµРЅС‚ Key
+			// Получаем компонент Key
 			Key key = other.gameObject.GetComponent<Key>();
 
-			// Р•СЃР»Рё РёРіСЂРѕРє РЅРµ РёРјРµРµС‚ СЌС‚РѕС‚ РєР»СЋС‡, РґРѕР±Р°РІР»СЏРµРј РµРіРѕ РІ РёРЅРІРµРЅС‚Р°СЂСЊ
+			// Если игрок не имеет этот ключ, добавляем его в инвентарь
 			if (!inventory.HasKey(key.keyId))
 			{
 				inventory.AddKey(key);
 				Debug.Log("You picked up the key!");
-				Destroy(other.gameObject); // РЈРґР°Р»СЏРµРј РѕР±СЉРµРєС‚ РєР»СЋС‡Р° РёР· СЃС†РµРЅС‹
+				Destroy(other.gameObject); // Удаляем объект ключа из сцены
 			}
 		}
 	}
@@ -184,20 +184,20 @@ public class CharacterController2D : EntityClass
 	{
 		if (other.gameObject.CompareTag("Door"))
 		{
-			// Р•СЃР»Рё РёРіСЂРѕРє РїРµСЂРµСЃС‚Р°Р» СЃС‚Р°Р»РєРёРІР°С‚СЊСЃСЏ СЃ РґРІРµСЂСЊСЋ, РѕС‡РёС‰Р°РµРј С‚РµРєСѓС‰СѓСЋ РґРІРµСЂСЊ
+			// Если игрок перестал сталкиваться с дверью, очищаем текущую дверь
 			currentDoor = null;
 		}
 	}
 
 	public void TryOpenDoor(Door door)
 	{
-		if (string.IsNullOrEmpty(door.keyId) || inventory.HasKey(door.keyId)) //РµСЃР»Рё РєР»СЋС‡ РїСѓСЃС‚РѕР№ РёР»Рё СѓР¶Рµ РµСЃС‚СЊ РІ РёРЅРІРµРЅС‚Р°СЂРµ РѕС‚РєСЂС‹РІР°РµРј РґРІРµСЂСЊ
+		if (string.IsNullOrEmpty(door.keyId) || inventory.HasKey(door.keyId)) //если ключ пустой или уже есть в инвентаре открываем дверь
 		{
 			door.Open();
 		}
 		else
 		{
-			// РџРѕРєР°Р·С‹РІР°РµРј СЃРѕРѕР±С‰РµРЅРёРµ Рѕ С‚РѕРј, С‡С‚Рѕ РЅРµРІРѕР·РјРѕР¶РЅРѕ РѕС‚РєСЂС‹С‚СЊ РґРІРµСЂСЊ
+			// Показываем сообщение о том, что невозможно открыть дверь
 			Debug.Log("You don't have the key to open this door.");
 		}
 	}

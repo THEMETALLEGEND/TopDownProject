@@ -28,16 +28,16 @@ public class WeaponBullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Hitbox") // Если этот гейм объект сталкивается с гейм объектом с тэгом "Hitbox"
         {
-            TestEnemy testEnemy = collision.gameObject.GetComponentInParent<TestEnemy>(); // Создаем переменную типа TestEnemy
+            EnemyClass enemyClass = collision.gameObject.GetComponentInParent<EnemyClass>(); // Создаем переменную типа EnemyClass
             TestEnemyStates testEnemyStates = collision.gameObject.GetComponentInParent<TestEnemyStates>();
-            if (testEnemyStates.isAlerted == false)
-                testEnemyStates.isAlerted = true;
-            testEnemy.TakeDamage(bulletDamageAmount); // Вызываем метод TakeDamage у врага
+            if (testEnemyStates.IsAlerted == false)
+                testEnemyStates.IsAlerted = true;
+            enemyClass.TakeDamage(bulletDamageAmount); // Вызываем метод TakeDamage у врага
 
             Rigidbody2D hitboxRigidbody = collision.gameObject.GetComponentInParent<Rigidbody2D>(); // Получаем Rigidbody2D гейм объекта с тегом "Hitbox"
-            Vector2 direction = collision.contacts[0].point - (Vector2)transform.position; // Вычисляем направление от пули до hitbox
+            Vector2 direction = collision.contacts[0].point - (Vector2)transform.position; // Вычисляем направление от пули до Hitbox
             direction = -direction.normalized; // Инвертируем направление и нормализуем его
-            hitboxRigidbody.AddForce(direction * 100, ForceMode2D.Impulse); // Применяем отталкивающую силу к hitbox
+            hitboxRigidbody.AddForce(direction * 100, ForceMode2D.Impulse); // Применяем отталкивающую силу к Hitbox
 
             ParticleSystem particleSystem = collision.gameObject.GetComponentInParent<ParticleSystem>(); // Воспроизводим систему частиц
             particleSystem.Play();

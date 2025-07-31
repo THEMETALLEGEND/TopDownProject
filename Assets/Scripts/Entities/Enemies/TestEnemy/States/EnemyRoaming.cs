@@ -13,11 +13,11 @@ public class EnemyRoaming : BaseState
     {
         base.Enter();
 
-        //_sm.isAlerted = false;
-        _sm.startingPosition = _sm.transform.position;
-        _sm.TargetSetter(_sm.pointTarget);
-        _sm.aIDest.target.position = GetRoamingPosition();
-        _sm.aIPath.maxSpeed = _sm.roamingSpeed;
+        //_sm.IsAlerted = false;
+        _sm.StartingPosition = _sm.transform.position;
+        _sm.TargetSetter(_sm.PointTarget);
+        _sm.AIDest.target.position = GetRoamingPosition();
+        _sm.AIPath.maxSpeed = _sm.roamingSpeed;
     }
 
     public override void UpdateLogic()
@@ -27,19 +27,19 @@ public class EnemyRoaming : BaseState
         if (_sm.CheckPlayerContact(48, 1, 30))
         {
             if (!_sm.isAnNPC && !_sm.debugMode)
-                stateMachine.ChangeState(_sm.chasingState);
+                stateMachine.ChangeState(_sm.ChasingState);
         }
 
-        if (_sm.isAlerted && !_sm.isAnNPC && _sm.playerObject != null)
-            _sm.ChangeState(_sm.chasingState);
-        else if (_sm.isAlerted && _sm.isAnNPC)// && _sm.CheckPlayerContact(48, 1, 30))
-            _sm.ChangeState(_sm.fleeingState);
+        if (_sm.IsAlerted && !_sm.isAnNPC && _sm.PlayerObject != null)
+            _sm.ChangeState(_sm.ChasingState);
+        else if (_sm.IsAlerted && _sm.isAnNPC)// && _sm.CheckPlayerContact(48, 1, 30))
+            _sm.ChangeState(_sm.FleeingState);
     }
 
     public override void UpdatePhysics()
     {
         base.UpdatePhysics();
-        if (timerEnded == false && _sm.aIPath.reachedEndOfPath)
+        if (timerEnded == false && _sm.AIPath.reachedEndOfPath)
         {
             _sm.roamingInterval -= 1;
         }
@@ -49,9 +49,9 @@ public class EnemyRoaming : BaseState
             timerEnded = true;
         }
 
-        if (timerEnded && _sm.aIPath.reachedEndOfPath)
+        if (timerEnded && _sm.AIPath.reachedEndOfPath)
         {
-            _sm.aIDest.target.position = GetRoamingPosition();
+            _sm.AIDest.target.position = GetRoamingPosition();
             _sm.roamingInterval = 60f;
             timerEnded = false;
         }
@@ -59,7 +59,7 @@ public class EnemyRoaming : BaseState
 
     private Vector3 GetRoamingPosition()
     {
-        return _sm.startingPosition + Random.insideUnitSphere * _sm.roamRadius;
+        return _sm.StartingPosition + Random.insideUnitSphere * _sm.roamRadius;
     }
 
 }

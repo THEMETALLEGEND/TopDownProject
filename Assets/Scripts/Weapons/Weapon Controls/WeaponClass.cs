@@ -252,12 +252,12 @@ public class WeaponClass : MonoBehaviour
 		if (hit.collider != null)
 		{
 			// Если рейкаст столкнулся с объектом на слое "Enemies", то обрабатываем столкновение
-			var enemy = hit.collider.GetComponentInParent<TestEnemy>();
+			var enemy = hit.collider.GetComponentInParent<EnemyClass>();
 			var enemyStates = hit.collider.GetComponentInParent<TestEnemyStates>();
 			if (enemy != null)
 			{
-				if (enemyStates.isAlerted == false)
-					enemyStates.isAlerted = true;
+				if (enemyStates.IsAlerted == false)
+					enemyStates.IsAlerted = true;
 				enemy.TakeDamage(20);
 			}
 			ParticleSystem particleSystem = hit.collider.gameObject.GetComponentInParent<ParticleSystem>();
@@ -280,7 +280,7 @@ public class WeaponClass : MonoBehaviour
 				TestEnemyStates agent = collider.GetComponent<TestEnemyStates>();
 				if (agent != null && agent != this)
 				{
-					agent.isAlerted = true;
+					agent.IsAlerted = true;
 				}
 			}
 		}

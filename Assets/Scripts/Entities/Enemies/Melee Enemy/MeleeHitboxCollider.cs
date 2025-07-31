@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MeleeHitboxCollider : MonoBehaviour
 {
-    private TestEnemy parent;
+    private EnemyClass parent;
     private void Awake()
     {
-        parent = transform.parent.GetComponent<TestEnemy>();
+        parent = transform.parent.GetComponent<EnemyClass>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -15,9 +15,9 @@ public class MeleeHitboxCollider : MonoBehaviour
         if (collision.gameObject.CompareTag("Player")) //если сталкиваемс€ с игроком (нпс дамага не наносит)
         {
             CharacterController2D player = collision.gameObject.GetComponentInParent<CharacterController2D>(); //то достаем его скрипт
-            player.TakeDamage(parent.meleeDamage); //и наху€риваем ему дамага
+            player.TakeDamage(parent.MeleeDamage); //и наху€риваем ему дамага
             player.currentSpeed = player.currentSpeed / 2;
-            parent.isDamaging = true;
+            parent.IsDamaging = true;
         }
     }
 
@@ -28,7 +28,7 @@ public class MeleeHitboxCollider : MonoBehaviour
             CharacterController2D player = collision.gameObject.GetComponent<CharacterController2D>();
             if (player != null)
                 player.currentSpeed = player.walkSpeed;
-            parent.isDamaging = false;
+            parent.IsDamaging = false;
             gameObject.SetActive(false);
         }
     }

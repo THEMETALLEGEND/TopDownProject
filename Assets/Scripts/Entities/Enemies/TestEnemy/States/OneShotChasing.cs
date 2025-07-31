@@ -15,10 +15,10 @@ public class OneShotChasing : BaseState
 	{
 		base.Enter();
 
-		if (_sm.playerObject != null)
+		if (_sm.PlayerObject != null)
 		{
-			_sm.TargetSetter(_sm.playerObject);
-			_sm.aIPath.maxSpeed = _sm.slowSpeed;
+			_sm.TargetSetter(_sm.PlayerObject);
+			_sm.AIPath.maxSpeed = _sm.slowSpeed;
 
 			_oneShot = _sm.StartCoroutine(OneShot());
 		}
@@ -43,7 +43,7 @@ public class OneShotChasing : BaseState
 
 	private void Shoot()
 	{
-		Vector2 direction = (_sm.playerObject.transform.position - _sm.enemyObject.transform.position).normalized; // Вычисляем вектор направления от врага до игрока
+		Vector2 direction = (_sm.PlayerObject.transform.position - _sm.EnemyObject.transform.position).normalized; // Вычисляем вектор направления от врага до игрока
 
 		float accuracy = 0.2f; // Устанавливаем точность стрельбы
 		float rand = Random.Range(-accuracy, accuracy); // Генерируем случайное смещение для направления выстрела
@@ -53,9 +53,9 @@ public class OneShotChasing : BaseState
 
 		// Вычисляем позицию, в которой нужно создать пулю, немного впереди от врага.
 		Vector2 firePointOffset = newDirection * 3.5f;
-		Vector3 position = new Vector3(_sm.enemyObject.transform.position.x + firePointOffset.x, _sm.enemyObject.transform.position.y + firePointOffset.y, 0f); //явное преобразование в vector3 с добавлением пустой z координаты
+		Vector3 position = new Vector3(_sm.EnemyObject.transform.position.x + firePointOffset.x, _sm.EnemyObject.transform.position.y + firePointOffset.y, 0f); //явное преобразование в vector3 с добавлением пустой z координаты
 
-		GameObject bullet = Object.Instantiate(_sm.bulletPrefab, position, Quaternion.identity); // Создаем экземпляр префаба пули в позиции врага и с нулевым поворотом
+		GameObject bullet = Object.Instantiate(_sm.BulletPrefab, position, Quaternion.identity); // Создаем экземпляр префаба пули в позиции врага и с нулевым поворотом
 		Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>(); // Получаем ссылку на Rigidbody2D экземпляра пули
 		bulletRigidbody.AddForce(direction * _sm.shootingBulletSpeed, ForceMode2D.Impulse); // Применяем силу в направлении игрока, используя вычисленный вектор направления и мощность силы 20
 	}
@@ -69,10 +69,10 @@ public class OneShotChasing : BaseState
 
 
 		if (!_sm.CheckPlayerInRange(_sm.chasingPlayerDistanceExit)) //если дальше указанного значения
-			stateMachine.ChangeState(_sm.roamingState);
+			stateMachine.ChangeState(_sm.RoamingState);
 
 		if (_sm.CheckPlayerContact(100, 5, 30)) //если ближе указанного значения
-			stateMachine.ChangeState(_sm.oneShotShootingState);
+			stateMachine.ChangeState(_sm.OneShotShootingState);
 	}
 
 	public override void Exit()

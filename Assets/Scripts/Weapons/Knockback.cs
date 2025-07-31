@@ -21,7 +21,7 @@ public class Knockback : MonoBehaviour
         if (collision.tag == "Enemy")
         {
             TestEnemyStates _sm = collision.GetComponent<TestEnemyStates>();
-            _sm.ChangeState(_sm.stunnedState);
+            _sm.ChangeState(_sm.StunnedState);
             Rigidbody2D enemyRB = collision.GetComponent<Rigidbody2D>(); // получаем Rigidbody2D противника
             Vector2 playerToMouse = mousePos - (Vector2)transform.position; // вектор от игрока до курсора мыши
 

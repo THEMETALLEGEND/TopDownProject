@@ -17,8 +17,8 @@ public class EnemyStunned : BaseState
     {
         base.Enter();
 
-        _sm.aIDest.enabled = false;
-        _sm.aIPath.canMove = false;
+        _sm.AIDest.enabled = false;
+        _sm.AIPath.canMove = false;
         stunnedCoroutine = _sm.StartCoroutine(StunnedForSeconds());
     }
 
@@ -26,16 +26,16 @@ public class EnemyStunned : BaseState
     {
         yield return new WaitForSeconds(1);
         if(_sm.isAnNPC)
-            _sm.ChangeState(_sm.fleeingState);
+            _sm.ChangeState(_sm.FleeingState);
         else
-            _sm.ChangeState(_sm.chasingState);
+            _sm.ChangeState(_sm.ChasingState);
     }
 
     public override void Exit()
     {
         base.Exit();
-        _sm.aIDest.enabled = true; 
-        _sm.aIPath.canMove = true;
+        _sm.AIDest.enabled = true; 
+        _sm.AIPath.canMove = true;
         _sm.StopCoroutine(StunnedForSeconds());
         stunnedCoroutine = null;
     }

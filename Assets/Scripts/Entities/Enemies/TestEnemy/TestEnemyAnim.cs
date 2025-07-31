@@ -5,7 +5,7 @@ using Pathfinding;
 
 public class TestEnemyAnim : MonoBehaviour
 {
-    private TestEnemy testEnemy;
+    private EnemyClass enemyClass;
     private Rigidbody2D rb;
     private float animVelocity;
     private Animator animator;
@@ -22,7 +22,7 @@ public class TestEnemyAnim : MonoBehaviour
 
     private void Awake()
     {
-        testEnemy = GetComponent<TestEnemy>();
+        enemyClass = GetComponent<EnemyClass>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         aIPath = GetComponent<AIPath>();

@@ -1,49 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using Configs;
+using Entities.Enemies.TestEnemy.States;
 using UnityEngine;
 using Pathfinding;
 
 public class TestEnemyStates : StateMachine
 {
 	//-------STATES--------
-	[HideInInspector] public EnemyWaiting waitingState;
-	[HideInInspector] public EnemyRoaming roamingState;
-	[HideInInspector] public EnemyPathMoving pathMovingState;
-	[HideInInspector] public EnemyChasing chasingState;
-	[HideInInspector] public EnemyShooting shootingState;
-	[HideInInspector] public EnemyHitting hittingState;
-	[HideInInspector] public EnemyFleeing fleeingState;
-	[HideInInspector] public EnemyAfraid afraidState;
-	[HideInInspector] public EnemyStunned stunnedState;
-	[HideInInspector] public OneShotChasing oneShotChasingState;
-	[HideInInspector] public OneShotShooting oneShotShootingState;
+	[HideInInspector] public EnemyWaiting WaitingState;
+	[HideInInspector] public EnemyRoaming RoamingState;
+	[HideInInspector] public EnemyPathMoving PathMovingState;
+	[HideInInspector] public EnemyInteraction InteractionState;
+	[HideInInspector] public EnemyChasing ChasingState;
+	[HideInInspector] public EnemyShooting ShootingState;
+	[HideInInspector] public EnemyHitting HittingState;
+	[HideInInspector] public EnemyFleeing FleeingState;
+	[HideInInspector] public EnemyAfraid AfraidState;
+	[HideInInspector] public EnemyStunned StunnedState;
+	[HideInInspector] public OneShotChasing OneShotChasingState;
+	[HideInInspector] public OneShotShooting OneShotShootingState;
 
 	//-------SCRIPTS--------
-	[HideInInspector] public TestEnemy testEnemy;
+	[HideInInspector] public EnemyClass EnemyClass;
 
 	//-------PATHFINDING A*--------
-	[HideInInspector] public AIPath aIPath;
-	[HideInInspector] public AIDestinationSetter aIDest;
+	[HideInInspector] public AIPath AIPath;
+	[HideInInspector] public AIDestinationSetter AIDest;
 
 	//-------COMPONENTS--------
-	[HideInInspector] public Vector3 startingPosition;
-	[HideInInspector] public GameObject playerObject;
-	[HideInInspector] public Animator animator;
-	[HideInInspector] public Transform target;
-	[HideInInspector] public GameObject enemyObject;
-	[HideInInspector] public Rigidbody2D rb;
-	[HideInInspector] public GameObject model;
-	[HideInInspector] public SpriteRenderer spriteRenderer;
-	[HideInInspector] public PlayerRaycast playerRaycast;
-	[HideInInspector] public GameObject hitbox;
+	[HideInInspector] public Vector3 StartingPosition;
+	[HideInInspector] public GameObject PlayerObject;
+	[HideInInspector] public Animator Animator;
+	[HideInInspector] public Transform Target;
+	[HideInInspector] public GameObject EnemyObject;
+	[HideInInspector] public Rigidbody2D Rigidbody;
+	[HideInInspector] public GameObject Model;
+	[HideInInspector] public SpriteRenderer SpriteRenderer;
+	[HideInInspector] public PlayerRaycast PlayerRaycast;
+	[HideInInspector] public GameObject Hitbox;
 
 	//-------LOGIC---------------
-	public GameObject pointTarget;
-	public GameObject bulletPrefab;
-	[HideInInspector] public bool isAlerted = false;
-	[HideInInspector] public bool isAfraid = false;
-	public float alertRadius = 10f;
+	public GameObject PointTarget;
+	public GameObject BulletPrefab;
+	[HideInInspector] public bool IsAlerted = false;
+	[HideInInspector] public bool IsAfraid = false;
+	public float AlertRadius = 10f;
 
 	//-------METHODS--------------
 	[HideInInspector] public Stack<BaseState> stateStack = new Stack<BaseState>();
@@ -99,6 +101,9 @@ public class TestEnemyStates : StateMachine
 	
 	[Header("Path Moving State")]
 	public PathConfig pathConfig;
+	
+	[Header("Slots")]
+	public SlotConfig slotConfig;
 
 	[Header("One Shot")]
 	public float oneShotTiming = 2f;
@@ -113,35 +118,36 @@ public class TestEnemyStates : StateMachine
 
 	public void Awake()
 	{
-		aIPath = GetComponent<AIPath>();
-		aIDest = GetComponent<AIDestinationSetter>();
-		rb = GetComponent<Rigidbody2D>();
-		enemyObject = gameObject;
-		//playerObject = GameObject.Find("Player");
-		//playerRaycast = playerObject.GetComponent<PlayerRaycast>();
-		target = aIDest.target;
-		pointTarget = transform.parent.GetChild(1).gameObject; //поиск пустого ГО к которому идет враг всегда - так называемая цель
-		hitbox = transform.GetChild(1).gameObject;
-		animator = GetComponent<Animator>();
-		model = transform.GetChild(0).gameObject;
-		spriteRenderer = model.GetComponent<SpriteRenderer>();
-		testEnemy = GetComponent<TestEnemy>();
-		waitingState = new EnemyWaiting(this); //присваивание состояний к переменным с этой стейт машиной
-		roamingState = new EnemyRoaming(this);
-		pathMovingState = new EnemyPathMoving(this, pathConfig);
-		chasingState = new EnemyChasing(this);
-		shootingState = new EnemyShooting(this);
-		hittingState = new EnemyHitting(this);
-		fleeingState = new EnemyFleeing(this);
-		afraidState = new EnemyAfraid(this);
-		stunnedState = new EnemyStunned(this);
-		oneShotChasingState = new OneShotChasing(this);
-		oneShotShootingState = new OneShotShooting(this);
-		GetGameObject(enemyObject);
+		AIPath = GetComponent<AIPath>();
+		AIDest = GetComponent<AIDestinationSetter>();
+		Rigidbody = GetComponent<Rigidbody2D>();
+		EnemyObject = gameObject;
+		//PlayerObject = GameObject.Find("Player");
+		//PlayerRaycast = PlayerObject.GetComponent<PlayerRaycast>();
+		Target = AIDest.target;
+		PointTarget = transform.parent.GetChild(1).gameObject; //поиск пустого ГО к которому идет враг всегда - так называемая цель
+		Hitbox = transform.GetChild(1).gameObject;
+		Animator = GetComponent<Animator>();
+		Model = transform.GetChild(0).gameObject;
+		SpriteRenderer = Model.GetComponent<SpriteRenderer>();
+		EnemyClass = GetComponent<EnemyClass>();
+		WaitingState = new EnemyWaiting(this); //присваивание состояний к переменным с этой стейт машиной
+		RoamingState = new EnemyRoaming(this);
+		PathMovingState = new EnemyPathMoving(this, pathConfig);
+		InteractionState = new EnemyInteraction(this, slotConfig);
+		ChasingState = new EnemyChasing(this);
+		ShootingState = new EnemyShooting(this);
+		HittingState = new EnemyHitting(this);
+		FleeingState = new EnemyFleeing(this);
+		AfraidState = new EnemyAfraid(this);
+		StunnedState = new EnemyStunned(this);
+		OneShotChasingState = new OneShotChasing(this);
+		OneShotShootingState = new OneShotShooting(this);
+		GetGameObject(EnemyObject);
 
 		if (isMelee)
 			defaultSpeed = meleeSpeed;
-		aIPath.maxSpeed = defaultSpeed;
+		AIPath.maxSpeed = defaultSpeed;
 	}
 
 	public override void ChangeState(BaseState newState)
@@ -158,7 +164,7 @@ public class TestEnemyStates : StateMachine
 
 	protected override BaseState GetInitialState() //начальное состояние в виде состояния ожидания
 	{
-		return pathMovingState;
+		return InteractionState;
 	}
 
 	public bool CheckPlayerContact(int rayCount, int playerRayCount, float rayLength)
@@ -211,13 +217,13 @@ public class TestEnemyStates : StateMachine
 		if (value)
 		{
 			// Оповещаем всех агентов в радиусе оповещения
-			Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, alertRadius);
+			Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, AlertRadius);
 			foreach (Collider2D collider in colliders)
 			{
 				TestEnemyStates agent = collider.GetComponent<TestEnemyStates>();
 				if (agent != null && agent != this)
 				{
-					agent.isAlerted = true;
+					agent.IsAlerted = true;
 				}
 			}
 		}
@@ -226,9 +232,9 @@ public class TestEnemyStates : StateMachine
 
 	public bool CheckPlayerInRange(float alertDistance)     // метод проверяющий расстояние до игрока с кастомной переменной
 	{
-		if (playerObject != null)
+		if (PlayerObject != null)
 		{
-			float distance = Vector3.Distance(enemyObject.transform.position, playerObject.transform.position); //проверка дистанции от объекта а до б
+			float distance = Vector3.Distance(EnemyObject.transform.position, PlayerObject.transform.position); //проверка дистанции от объекта а до б
 			if (distance <= alertDistance)
 				return true;
 			else
@@ -242,7 +248,7 @@ public class TestEnemyStates : StateMachine
 
 	public void TargetSetter(GameObject newTarget)
 	{
-		aIDest.target = newTarget.transform;
+		AIDest.target = newTarget.transform;
 	}
 
 	public void DiceMethod(float successChance, Action methodToRun) //метод который принимает шанс выполнения метода и при успехе выполняет его.

@@ -17,11 +17,11 @@ public class EnemyShooting : BaseState
     {
         base.Enter();
 
-        //_sm.aIPath.canMove = false;
-        Vector2 direction = (_sm.playerObject.transform.position - _sm.enemyObject.transform.position).normalized;
-        _sm.pointTarget.transform.position = _sm.enemyObject.transform.position + (new Vector3(direction.x, direction.y, 0f) * 2f); //ставим пустое ГО под ноги агенту но немного вперед в сторону игрока чтобы он
+        //_sm.AIPath.canMove = false;
+        Vector2 direction = (_sm.PlayerObject.transform.position - _sm.EnemyObject.transform.position).normalized;
+        _sm.PointTarget.transform.position = _sm.EnemyObject.transform.position + (new Vector3(direction.x, direction.y, 0f) * 2f); //ставим пустое ГО под ноги агенту но немного вперед в сторону игрока чтобы он
                                                                                                                                     //остановился и обнулил desiredVelocity и все еще был повернут к игроку лицом
-        _sm.TargetSetter(_sm.pointTarget);
+        _sm.TargetSetter(_sm.PointTarget);
 
         _shootBurstCoroutine = _sm.StartCoroutine(ShootBurst()); //назначаем корутину и вызываем ее
     }
@@ -31,7 +31,7 @@ public class EnemyShooting : BaseState
         base.UpdateLogic();
 
         if (!_sm.CheckPlayerInRange(_sm.shootingPlayerDistanceExit)) //если дальше указанного значения
-            stateMachine.ChangeState(_sm.chasingState);
+            stateMachine.ChangeState(_sm.ChasingState);
 
     }
 
@@ -42,7 +42,7 @@ public class EnemyShooting : BaseState
             // проверяем, сталкивается ли агент с лучом игрока
             if (!_sm.CheckPlayerContact(48, 1, 30))
             {
-                stateMachine.ChangeState(_sm.chasingState);
+                stateMachine.ChangeState(_sm.ChasingState);
                 yield break;
             }
 
@@ -61,7 +61,7 @@ public class EnemyShooting : BaseState
 
     private void Shoot()
     {
-        Vector2 direction = (_sm.playerObject.transform.position - _sm.enemyObject.transform.position).normalized; // Вычисляем вектор направления от врага до игрока
+        Vector2 direction = (_sm.PlayerObject.transform.position - _sm.EnemyObject.transform.position).normalized; // Вычисляем вектор направления от врага до игрока
 
         float accuracy = 0.2f; // Устанавливаем точность стрельбы
         float rand = Random.Range(-accuracy, accuracy); // Генерируем случайное смещение для направления выстрела
@@ -71,17 +71,17 @@ public class EnemyShooting : BaseState
 
         // Вычисляем позицию, в которой нужно создать пулю, немного впереди от врага.
         Vector2 firePointOffset = newDirection * 3.5f; 
-        Vector3 position = new Vector3(_sm.enemyObject.transform.position.x + firePointOffset.x, _sm.enemyObject.transform.position.y + firePointOffset.y, 0f); //явное преобразование в vector3 с добавлением пустой z координаты
+        Vector3 position = new Vector3(_sm.EnemyObject.transform.position.x + firePointOffset.x, _sm.EnemyObject.transform.position.y + firePointOffset.y, 0f); //явное преобразование в vector3 с добавлением пустой z координаты
 
-        GameObject bullet = Object.Instantiate(_sm.bulletPrefab, position, Quaternion.identity); // Создаем экземпляр префаба пули в позиции врага и с нулевым поворотом
+        GameObject bullet = Object.Instantiate(_sm.BulletPrefab, position, Quaternion.identity); // Создаем экземпляр префаба пули в позиции врага и с нулевым поворотом
         Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>(); // Получаем ссылку на Rigidbody2D экземпляра пули
         bulletRigidbody.AddForce(direction * _sm.shootingBulletSpeed, ForceMode2D.Impulse); // Применяем силу в направлении игрока, используя вычисленный вектор направления и мощность силы 20
     }
 
     private void Dodge()
     {
-        _sm.aIPath.maxSpeed = _sm.dodgeSpeed; //на время доджа сильно увеличиваем скорость
-        Vector2 direction = (_sm.playerObject.transform.position - _sm.enemyObject.transform.position).normalized; //высчитываем нормализованный вектор от агента до игрока
+        _sm.AIPath.maxSpeed = _sm.dodgeSpeed; //на время доджа сильно увеличиваем скорость
+        Vector2 direction = (_sm.PlayerObject.transform.position - _sm.EnemyObject.transform.position).normalized; //высчитываем нормализованный вектор от агента до игрока
         Vector2 perpendicularVector = new Vector2(direction.y, -direction.x); //высчитываем вектор перпендикулярный вектору выше
 
         int dodgeDirectionDecision = Random.Range(0, 2); //рандомно решаем бежать влево или вправо
@@ -95,7 +95,7 @@ public class EnemyShooting : BaseState
         }
 
         Vector3 dodgePoint = perpendicularVector * _sm.dodgeRandom; //ставим точку на перпендикулярный вектор
-        _sm.pointTarget.transform.position = _sm.enemyObject.transform.position + dodgePoint; //ставим таргет ГО на ранд точку перпендикулярного вектора относительно себя
+        _sm.PointTarget.transform.position = _sm.EnemyObject.transform.position + dodgePoint; //ставим таргет ГО на ранд точку перпендикулярного вектора относительно себя
     }
 
     public override void Exit()

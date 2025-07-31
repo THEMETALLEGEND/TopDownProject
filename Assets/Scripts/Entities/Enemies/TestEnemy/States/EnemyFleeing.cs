@@ -25,11 +25,11 @@ public class EnemyFleeing : BaseState
     public override void Enter()
     {
         base.Enter();
-        _sm.isAlerted = true;
+        _sm.IsAlerted = true;
         player = GameObject.Find("Player");
-        _sm.aIPath.maxSpeed = _sm.fleeingSpeed; //назначаем скорость больше дефолтной на момент отступления
+        _sm.AIPath.maxSpeed = _sm.fleeingSpeed; //назначаем скорость больше дефолтной на момент отступления
         //_fleeTarget = new GameObject("FleeTarget"); // создаем пустой объект-цель
-        _sm.TargetSetter(_sm.pointTarget); // устанавливаем пустой объект-цель в качестве цели агента
+        _sm.TargetSetter(_sm.PointTarget); // устанавливаем пустой объект-цель в качестве цели агента
     }
 
 
@@ -39,21 +39,21 @@ public class EnemyFleeing : BaseState
         base.UpdateLogic();
 
 
-        if (!_sm.isAlerted)
-            _sm.ChangeState(_sm.roamingState);
+        if (!_sm.IsAlerted)
+            _sm.ChangeState(_sm.RoamingState);
 
 
-        if (_sm.playerObject != null)
+        if (_sm.PlayerObject != null)
         {
-            Vector3 dir = (player.transform.position - _sm.enemyObject.transform.position).normalized; // вычисляем вектор направления от агента до цели
+            Vector3 dir = (player.transform.position - _sm.EnemyObject.transform.position).normalized; // вычисляем вектор направления от агента до цели
             Vector3 opDir = dir * -1; //обращаем этот вектор
-            targetpoint = _sm.enemyObject.transform.position + opDir * 3f; //назначаем целевую точку от агента в противоположную от игрока сторону на 3
+            targetpoint = _sm.EnemyObject.transform.position + opDir * 3f; //назначаем целевую точку от агента в противоположную от игрока сторону на 3
 
-            _sm.pointTarget.transform.position = targetpoint; // устанавливаем позицию пустого объекта-цели
+            _sm.PointTarget.transform.position = targetpoint; // устанавливаем позицию пустого объекта-цели
         }
         else
         {
-            _sm.ChangeState(_sm.roamingState);
+            _sm.ChangeState(_sm.RoamingState);
         }
 
         //если дальше указанного значения
@@ -66,7 +66,7 @@ public class EnemyFleeing : BaseState
             }
             else if (Time.time - startTime2 >= waitTime2)
             {
-                stateMachine.ChangeState(_sm.roamingState);
+                stateMachine.ChangeState(_sm.RoamingState);
             }
         }
 
@@ -78,9 +78,9 @@ public class EnemyFleeing : BaseState
             {
                 TestEnemyStates enemyStates = collider.GetComponent<TestEnemyStates>();
 
-                if (enemyStates != null && enemyStates.isAfraid)
+                if (enemyStates != null && enemyStates.IsAfraid)
                 {
-                    _sm.ChangeState(_sm.afraidState);
+                    _sm.ChangeState(_sm.AfraidState);
                 }
             }
         }
@@ -91,12 +91,12 @@ public class EnemyFleeing : BaseState
     {
         base.UpdatePhysics();
 
-        if (_sm.aIPath.velocity.magnitude <= .2f && !_sm.CheckPlayerInRange(_sm.fleeingPlayerDistanceExit))
+        if (_sm.AIPath.velocity.magnitude <= .2f && !_sm.CheckPlayerInRange(_sm.fleeingPlayerDistanceExit))
         {
-            _sm.ChangeState(_sm.roamingState);
+            _sm.ChangeState(_sm.RoamingState);
         }
 
-            if (_sm.aIDest.target != null && _sm.aIPath.velocity.magnitude <= .5f && _sm.aIPath.reachedEndOfPath) //если цель не нулл и двигаемся и достигли конца пути (aIPath.velocity.magnitude работает только в updatephysics)
+            if (_sm.AIDest.target != null && _sm.AIPath.velocity.magnitude <= .5f && _sm.AIPath.reachedEndOfPath) //если цель не нулл и двигаемся и достигли конца пути (AIPath.velocity.magnitude работает только в updatephysics)
         {
             if (!waiting) //таймер который отсчитывает секунду прежде чем уходить в состояние страха
             {
@@ -105,7 +105,7 @@ public class EnemyFleeing : BaseState
             }
             else if (Time.time - startTime >= waitTime)
             {
-                _sm.ChangeState(_sm.afraidState);
+                _sm.ChangeState(_sm.AfraidState);
             }
         }
         else
@@ -118,7 +118,7 @@ public class EnemyFleeing : BaseState
     {
         base.Exit();
 
-        _sm.isAlerted = false;
+        _sm.IsAlerted = false;
         waiting2 = false;
     }
 }

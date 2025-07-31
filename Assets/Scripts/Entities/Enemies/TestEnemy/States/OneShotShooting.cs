@@ -18,11 +18,11 @@ public class OneShotShooting : BaseState
 
 		oneShotModel = _sm.transform.GetChild(0).GetComponent<SpriteRenderer>();
 
-		if (_sm.playerObject != null)
+		if (_sm.PlayerObject != null)
 		{
 			;
-			_sm.pointTarget.transform.position = _sm.enemyObject.transform.position;
-			_sm.TargetSetter(_sm.pointTarget);
+			_sm.PointTarget.transform.position = _sm.EnemyObject.transform.position;
+			_sm.TargetSetter(_sm.PointTarget);
 
 			_oneShotAttack = _sm.StartCoroutine(OneShot());
 		}
@@ -35,7 +35,7 @@ public class OneShotShooting : BaseState
 			// проверяем, сталкивается ли агент с лучом игрока
 			if (!_sm.CheckPlayerContact(48, 1, 30))
 			{
-				stateMachine.ChangeState(_sm.chasingState);
+				stateMachine.ChangeState(_sm.ChasingState);
 				yield break;
 			}
 
@@ -48,7 +48,7 @@ public class OneShotShooting : BaseState
 
 	private void Shoot()
 	{
-		Vector2 direction = (_sm.playerObject.transform.position - _sm.enemyObject.transform.position).normalized; // Вычисляем вектор направления от врага до игрока
+		Vector2 direction = (_sm.PlayerObject.transform.position - _sm.EnemyObject.transform.position).normalized; // Вычисляем вектор направления от врага до игрока
 
 		float accuracy = 0.2f; // Устанавливаем точность стрельбы
 		float rand = Random.Range(-accuracy, accuracy); // Генерируем случайное смещение для направления выстрела
@@ -58,9 +58,9 @@ public class OneShotShooting : BaseState
 
 		// Вычисляем позицию, в которой нужно создать пулю, немного впереди от врага.
 		Vector2 firePointOffset = newDirection * 3.5f;
-		Vector3 position = new Vector3(_sm.enemyObject.transform.position.x + firePointOffset.x, _sm.enemyObject.transform.position.y + firePointOffset.y, 0f); //явное преобразование в vector3 с добавлением пустой z координаты
+		Vector3 position = new Vector3(_sm.EnemyObject.transform.position.x + firePointOffset.x, _sm.EnemyObject.transform.position.y + firePointOffset.y, 0f); //явное преобразование в vector3 с добавлением пустой z координаты
 
-		GameObject bullet = Object.Instantiate(_sm.bulletPrefab, position, Quaternion.identity); // Создаем экземпляр префаба пули в позиции врага и с нулевым поворотом
+		GameObject bullet = Object.Instantiate(_sm.BulletPrefab, position, Quaternion.identity); // Создаем экземпляр префаба пули в позиции врага и с нулевым поворотом
 		Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>(); // Получаем ссылку на Rigidbody2D экземпляра пули
 		bulletRigidbody.AddForce(direction * _sm.shootingBulletSpeed, ForceMode2D.Impulse); // Применяем силу в направлении игрока, используя вычисленный вектор направления и мощность силы 20
 	}
@@ -70,14 +70,14 @@ public class OneShotShooting : BaseState
 		base.UpdateLogic();
 
 		// Check if the player is on the right or left of the object
-		Vector3 directionToPlayer = _sm.playerObject.transform.position - _sm.transform.position;
+		Vector3 directionToPlayer = _sm.PlayerObject.transform.position - _sm.transform.position;
 		float angle = Vector3.SignedAngle(directionToPlayer, _sm.transform.right, Vector3.up);
 
 		// Determine if the player is on the right or left
 		bool isOnRightSide = angle >= 0 && angle <= 179;
 		bool isOnLeftSide = angle >= 180 && angle <= 359;
 
-		// Flip the object's model based on player position
+		// Flip the object's Model based on player position
 		if (isOnRightSide)
 		{
 			oneShotModel.flipX = false; // Model is normal
@@ -88,7 +88,7 @@ public class OneShotShooting : BaseState
 		}
 
 		if (!_sm.CheckPlayerContact(100, 5, 30)) //если дальше указанного значения
-			stateMachine.ChangeState(_sm.oneShotChasingState);
+			stateMachine.ChangeState(_sm.OneShotChasingState);
 	}
 
 	public override void Exit()

@@ -14,10 +14,10 @@ public class EnemyChasing : BaseState
     {
         base.Enter();
 
-        if (_sm.playerObject != null)
+        if (_sm.PlayerObject != null)
         {
-            _sm.TargetSetter(_sm.playerObject);
-            _sm.aIPath.maxSpeed = _sm.defaultSpeed;
+            _sm.TargetSetter(_sm.PlayerObject);
+            _sm.AIPath.maxSpeed = _sm.defaultSpeed;
         }
     }
 
@@ -28,18 +28,18 @@ public class EnemyChasing : BaseState
         _sm.SetAlerted(true);
 
 
-        /*if (_sm.testEnemy.isDamaging)
-            _sm.aIPath.maxSpeed = _sm.defaultSpeed / 3;
-        else if (!_sm.testEnemy.isDamaging)
-            _sm.aIPath.maxSpeed = _sm.defaultSpeed;*/
+        /*if (_sm.EnemyClass.IsDamaging)
+            _sm.AIPath.maxSpeed = _sm.defaultSpeed / 3;
+        else if (!_sm.EnemyClass.IsDamaging)
+            _sm.AIPath.maxSpeed = _sm.defaultSpeed;*/
 
         if (!_sm.CheckPlayerInRange(_sm.chasingPlayerDistanceExit)) //���� ������ ���������� ��������
-            stateMachine.ChangeState(_sm.pathMovingState);
+            stateMachine.ChangeState(_sm.PathMovingState);
 
         if (_sm.CheckPlayerContact(100, 3, 30) && !_sm.isMelee) //���� ����� ���������� �������� � �� �������
-            stateMachine.ChangeState(_sm.shootingState);
+            stateMachine.ChangeState(_sm.ShootingState);
 
-        if (_sm.testEnemy.isDamaging && _sm.isMelee) //���� �������� ������ � �������
-            stateMachine.ChangeState(_sm.hittingState);
+        if (_sm.EnemyClass.IsDamaging && _sm.isMelee) //���� �������� ������ � �������
+            stateMachine.ChangeState(_sm.HittingState);
     }
 }

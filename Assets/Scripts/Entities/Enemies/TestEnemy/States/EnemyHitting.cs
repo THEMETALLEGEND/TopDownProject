@@ -16,18 +16,18 @@ public class EnemyHitting : BaseState
     {
         base.Enter();
 
-        _sm.TargetSetter(_sm.playerObject);
-        _sm.aIPath.maxSpeed = _sm.defaultSpeed / 3;
+        _sm.TargetSetter(_sm.PlayerObject);
+        _sm.AIPath.maxSpeed = _sm.defaultSpeed / 3;
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
 
-        if (!_sm.testEnemy.isDamaging)
-            stateMachine.ChangeState(_sm.chasingState);
-        else if (_sm.playerObject == null)
-            stateMachine.ChangeState(_sm.roamingState);
+        if (!_sm.EnemyClass.IsDamaging)
+            stateMachine.ChangeState(_sm.ChasingState);
+        else if (_sm.PlayerObject == null)
+            stateMachine.ChangeState(_sm.RoamingState);
     }
 
     public override void Exit()
