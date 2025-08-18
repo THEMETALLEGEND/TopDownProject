@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Configs;
+using Waypoints;
 using Entities.Enemies.TestEnemy.States;
 using UnityEngine;
 using Pathfinding;
@@ -102,8 +103,8 @@ public class TestEnemyStates : StateMachine
 	[Header("Path Moving State")]
 	public PathConfig pathConfig;
 	
-	[Header("Slots")]
-	public SlotConfig slotConfig;
+	[Header("Waypoint Controller")]
+	public SlotController slotController;
 
 	[Header("One Shot")]
 	public float oneShotTiming = 2f;
@@ -134,7 +135,7 @@ public class TestEnemyStates : StateMachine
 		WaitingState = new EnemyWaiting(this); //присваивание состояний к переменным с этой стейт машиной
 		RoamingState = new EnemyRoaming(this);
 		PathMovingState = new EnemyPathMoving(this, pathConfig);
-		InteractionState = new EnemyInteraction(this, slotConfig);
+		InteractionState = new EnemyInteraction(this, slotController);
 		ChasingState = new EnemyChasing(this);
 		ShootingState = new EnemyShooting(this);
 		HittingState = new EnemyHitting(this);
