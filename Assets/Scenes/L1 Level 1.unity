@@ -2815,7 +2815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  uniqueID: 5366579770696824121
+  uniqueID: 1789219582891748981
   wallHeight: 1
 --- !u!114 &539735252
 MonoBehaviour:
@@ -6967,7 +6967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAAAoIeyqcwwevgIAAL4FAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFtVO9v2jAQ/VeQP68oSYG0+7YBpZvUFpVN/TD6wcQXYuHYkX8UaMX/vrOTkJRNqoT77t7dvedzPgiXpoLMKr3QnD0oBuTrgPgz+TLogvdwoFslV/wd2pwXzmzhk2jIeaaWK8RjTzOqBKt59k1uhU+OEHSS50qXc7aFqTLWIJxTYQBDWlnPlgh9DMgBf65uPeWIpyT1p3c83UaDEx4zkBZ0LzVObofp5DZNxw0lHg1vRlGUXDfEmudkJmhZAfMiOnoyiofRTcvEUteTkC5RZpMZD0epb6yE4KYZk9hjFWyY0so4FIkJjFOUHWaLh2mCSAF8W1jfpc9/ynMDtrFF0+OMazSwLky+q9rVkppdPeUbFc63Ssb1ZHXRh3/iV3EI51qV923fOPI9bMGz3TM9ZtTYnu19eNabPZi1p2JHNwJeCpCPaqGVkwyDVjtPdQaSWffvWdq0gGzX4fWoF6CrOvfbW27v2Gs4BfWHqeDlxoeGoxpYCRUsD6sBGu/nBw4cFsc0JRD1U/w28Itu+xvWBO64NhZDjUrpx9sop30qmQfPvBpnp0pLCHAzdAWSCntcYhl7eYUXsV7bi8gd9W+pad7E2idyQQlwlx9FF6Gl2neXZeCnK6ul4tKugOqs6NUzhdo/gCmenBVcQqfIBx7RxKmSsl4/8x/ayumcZj2ahYN1GmbU0vAOcCbcEtanoqGBIZ0QfiGDCl/8D6rwf6/e5IJiXxFg8qhkeEGffl/9ImwdZ5/XnOTpZMPGWUzzPMryJL4aUTYep0k+mlxv2E0yJuEdcImeU7GsTWuuCjdIdlok7nz7uRssNK3Cy2Oa7hf8vVS96+cyV6tMA8inusJZLGhsgt8JNmccZa7AWi7D7pGPNREq2wFbnwutg7Hzg9V03VVZk4q/KeuRNZmG79uaePj8rpYa3jjsffO22Imc/gJQSwMEFAAACAgAACgh7K7+k5ptAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSM7TQUVBKL0osyCgGihiCOKWZKSB2tFKauVlSimmyYWJamkFympGhrkliiqmpuVGaiZlxUoqFkalSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAACgh7KpzDB6+AgAAvgUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAACgh7K7+k5ptAAAAeAAAAAkAJAAAAAAAAAAAAAAACwMAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAADDAwAAAAA=
+    dataString: UEsDBBQAAAgIAAAYIeyqcwwevgIAAL4FAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFtVO9v2jAQ/VeQP68oSYG0+7YBpZvUFpVN/TD6wcQXYuHYkX8UaMX/vrOTkJRNqoT77t7dvedzPgiXpoLMKr3QnD0oBuTrgPgz+TLogvdwoFslV/wd2pwXzmzhk2jIeaaWK8RjTzOqBKt59k1uhU+OEHSS50qXc7aFqTLWIJxTYQBDWlnPlgh9DMgBf65uPeWIpyT1p3c83UaDEx4zkBZ0LzVObofp5DZNxw0lHg1vRlGUXDfEmudkJmhZAfMiOnoyiofRTcvEUteTkC5RZpMZD0epb6yE4KYZk9hjFWyY0so4FIkJjFOUHWaLh2mCSAF8W1jfpc9/ynMDtrFF0+OMazSwLky+q9rVkppdPeUbFc63Ssb1ZHXRh3/iV3EI51qV923fOPI9bMGz3TM9ZtTYnu19eNabPZi1p2JHNwJeCpCPaqGVkwyDVjtPdQaSWffvWdq0gGzX4fWoF6CrOvfbW27v2Gs4BfWHqeDlxoeGoxpYCRUsD6sBGu/nBw4cFsc0JRD1U/w28Itu+xvWBO64NhZDjUrpx9sop30qmQfPvBpnp0pLCHAzdAWSCntcYhl7eYUXsV7bi8gd9W+pad7E2idyQQlwlx9FF6Gl2neXZeCnK6ul4tKugOqs6NUzhdo/gCmenBVcQqfIBx7RxKmSsl4/8x/ayumcZj2ahYN1GmbU0vAOcCbcEtanoqGBIZ0QfiGDCl/8D6rwf6/e5IJiXxFg8qhkeEGffl/9ImwdZ5/XnOTpZMPGWUzzPMryJL4aUTYep0k+mlxv2E0yJuEdcImeU7GsTWuuCjdIdlok7nz7uRssNK3Cy2Oa7hf8vVS96+cyV6tMA8inusJZLGhsgt8JNmccZa7AWi7D7pGPNREq2wFbnwutg7Hzg9V03VVZk4q/KeuRNZmG79uaePj8rpYa3jjsffO22Imc/gJQSwMEFAAACAgAABgh7K7+k5ptAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSM7TQUVBKL0osyCgGihiCOKWZKSB2tFKauVlSimmyYWJamkFympGhrkliiqmpuVGaiZlxUoqFkalSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAABgh7KpzDB6+AgAAvgUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAABgh7K7+k5ptAAAAeAAAAAkAJAAAAAAAAAAAAAAACwMAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAADDAwAAAAA=
     upgradeData: 
     file_cachedStartup: {fileID: 4900000, guid: 379cdda6a664a234eb8d357e709ec8b1,
       type: 3}
@@ -30385,10 +30385,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 50
-  target: {fileID: 0}
-  meleeDamage: 1
-  isDamaging: 0
-  value: 50
+  Target: {fileID: 0}
+  MeleeDamage: 1
+  IsDamaging: 0
+  _value: 0
 --- !u!114 &6581854852324532862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30580,25 +30580,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 767d783f39f4af54ea133328fef28157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testEnemy: {fileID: 0}
-  aIPath: {fileID: 0}
-  aIDest: {fileID: 0}
-  startingPosition: {x: 0, y: 0, z: 0}
-  playerObject: {fileID: 0}
-  animator: {fileID: 0}
-  target: {fileID: 0}
-  enemyObject: {fileID: 0}
-  rb: {fileID: 0}
-  model: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  playerRaycast: {fileID: 0}
-  hitbox: {fileID: 0}
-  pointTarget: {fileID: 981797830019617798}
-  bulletPrefab: {fileID: 8895918990583274388, guid: bb10998cdecf6924a93ed9603f030122,
-    type: 3}
-  isAlerted: 0
-  isAfraid: 0
-  alertRadius: 10
+  EnemyClass: {fileID: 0}
+  AIPath: {fileID: 0}
+  AIDest: {fileID: 0}
+  StartingPosition: {x: 0, y: 0, z: 0}
+  PlayerObject: {fileID: 0}
+  Animator: {fileID: 0}
+  Target: {fileID: 0}
+  EnemyObject: {fileID: 0}
+  Rigidbody: {fileID: 0}
+  Model: {fileID: 0}
+  SpriteRenderer: {fileID: 0}
+  PlayerRaycast: {fileID: 0}
+  Hitbox: {fileID: 0}
+  PointTarget: {fileID: 0}
+  BulletPrefab: {fileID: 0}
+  IsAlerted: 0
+  IsAfraid: 0
+  AlertRadius: 10
   showDebugGizmos: 0
   defaultSpeed: 12
   slowSpeed: 8
@@ -30629,6 +30628,8 @@ MonoBehaviour:
   fleeingTime: 10
   afraidPlayerDistanceExit: 20
   playerRaycastHit: 0
+  pathConfig: []
+  slotConfig: {fileID: 0}
   oneShotTiming: 2
   obstacleLayer:
     serializedVersion: 2

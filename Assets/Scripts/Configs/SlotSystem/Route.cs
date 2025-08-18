@@ -6,7 +6,7 @@ namespace Waypoints
 {
     public class Route : MonoBehaviour
     {
-        [SerializeField] private List<Waypoint> _waypoints = new List<Waypoint>();
+        [SerializeField] private List<Waypoint> _waypoints = new();
         [SerializeField] private bool _isLooped;
         [SerializeField] private bool _isLoopedMirrored;
         [SerializeField] private bool _randomiseWaypoints;

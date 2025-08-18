@@ -162,7 +162,11 @@ public class TestEnemyStates : StateMachine
 
 	protected override BaseState GetInitialState() //начальное состояние в виде состояния ожидания
 	{
-		return InteractionState;
+		if (true)
+		{
+			return PathMovingState;
+		}
+		return RoamingState;
 	}
 
 	public bool CheckPlayerContact(int rayCount, int playerRayCount, float rayLength)
