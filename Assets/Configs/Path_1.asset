@@ -13,8 +13,15 @@ MonoBehaviour:
   m_Name: Path_1
   m_EditorClassIdentifier: 
   points:
-  - {x: -181.3, y: -10.099998, z: 1.3456726}
-  - {x: -144.14626, y: -17.4, z: 1.3456726}
-  - {x: -180.9, y: -24.7, z: 1.3456726}
-  - {x: -181.09999, y: -47.4, z: 1.3456721}
-  - {x: -149.8, y: -54.5, z: 1.3456726}
+  - Position: {x: -181.3, y: -10.099998, z: 1.3456726}
+    StandDelay: 30
+  - Position: {x: -144.14626, y: -17.4, z: 1.3456726}
+    StandDelay: 30
+  - Position: {x: -180.9, y: -24.7, z: 1.3456726}
+    StandDelay: 30
+  - Position: {x: -181.09999, y: -47.4, z: 1.3456721}
+    StandDelay: 30
+  - Position: {x: -149.8, y: -54.5, z: 1.3456726}
+    StandDelay: 30
+  IsCycle: 0
+  IsMirrorCycle: 0

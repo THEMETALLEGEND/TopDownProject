@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: SlotConfig
   m_EditorClassIdentifier: 
   interactionSlots:
-  - Position: {x: -170.7, y: -22.500002, z: -1.3604903}
+  - Position: {x: -181.3, y: -10.099998, z: 1.3456726}
     IsBusy: 0
-  - Position: {x: -152.59999, y: -22.500002, z: -1.3604903}
+  - Position: {x: -181.3, y: -10.099998, z: 1.3456726}
     IsBusy: 0
   - Position: {x: -152.59999, y: -39.2, z: -1.3604903}
     IsBusy: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
   - Position: {x: -107.799995, y: -38.5, z: -1.3604903}
     IsBusy: 0
   - Position: {x: -128, y: -38.5, z: -1.3604903}
-    IsBusy: 0
+    IsBusy: 1
   - Position: {x: -124.899994, y: -23.000002, z: -1.3604903}
     IsBusy: 0
   - Position: {x: -95.7, y: -34.300003, z: -1.3604903}

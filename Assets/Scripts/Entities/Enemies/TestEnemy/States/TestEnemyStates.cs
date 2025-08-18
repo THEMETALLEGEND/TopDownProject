@@ -100,7 +100,7 @@ public class TestEnemyStates : StateMachine
 	public bool playerRaycastHit;
 	
 	[Header("Path Moving State")]
-	public PathConfig pathConfig;
+	public List<PathConfig> pathConfig;
 	
 	[Header("Slots")]
 	public SlotConfig slotConfig;
@@ -164,7 +164,11 @@ public class TestEnemyStates : StateMachine
 
 	protected override BaseState GetInitialState() //начальное состояние в виде состояния ожидания
 	{
-		return InteractionState;
+		if (pathConfig != null)
+		{
+			return PathMovingState;
+		}
+		return RoamingState;
 	}
 
 	public bool CheckPlayerContact(int rayCount, int playerRayCount, float rayLength)
