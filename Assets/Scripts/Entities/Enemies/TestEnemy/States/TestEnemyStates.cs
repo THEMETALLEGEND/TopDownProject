@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Configs;
 using Waypoints;
 using Entities.Enemies.TestEnemy.States;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.Serialization;
 
 public class TestEnemyStates : StateMachine
 {
@@ -100,11 +100,8 @@ public class TestEnemyStates : StateMachine
 	[Header("Detecting")]
 	public bool playerRaycastHit;
 	
-	[Header("Path Moving State")]
-	public PathConfig pathConfig;
-	
-	[Header("Waypoint Controller")]
-	public SlotController slotController;
+	[FormerlySerializedAs("slotController")] [Header("Waypoint Controller")]
+	public PathController pathController;
 
 	[Header("One Shot")]
 	public float oneShotTiming = 2f;
@@ -134,8 +131,8 @@ public class TestEnemyStates : StateMachine
 		EnemyClass = GetComponent<EnemyClass>();
 		WaitingState = new EnemyWaiting(this); //присваивание состояний к переменным с этой стейт машиной
 		RoamingState = new EnemyRoaming(this);
-		PathMovingState = new EnemyPathMoving(this, pathConfig);
-		InteractionState = new EnemyInteraction(this, slotController);
+		PathMovingState = new EnemyPathMoving(this, pathController);
+		InteractionState = new EnemyInteraction(this, pathController);
 		ChasingState = new EnemyChasing(this);
 		ShootingState = new EnemyShooting(this);
 		HittingState = new EnemyHitting(this);

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Waypoints
 {
@@ -9,7 +10,7 @@ namespace Waypoints
         [SerializeField] private bool _isBusy = false;
         [SerializeField] private bool _multipleUses = false;
         [SerializeField] private uint _timeDelay = 0;
-        [SerializeField] private List<string> _events = new List<string>();
+        [SerializeField] private UnityEvent _events;
 
         public Vector3 Position => gameObject.transform.position;
         public bool IsBusy

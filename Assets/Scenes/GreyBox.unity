@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43369641}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.4, y: 37.5, z: 1.3456726}
+  m_LocalPosition: {x: -138.29999, y: -12.099998, z: 1.3456726}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -201,7 +201,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &119004353
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,7 +282,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &208861515 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8225785139911405210, guid: 3bff47cd748976448b3d268989040bbd,
@@ -334,7 +338,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &268966110
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,7 +437,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &321506877
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,14 +501,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 413798178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -125.2, y: -47.9, z: -1.3604903}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 495890280}
-  - {fileID: 1435855337}
   - {fileID: 481420036}
-  - {fileID: 1758680222}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -551,7 +557,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &450328938
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,12 +732,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 481420035}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 49, y: 6.8, z: 1.3456726}
+  m_LocalPosition: {x: -76.1, y: -41.4, z: 1.3456726}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 413798179}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &488717665
 GameObject:
@@ -778,7 +786,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &495890279
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,7 +813,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 495890279}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 48.9, y: 22.8, z: 1.3456726}
+  m_LocalPosition: {x: -76.2, y: -25.4, z: 1.3456726}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -857,7 +867,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &536374285
 GameObject:
   m_ObjectHideFlags: 0
@@ -2247,7 +2259,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &645104510
 GameObject:
   m_ObjectHideFlags: 0
@@ -14173,7 +14187,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &861030363
 GameObject:
   m_ObjectHideFlags: 0
@@ -14221,7 +14237,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &861041284
 GameObject:
   m_ObjectHideFlags: 0
@@ -14269,7 +14287,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &875610865
 GameObject:
   m_ObjectHideFlags: 0
@@ -14317,7 +14337,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &909362183
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14531,7 +14553,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1146503553
 GameObject:
   m_ObjectHideFlags: 0
@@ -14579,7 +14603,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1147367314
 GameObject:
   m_ObjectHideFlags: 0
@@ -14676,7 +14702,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1232003469
 GameObject:
   m_ObjectHideFlags: 0
@@ -14724,7 +14752,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1291964473
 GameObject:
   m_ObjectHideFlags: 0
@@ -14772,7 +14802,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1305933302
 GameObject:
   m_ObjectHideFlags: 0
@@ -14884,7 +14916,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1413780131
 GameObject:
   m_ObjectHideFlags: 0
@@ -14932,7 +14966,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1415528402
 GameObject:
   m_ObjectHideFlags: 0
@@ -15012,38 +15048,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
---- !u!1 &1435855336
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1435855337}
-  m_Layer: 0
-  m_Name: point_2
-  m_TagString: Untagged
-  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1435855337
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1435855336}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 40.7, y: 14.9, z: 1.3456726}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 413798179}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1456580148
 GameObject:
   m_ObjectHideFlags: 0
@@ -15210,7 +15217,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1517257491
 GameObject:
   m_ObjectHideFlags: 0
@@ -15258,7 +15267,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 1
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1518824471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15380,7 +15391,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 1
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1557792320
 GameObject:
   m_ObjectHideFlags: 0
@@ -17501,7 +17514,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1728187945
 GameObject:
   m_ObjectHideFlags: 0
@@ -17549,7 +17564,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1743180826
 GameObject:
   m_ObjectHideFlags: 0
@@ -17597,38 +17614,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
---- !u!1 &1758680221
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1758680222}
-  m_Layer: 0
-  m_Name: point_4
-  m_TagString: Untagged
-  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1758680222
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1758680221}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 56.9, y: 14.9, z: 1.3456726}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 413798179}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1787344395
 GameObject:
   m_ObjectHideFlags: 0
@@ -17652,7 +17640,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1787344395}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17712,7 +17700,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1851408112 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8225785139911405210, guid: 3bff47cd748976448b3d268989040bbd,
@@ -17816,8 +17806,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1871411191}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -124.2, y: -47.5, z: -1.3604903}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17998,7 +17988,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091989246}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.3, y: -6.9, z: 1.3456726}
+  m_LocalPosition: {x: -138.2, y: -56.5, z: 1.3456726}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18052,7 +18042,9 @@ MonoBehaviour:
   _isBusy: 0
   _multipleUses: 0
   _timeDelay: 0
-  _events: []
+  _events:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2126821819
 GameObject:
   m_ObjectHideFlags: 0

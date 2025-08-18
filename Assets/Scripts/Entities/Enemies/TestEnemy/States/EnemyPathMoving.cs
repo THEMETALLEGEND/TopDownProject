@@ -1,27 +1,22 @@
-using Configs;
-using UnityEngine;
+using Waypoints;
 
 public class EnemyPathMoving: BaseState
 {
+    private PathController _pathController;
     private TestEnemyStates _sm;
     private bool _timerEnded = false;
-    private PathConfig _pathConfig;
     private int _pointID = 0;
     
-    public EnemyPathMoving(TestEnemyStates enemyStateMachine, PathConfig pathConfig) : base("TestEnemyPathMoving", enemyStateMachine) {
+    public EnemyPathMoving(TestEnemyStates enemyStateMachine, PathController pathController) : base("TestEnemyPathMoving", enemyStateMachine) 
+    {
         _sm = (TestEnemyStates)stateMachine;
-        _pathConfig = pathConfig;
+        _pathController = pathController;
     }
 
     public override void Enter()
     {
         base.Enter();
-
-        //_sm.IsAlerted = false;
-        _sm.StartingPosition = _sm.transform.position;
-        _sm.TargetSetter(_sm.PointTarget);
-        _sm.AIDest.target.position = GetPathPoint();
-        _sm.AIPath.maxSpeed = _sm.roamingSpeed;
+        _pathController.StartRoute(_sm);
     }
 
     public override void UpdateLogic()
@@ -55,20 +50,8 @@ public class EnemyPathMoving: BaseState
 
         if (_timerEnded && _sm.AIPath.reachedEndOfPath)
         {
-            _sm.AIDest.target.position = GetPathPoint();
             _sm.roamingInterval = 60f;
             _timerEnded = false;
         }
     }
-
-    private Vector3 GetPathPoint()
-    {
-        if (_pointID == _pathConfig.points.Count)
-        {
-            _pointID = 0;
-        }
-            
-        return _pathConfig.points[_pointID++];
-    }
-
 }

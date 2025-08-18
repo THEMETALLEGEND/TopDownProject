@@ -1,31 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 
 namespace Waypoints
 {
-    public class SlotController : MonoBehaviour, IDisposable
+    public class PathController : MonoBehaviour, IDisposable
     {
-        [SerializeField] private RouteController _routeController;
-        [SerializeField] private bool _checkRoutes;
-
+        [SerializeField] private List<Route> routes = new();
+        
         private Route _currentRoute;
         private TestEnemyStates _enemyStates;
         
         private CompositeDisposable _disposable;
 
-        public void StartRoute(TestEnemyStates enemyStates)
+        public void StartRoute(TestEnemyStates enemyStates, int indexRoute = 0)
         {
+            if (routes.Count == 0)
+                return;
+            
             _enemyStates = enemyStates;
-            if (_checkRoutes)
-            {
-                CheckingRoutes();
-            }
+            _currentRoute = routes[indexRoute];
 
-            _currentRoute = _routeController.GetCurrentRoute();
             SettingInitialSettings();
             StartingMovingRoute();
+        }
 
+        public void SetRoute(Route route)
+        {
+            _currentRoute = route;
         }
 
         private void StartingMovingRoute()
@@ -45,7 +48,7 @@ namespace Waypoints
                     }
                     else
                     {
-                        _enemyStates.AIDest.target.position = _currentRoute.DespawnPoint.Position;
+                        // end path
                     }
                 }
             }).AddTo(_disposable);
@@ -53,22 +56,9 @@ namespace Waypoints
 
         private void SettingInitialSettings()
         {
-            _enemyStates.StartingPosition = _currentRoute.SpawnPoint.Position;
+            _enemyStates.StartingPosition = _currentRoute.StartWaypoint.Position;
             _enemyStates.TargetSetter(_enemyStates.PointTarget);
             _enemyStates.AIPath.maxSpeed = _enemyStates.roamingSpeed;
-        }
-
-        private void CheckingRoutes()
-        {
-            _routeController.CurrentRoute.Subscribe(_ =>
-            {
-                ChangingRoute();
-            }).AddTo(_disposable);
-        }
-
-        private void ChangingRoute()
-        {
-            
         }
 
         public void Dispose()
