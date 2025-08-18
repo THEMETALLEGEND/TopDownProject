@@ -1,5 +1,4 @@
 using System.Collections;
-using Entities.Enemies.TestEnemy.Enums;
 using UnityEngine;
 using Pathfinding;
 
@@ -10,8 +9,6 @@ public class EnemyClass : EntityClass
 	public Transform Target;
 	public float MeleeDamage = 1f;
 	public bool IsDamaging = false;
-	public EPathStates PathState => _pathState;
-
 
 	private TestEnemyStates _sm;
 	private ParticleSystem _ps;
@@ -21,8 +18,6 @@ public class EnemyClass : EntityClass
 	[SerializeField] private int _value;
 	private PlayerInventory _playerInventory;
 
-	private EPathStates _pathState;
-
 	private void Awake()
 	{
 		_sm = GetComponent<TestEnemyStates>();
@@ -31,7 +26,6 @@ public class EnemyClass : EntityClass
 		_aIPath = GetComponent<AIPath>();
 		if (_sm.isMelee)
 			_meleeCollider = transform.GetChild(3).gameObject;
-		_pathState = 0;
 	}
 
 	public override void TakeDamage(float damageAmount)
@@ -83,10 +77,5 @@ public class EnemyClass : EntityClass
 			if (_sm.isMelee)
 				_meleeCollider.SetActive(true);
 		}
-	}
-
-	public void SetPathState(EPathStates state)
-	{
-		_pathState = state;
 	}
 }
