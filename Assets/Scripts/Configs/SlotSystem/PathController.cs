@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
@@ -20,7 +19,7 @@ namespace Waypoints
         
         private bool isDelay = false;
 
-        private CompositeDisposable _disposable;
+        private CompositeDisposable _disposable = new CompositeDisposable();
 
         public void StartRoute(TestEnemyStates enemyStates, int indexRoute = 0)
         {

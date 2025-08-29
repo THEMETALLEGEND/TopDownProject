@@ -14249,7 +14249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   routes:
-  - {fileID: 1787344397}
+  - {fileID: 1681080052}
 --- !u!1 &861030363
 GameObject:
   m_ObjectHideFlags: 0
@@ -17491,6 +17491,7 @@ MonoBehaviour:
   - {fileID: 131995055}
   - {fileID: 1386632017}
   - {fileID: 2115642634}
+  - {fileID: 1527773270}
   _isLooped: 0
   _isLoopedMirrored: 0
   _randomiseWaypoints: 0
