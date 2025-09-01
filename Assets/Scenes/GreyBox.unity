@@ -389,6 +389,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1681080051}
+  - {fileID: 1358385660}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14250,6 +14251,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   routes:
   - {fileID: 1681080052}
+--- !u!114 &821973838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821973804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6300891b1436463f8d4292f842ae13a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  routes:
+  - {fileID: 1358385661}
 --- !u!1 &861030363
 GameObject:
   m_ObjectHideFlags: 0
@@ -14429,6 +14444,16 @@ PrefabInstance:
       propertyPath: slotController
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 840156048085309693, guid: 3bff47cd748976448b3d268989040bbd,
+        type: 3}
+      propertyPath: showDebugGizmos
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 840156048085309693, guid: 3bff47cd748976448b3d268989040bbd,
+        type: 3}
+      propertyPath: interactionController
+      value: 
+      objectReference: {fileID: 821973838}
     - target: {fileID: 2652802638391646753, guid: 3bff47cd748976448b3d268989040bbd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14849,7 +14874,19 @@ MonoBehaviour:
   _timeDelay: 0
   _events:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1825320676}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1305933302
 GameObject:
   m_ObjectHideFlags: 0
@@ -14914,6 +14951,57 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1358385659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1358385660}
+  - component: {fileID: 1358385661}
+  m_Layer: 0
+  m_Name: Route1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1358385660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358385659}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 268966112}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1358385661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358385659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68968c21acd446b996c5638fe3042b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waypoints:
+  - {fileID: 1743180828}
+  - {fileID: 1224108166}
+  - {fileID: 791958400}
+  _isLooped: 0
+  _isLoopedMirrored: 0
+  _randomiseWaypoints: 0
 --- !u!1 &1386632015
 GameObject:
   m_ObjectHideFlags: 0
@@ -17492,7 +17580,7 @@ MonoBehaviour:
   - {fileID: 1386632017}
   - {fileID: 2115642634}
   - {fileID: 1527773270}
-  _isLooped: 0
+  _isLooped: 1
   _isLoopedMirrored: 0
   _randomiseWaypoints: 0
 --- !u!1 &1706188907
@@ -17674,9 +17762,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64e83e8d48044daaa4e8c006efd71d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isBusy: 0
+  _isBusy: 1
   _multipleUses: 0
-  _timeDelay: 0
+  _timeDelay: 5
   _events:
     m_PersistentCalls:
       m_Calls: []

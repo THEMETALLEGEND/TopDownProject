@@ -21,5 +21,6 @@ namespace Waypoints
 
         public bool MultipleUses => _multipleUses;
         public uint TimeDelay => _timeDelay;
+        public UnityEvent Event => _events;
     }
 }

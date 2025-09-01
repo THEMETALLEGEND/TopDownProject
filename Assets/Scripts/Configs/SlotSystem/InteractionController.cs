@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Waypoints
 {
-    public class PathController : MonoBehaviour, IDisposable
+    public class InteractionController : MonoBehaviour, IDisposable
     {
         [SerializeField] private List<Route> routes = new();
 
@@ -29,25 +29,22 @@ namespace Waypoints
             _sm = enemyStates;
             _currentRoute = routes[indexRoute];
 
-            SettingInitialSettings();
             StartingMovingRoute();
-        }
-
-        public void SetRoute(Route route)
-        {
-            _currentRoute = route;
         }
 
         private void StartingMovingRoute()
         {
+            SettingInitialSettings();
+            
             _pointID = 0;
             _pointMirrorID = 0;
-            
+
             var firstPoint = _currentRoute.Waypoints[_pointID].Position;
             _sm.AIDest.target.position = firstPoint;
+
+            CheckWaypoint();
             UpdateReachedEndOfPath();
         }
-
         private void SettingInitialSettings()
         {
             _sm.StartingPosition = _currentRoute.StartWaypoint.Position;
@@ -55,6 +52,15 @@ namespace Waypoints
             _sm.AIPath.maxSpeed = _sm.roamingSpeed;
         }
 
+        private void CheckWaypoint()
+        {
+            if (_currentRoute.Waypoints[_pointID].IsBusy)
+            {
+                _pointID++;
+                _sm.AIDest.target.position = _currentRoute.Waypoints[_pointID].Position;
+            }
+        }
+        
         private void UpdateReachedEndOfPath()
         {
             Observable.Interval(TimeSpan.FromSeconds(1)).Subscribe(async _ =>
@@ -64,7 +70,7 @@ namespace Waypoints
                     isDelay = true;
                     _currentRoute.Waypoints[_pointID].Event.Invoke();
                     await UniTask.Delay(TimeSpan.FromSeconds(_timeDelayPoint));
-                    _sm.AIDest.target.position = GetPathPoint();
+                    _sm.AIDest.target.position = GetFreePosition();
                     isDelay = false;
                 }
                 else
@@ -74,36 +80,14 @@ namespace Waypoints
             }).AddTo(_disposable);
         }
 
-        private Vector3 GetPathPoint()
+        private Vector3 GetFreePosition()
         {
-            if (_currentRoute.IsLooped && _pointID == _currentRoute.Waypoints.Count)
+            if (_pointID != 0 && !_currentRoute.Waypoints[_pointID-1].IsBusy)
             {
-                _pointID = 0;
+                return _currentRoute.Waypoints[--_pointID].Position;
             }
 
-            if (_currentRoute.IsLoopedMirrored && _pointID == _currentRoute.Waypoints.Count)
-            {
-                if (_pointMirrorID == 0)
-                {
-                    _pointMirrorID = _currentRoute.Waypoints.Count - 1;
-                    _pointID = 0;
-
-                    _timeDelayPoint = _currentRoute.Waypoints[_pointID].TimeDelay;
-                    return _currentRoute.Waypoints[_pointID++].Position;
-                }
-
-                _timeDelayPoint = _currentRoute.Waypoints[_pointMirrorID].TimeDelay;
-                return _currentRoute.Waypoints[_pointMirrorID--].Position;
-            }
-
-            if (_pointID == _currentRoute.Waypoints.Count)
-            {
-                _timeDelayPoint = _currentRoute.Waypoints[^1].TimeDelay;
-                return _currentRoute.Waypoints[^1].Position;
-            }
-
-            _timeDelayPoint = _currentRoute.Waypoints[_pointID].TimeDelay;
-            return _currentRoute.Waypoints[_pointID++].Position;
+            return _currentRoute.Waypoints[_pointID].Position;
         }
 
         public void Dispose()

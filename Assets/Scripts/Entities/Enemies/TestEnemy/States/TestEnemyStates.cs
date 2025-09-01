@@ -100,8 +100,9 @@ public class TestEnemyStates : StateMachine
 	[Header("Detecting")]
 	public bool playerRaycastHit;
 	
-	[FormerlySerializedAs("slotController")] [Header("Waypoint Controller")]
+	[Header("Waypoint Controller")]
 	public PathController pathController;
+	public InteractionController interactionController;
 
 	[Header("One Shot")]
 	public float oneShotTiming = 2f;
@@ -132,7 +133,7 @@ public class TestEnemyStates : StateMachine
 		WaitingState = new EnemyWaiting(this); //присваивание состояний к переменным с этой стейт машиной
 		RoamingState = new EnemyRoaming(this);
 		PathMovingState = new EnemyPathMoving(this, pathController);
-		InteractionState = new EnemyInteraction(this, pathController);
+		InteractionState = new EnemyInteraction(this, interactionController);
 		ChasingState = new EnemyChasing(this);
 		ShootingState = new EnemyShooting(this);
 		HittingState = new EnemyHitting(this);
@@ -164,7 +165,7 @@ public class TestEnemyStates : StateMachine
 	{
 		if (true)
 		{
-			return PathMovingState;
+			return InteractionState;
 		}
 		return RoamingState;
 	}

@@ -5,16 +5,16 @@ namespace Entities.Enemies.TestEnemy.States
     public class EnemyInteraction : BaseState
     {
         private TestEnemyStates _sm;
-        private PathController _pathController;
+        private InteractionController _pathController;
         private int _randomIndexPoint;
 
         private Waypoint _selecterInteractivePoint;
         private Waypoint _selecterQueuePoint;
 
-        public EnemyInteraction(TestEnemyStates enemyStateMachine, PathController pathController) : base("EnemyInteraction", enemyStateMachine) 
+        public EnemyInteraction(TestEnemyStates enemyStateMachine, InteractionController interactionController) : base("EnemyInteraction", enemyStateMachine) 
         {
             _sm = (TestEnemyStates)stateMachine;
-            _pathController = pathController;
+            _pathController = interactionController;
             _pathController.StartRoute(_sm);
         }
 
