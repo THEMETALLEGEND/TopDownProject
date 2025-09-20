@@ -14231,40 +14231,30 @@ MonoBehaviour:
   _events:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &821973804 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2652802638391646756, guid: 3bff47cd748976448b3d268989040bbd,
+--- !u!114 &821973821 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4821589335468405366, guid: 3bff47cd748976448b3d268989040bbd,
     type: 3}
   m_PrefabInstance: {fileID: 909362183}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &821973821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821973804}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32bd726c793e49cc9f4eea7630425661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  routes:
-  - {fileID: 1681080052}
---- !u!114 &821973838
+--- !u!114 &821973838 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6535061490680882220, guid: 3bff47cd748976448b3d268989040bbd,
+    type: 3}
+  m_PrefabInstance: {fileID: 909362183}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821973804}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6300891b1436463f8d4292f842ae13a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  routes:
-  - {fileID: 1358385661}
 --- !u!1 &861030363
 GameObject:
   m_ObjectHideFlags: 0
@@ -14436,6 +14426,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 840156048085309693, guid: 3bff47cd748976448b3d268989040bbd,
         type: 3}
+      propertyPath: startingState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 840156048085309693, guid: 3bff47cd748976448b3d268989040bbd,
+        type: 3}
       propertyPath: pathController
       value: 
       objectReference: {fileID: 821973821}
@@ -14464,6 +14459,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -27.4
       objectReference: {fileID: 0}
+    - target: {fileID: 4821589335468405366, guid: 3bff47cd748976448b3d268989040bbd,
+        type: 3}
+      propertyPath: routes.Array.data[0]
+      value: 
+      objectReference: {fileID: 1787344397}
+    - target: {fileID: 6535061490680882220, guid: 3bff47cd748976448b3d268989040bbd,
+        type: 3}
+      propertyPath: routes.Array.data[0]
+      value: 
+      objectReference: {fileID: 1358385661}
     - target: {fileID: 7832661893444102703, guid: 3bff47cd748976448b3d268989040bbd,
         type: 3}
       propertyPath: m_IsActive
@@ -14996,6 +15001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _waypoints:
+  - {fileID: 1527773270}
   - {fileID: 1743180828}
   - {fileID: 1224108166}
   - {fileID: 791958400}

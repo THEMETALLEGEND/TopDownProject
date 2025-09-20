@@ -15,12 +15,12 @@ namespace Entities.Enemies.TestEnemy.States
         {
             _sm = (TestEnemyStates)stateMachine;
             _pathController = interactionController;
-            _pathController.StartRoute(_sm);
         }
 
         public override void Enter()
         {
             base.Enter();
+            _pathController.StartRoute(_sm);
         }
     }
 }

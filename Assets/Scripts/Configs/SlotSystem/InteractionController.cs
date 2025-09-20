@@ -58,6 +58,7 @@ namespace Waypoints
             {
                 _pointID++;
                 _sm.AIDest.target.position = _currentRoute.Waypoints[_pointID].Position;
+                _currentRoute.Waypoints[_pointID].IsBusy = true;
             }
         }
         
@@ -84,7 +85,9 @@ namespace Waypoints
         {
             if (_pointID != 0 && !_currentRoute.Waypoints[_pointID-1].IsBusy)
             {
-                return _currentRoute.Waypoints[--_pointID].Position;
+                _currentRoute.Waypoints[_pointID].IsBusy = false;
+                _currentRoute.Waypoints[--_pointID].IsBusy = true;
+                return _currentRoute.Waypoints[_pointID].Position;
             }
 
             return _currentRoute.Waypoints[_pointID].Position;

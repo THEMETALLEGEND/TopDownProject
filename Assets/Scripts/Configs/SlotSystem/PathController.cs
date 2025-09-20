@@ -62,7 +62,7 @@ namespace Waypoints
                 if (_sm.AIPath.reachedEndOfPath && !isDelay)
                 {
                     isDelay = true;
-                    _currentRoute.Waypoints[_pointID].Event.Invoke();
+                    InvokePointEvent();
                     await UniTask.Delay(TimeSpan.FromSeconds(_timeDelayPoint));
                     _sm.AIDest.target.position = GetPathPoint();
                     isDelay = false;
@@ -104,6 +104,19 @@ namespace Waypoints
 
             _timeDelayPoint = _currentRoute.Waypoints[_pointID].TimeDelay;
             return _currentRoute.Waypoints[_pointID++].Position;
+        }
+
+        private void InvokePointEvent()
+        {
+            if (_pointID == _currentRoute.Waypoints.Count)
+            {
+                _currentRoute.Waypoints[^1].Event.Invoke();
+            }
+            else
+            {
+                _currentRoute.Waypoints[_pointID].Event.Invoke();
+            }
+            
         }
 
         public void Dispose()

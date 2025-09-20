@@ -6,6 +6,8 @@ using UnityEngine;
 using Pathfinding;
 using UnityEngine.Serialization;
 
+[RequireComponent (typeof (PathController))]
+[RequireComponent (typeof (InteractionController))]
 public class TestEnemyStates : StateMachine
 {
 	//-------STATES--------
@@ -101,6 +103,7 @@ public class TestEnemyStates : StateMachine
 	public bool playerRaycastHit;
 	
 	[Header("Waypoint Controller")]
+	public EStates startingState;
 	public PathController pathController;
 	public InteractionController interactionController;
 
@@ -130,6 +133,8 @@ public class TestEnemyStates : StateMachine
 		Model = transform.GetChild(0).gameObject;
 		SpriteRenderer = Model.GetComponent<SpriteRenderer>();
 		EnemyClass = GetComponent<EnemyClass>();
+		interactionController = GetComponent<InteractionController>();
+		pathController = GetComponent<PathController>();
 		WaitingState = new EnemyWaiting(this); //присваивание состояний к переменным с этой стейт машиной
 		RoamingState = new EnemyRoaming(this);
 		PathMovingState = new EnemyPathMoving(this, pathController);
@@ -163,11 +168,17 @@ public class TestEnemyStates : StateMachine
 
 	protected override BaseState GetInitialState() //начальное состояние в виде состояния ожидания
 	{
-		if (true)
+		switch (startingState)
 		{
-			return InteractionState;
+			case EStates.Roaming:
+				return RoamingState;
+			case EStates.Path:
+				return PathMovingState;
+			case EStates.Slots:
+				return InteractionState;
+			default:
+				throw new ArgumentOutOfRangeException();
 		}
-		return RoamingState;
 	}
 
 	public bool CheckPlayerContact(int rayCount, int playerRayCount, float rayLength)

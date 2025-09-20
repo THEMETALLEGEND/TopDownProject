@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 2652802638391646772}
   - component: {fileID: 3686716091314735226}
   - component: {fileID: 967545555945211692}
+  - component: {fileID: 4821589335468405366}
+  - component: {fileID: 6535061490680882220}
   m_Layer: 13
   m_Name: EnemyObject
   m_TagString: Enemy
@@ -4937,10 +4939,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   maxHealth: 50
-  target: {fileID: 0}
-  meleeDamage: 1
-  isDamaging: 0
-  value: 50
+  Target: {fileID: 0}
+  MeleeDamage: 1
+  IsDamaging: 0
+  _value: 0
 --- !u!114 &2652802638391646778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4965,30 +4967,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 767d783f39f4af54ea133328fef28157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testEnemy: {fileID: 0}
-  aIPath: {fileID: 0}
-  aIDest: {fileID: 0}
-  startingPosition: {x: 0, y: 0, z: 0}
-  playerObject: {fileID: 0}
-  animator: {fileID: 0}
-  target: {fileID: 0}
-  enemyObject: {fileID: 0}
-  rb: {fileID: 0}
-  model: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  playerRaycast: {fileID: 0}
-  hitbox: {fileID: 0}
-  pointTarget: {fileID: 8225785140343745612}
-  bulletPrefab: {fileID: 8895918990583274388, guid: bb10998cdecf6924a93ed9603f030122,
-    type: 3}
-  isAlerted: 0
-  isAfraid: 0
-  alertRadius: 10
+  EnemyClass: {fileID: 0}
+  AIPath: {fileID: 0}
+  AIDest: {fileID: 0}
+  StartingPosition: {x: 0, y: 0, z: 0}
+  PlayerObject: {fileID: 0}
+  Animator: {fileID: 0}
+  Target: {fileID: 0}
+  EnemyObject: {fileID: 0}
+  Rigidbody: {fileID: 0}
+  Model: {fileID: 0}
+  SpriteRenderer: {fileID: 0}
+  PlayerRaycast: {fileID: 0}
+  Hitbox: {fileID: 0}
+  PointTarget: {fileID: 0}
+  BulletPrefab: {fileID: 0}
+  IsAlerted: 0
+  IsAfraid: 0
+  AlertRadius: 10
   showDebugGizmos: 1
   defaultSpeed: 12
+  slowSpeed: 8
   meleeSpeed: 20
   isAnNPC: 0
   isMelee: 0
+  isOneShot: 0
+  isMinigunner: 0
   debugMode: 0
   roamingSpeed: 10
   roamingInterval: 30
@@ -5011,6 +5015,10 @@ MonoBehaviour:
   fleeingTime: 10
   afraidPlayerDistanceExit: 20
   playerRaycastHit: 0
+  startingState: 0
+  pathController: {fileID: 0}
+  interactionController: {fileID: 0}
+  oneShotTiming: 2
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -5243,6 +5251,34 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &4821589335468405366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2652802638391646756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32bd726c793e49cc9f4eea7630425661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  routes:
+  - {fileID: 0}
+--- !u!114 &6535061490680882220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2652802638391646756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6300891b1436463f8d4292f842ae13a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  routes:
+  - {fileID: 0}
 --- !u!1 &3872482337564955135
 GameObject:
   m_ObjectHideFlags: 0
